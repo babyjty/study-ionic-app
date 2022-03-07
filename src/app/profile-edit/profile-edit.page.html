@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label>change profile photo</ion-label>
+      <ion-input placeholder="Enter Input"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Display Name</ion-label>
+      <ion-input maxlength="20" placeholder="Display Name"></ion-input>
+    </ion-item>
+
+    <ion-item> 
+      <ion-label>Bio</ion-label>
+      <ion-input maxlength="160" placeholder="Bio"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Work Level</ion-label>
+      <ion-select placeholder="Select One">
+        <ion-select-option value="s">Secondary School</ion-select-option>
+        <ion-select-option value="i">ITE</ion-select-option>
+        <ion-select-option value="j">Junior College</ion-select-option>
+        <ion-select-option value="p">Polytechnic</ion-select-option>
+        <ion-select-option value="j">University</ion-select-option>
+        <ion-select-option value="w">Professional</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
