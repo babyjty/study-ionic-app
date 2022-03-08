@@ -1,0 +1,57 @@
+<ion-content>
+  <div class = "login-logo">
+    <img src = "assets/img/StudyJioLogo.png">
+  </div>
+  
+  <div class = "relative-center">
+    <form [formGroup] = "form">
+      <!-- ion-card from ionic documentation -->
+      <ion-card >
+        <!-- <ion-card-header>
+          <ion-card-title>Login</ion-card-title> -->
+        <!-- </ion-card-header> -->
+      
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type = "email" formControlName = "email"></ion-input>
+          </ion-item>
+
+          <!-- check if field is touched & check if there is error in the email field and if the error is of type required -->
+          <!-- <ion-label color = "danger" *ngIf = "form.get('email').touched && form.get('email').errors?.required">Email is mandatory</ion-label> -->
+          <!-- check if field is touched & check if there is error in the email field and if the error is of type email -->
+          <!-- <ion-label color = "danger" *ngIf = "form.get('email').touched && form.get('email').errors?.email">Email is invalid</ion-label>  -->
+          
+          <app-error-message [field]= "form.get('email')" error = "required" message = "Email is required"></app-error-message>
+          <app-error-message [field]= "form.get('email')" error = "email" message = "Email is invalid"></app-error-message>
+
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type = "password" formControlName = "password"></ion-input>
+          </ion-item>
+          <!-- check if field is touched & check if there is error in the password field and if the error is of type required -->
+          <!-- <ion-label color = "danger" *ngIf = "form.get('password').touched && form.get('password').errors?.required">Password is mandatory</ion-label> -->
+
+          <app-error-message [field]= "form.get('password')" error = "required" message = "Password is required"></app-error-message>
+
+
+        </ion-card-content>
+        <ion-button size = full (click) = "login()" [disabled] = "!form.valid">LOGIN</ion-button>
+        <ion-button fill = "clear" size = full (click) = "register()">Register</ion-button>
+        <ion-button color="dark" fill = "clear" size = full routerLink = '/forget' [disabled] = "!form.get('email').valid">Forget Password</ion-button>
+        <div class = "ion-text-center">
+          <p> ________________________ </p>
+          <p> Sign Up Using</p>
+        </div>
+        <div class = 'ion-text-center'>
+          <ion-button color = "clear">
+            <img src = "assets/img/GoogleLogo.png" style = "width:100% ; height: 100%">
+          </ion-button>
+          <ion-button color = "clear">
+            <img src = "assets/img/FacebookLogo.png" style = "width:100% ; height: 100%">
+          </ion-button>
+        </div>
+      </ion-card>
+    </form>
+  </div>
+</ion-content>
