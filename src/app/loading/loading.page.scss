@@ -1,0 +1,6 @@
+.flex-center { // . allows me to identify a class of a component that .flex-center would identify this class
+    display: flex; // display is of type flex
+    justify-content: center;// justify the content to the center of the screen
+    align-items: center;
+    height: 100%; // to adjust the vertical height to consider range of 100% of screen
+}
