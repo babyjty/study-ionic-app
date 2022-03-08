@@ -10,8 +10,6 @@ const cookieparser = require('cookie-parser')
 const { auth } = require('../middleware/auth')
 
 
-
-
 router.get('/', (req, res) => {
     res.render("../views/index.ejs")
 })
@@ -122,4 +120,4 @@ router.get('/api/users/logout', auth, (req, res) => {
 
 
 
-module.exports = router;
+module.exports = router
