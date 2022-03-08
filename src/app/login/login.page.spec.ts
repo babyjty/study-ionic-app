@@ -8,7 +8,7 @@ describe('LoginPage', () => {
   let component: LoginPage;
   let fixture: ComponentFixture<LoginPage>;
   let router: Router;
-   
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginPage ],
@@ -25,10 +25,10 @@ describe('LoginPage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should go to home page on login', () => {
+  it('should go to map page on login', () => {
     spyOn(router, 'navigate');
     component.login();
-    expect(router.navigate).toHaveBeenCalledWith(['home']);
+    expect(router.navigate).toHaveBeenCalledWith(['map']);
   });
 
   it('should go to register page on register', () => {
