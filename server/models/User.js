@@ -42,6 +42,10 @@ const userSchema = mongoose.Schema({
     },
     tokenExp: {
         type: Number
+    },
+    provider: {
+        type: String,
+        enum: ['google', 'local']
     }
     
 })
@@ -109,6 +113,8 @@ userSchema.statics.findByToken = function (token, cb){
         })
     })
 }
+
+userSchema.methods.addGoogleUser = 
 
 const User = mongoose.model('User', userSchema)
 module.exports = {User}
