@@ -114,7 +114,6 @@ userSchema.statics.findByToken = function (token, cb){
     })
 }
 
-userSchema.methods.addGoogleUser = 
 
 const User = mongoose.model('User', userSchema)
 module.exports = {User}

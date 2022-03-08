@@ -37,5 +37,8 @@ passport.use(
     )
 )
 
+passport.use('local-signup', new LocalStrate
+)
+
 module.exports = passport
 
