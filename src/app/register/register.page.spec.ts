@@ -27,9 +27,9 @@ describe('RegisterPage', () => {
     expect(component).toBeTruthy();
   });
   
-  it('should go to home page on register', () => {
+  it('should go to map page on register', () => {
     spyOn(router, 'navigate');
     component.register();
-    expect(router.navigate).toHaveBeenCalledWith(['home']);
+    expect(router.navigate).toHaveBeenCalledWith(['map']);
   });
 });
