@@ -10,7 +10,7 @@ const cookieparser = require('cookie-parser')
 const { auth } = require('../middleware/auth')
 
 router.get('/', (req, res) => {
-    res.send("API router")
+    res.send("user router")
 })
 
 //application/x-www-form-urlencoded 
