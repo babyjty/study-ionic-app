@@ -26,7 +26,6 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         minLength: 10,
-        required: true
     }, 
     workLevel: {
         type: String,
@@ -46,6 +45,9 @@ const userSchema = mongoose.Schema({
     provider: {
         type: String,
         enum: ['google', 'local']
+    },
+    googleid: {
+        type: String
     }
     
 })

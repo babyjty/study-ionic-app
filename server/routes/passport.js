@@ -6,6 +6,15 @@ const { userError } = require('@angular/compiler-cli/src/transformers/util')
 const CALLBACK_URL = 'http://localhost:3000/google/callback'
 const user = new User()
 
+
+passport.serializeUser((user, done) => {
+    done(null, user)
+})
+
+passport.deserializeUser((user, done) => {
+    done(null, user)
+})
+
 passport.use(
     new GoogleStrategy({
         callbackURL: CALLBACK_URL,
@@ -14,7 +23,7 @@ passport.use(
     },
     async (request, accessToken, refreshToken, profile, done) => {
         console.log("user profile is: ", profile)
-        User.findOne({email: profile.email}, (err, user) => {
+        User.findOne({googleid: profile.googleid}, (err, user) => {
             if (user) {
                 done(null, user)
             } else {
@@ -23,7 +32,7 @@ passport.use(
                 user.firstname = profile.given_name,
                 user.lastname = profile.family_name,
                 user.provider = "google",
-                user.password = "00000000000",
+                user.googleid = profile.googleid
                 user.save((err) => {
                     if (err) {
                         throw err

@@ -10,7 +10,6 @@ const cookieparser = require('cookie-parser')
 const { auth } = require('../middleware/auth')
 
 
-
 router.get('/', (req, res) => {
     res.render("../views/index.ejs")
 })
