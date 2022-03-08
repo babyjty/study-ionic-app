@@ -9,8 +9,11 @@ const { response, application } = require('express')
 const cookieparser = require('cookie-parser')
 const { auth } = require('../middleware/auth')
 
+
+
+
 router.get('/', (req, res) => {
-    res.send("user router")
+    res.render("../views/index.ejs")
 })
 
 //application/x-www-form-urlencoded 
@@ -115,8 +118,6 @@ router.get('/api/users/logout', auth, (req, res) => {
 
     //just removing token
 })
-
-
 
 
 
