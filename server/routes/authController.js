@@ -19,6 +19,13 @@ router.get('/google/callback',
     passport.authenticate('google'), authSuccess
 )
 
+router.post('/', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/'
+}), (req, res) => {
+    
+})
+
 function authSuccess(req, res)  {
     res.redirect('/')
 }

@@ -5,7 +5,8 @@ const config = require('../config/key')
 const { userError } = require('@angular/compiler-cli/src/transformers/util')
 const CALLBACK_URL = 'http://localhost:3000/google/callback'
 const user = new User()
-
+const LocalStrategy = require('passport-local').Strategy
+const bcrypt = require('bcrypt')
 
 passport.serializeUser((user, done) => {
     done(null, user)
@@ -46,7 +47,27 @@ passport.use(
     )
 )
 
-passport.use('local-signup', new LocalStrate
+passport.use('local-signup', new LocalStrategy(
+    async (email, password, done) => {
+        User.findOne({email: email}, (err, user) => {
+            if (err){
+                return done(err)
+            }
+            if (!user) {
+                done(null, user)
+            } 
+            var pass_retrieved = user.password
+            bcrypt.compare(password, pass_retrieved, (err, correct) => {
+                if (err){
+                    return done(null, false)
+                } 
+                if (correct){
+                    done(null, user)
+                }
+            })
+        })
+    }
+)
 )
 
 module.exports = passport
