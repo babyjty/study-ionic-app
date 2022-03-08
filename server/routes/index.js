@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-router.use('/api', require('./userController'))
+router.use('/user', require('./userController'))
+//router.use('/jio', require('./jioController'))
+
 
 router.get('/test', (req, res) => {
     res.send('Test route')

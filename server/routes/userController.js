@@ -113,7 +113,7 @@ router.get('/api/users/logout', auth, (req, res) => {
         })
     })
 
-    //remove token
+    //just removing token
 })
 
 
