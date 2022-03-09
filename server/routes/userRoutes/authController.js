@@ -2,9 +2,6 @@ const express = require('express')
 const router = express.Router()
 const passport = require('./passport')
 
-router.get('/login', (req, res) => {
-    res.render('auth/login')
-})
 
 router.get('/logout', (req, res) => {
     req.logout()
@@ -19,12 +16,16 @@ router.get('/google/callback',
     passport.authenticate('google'), authSuccess
 )
 
-router.post('/', passport.authenticate('local', {
+router.post('/local-login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/'
 }), (req, res) => {
     
 })
+
+
+
+
 
 function authSuccess(req, res)  {
     res.redirect('/')

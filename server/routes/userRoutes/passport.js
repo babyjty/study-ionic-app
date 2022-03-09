@@ -1,10 +1,9 @@
 const passport = require('passport')
-const User = require('../models/User')
-const GoogleStrategy = require('passport-google-oauth20').Strategy
-const config = require('../config/key')
-const { userError } = require('@angular/compiler-cli/src/transformers/util')
+const User = require('../../models/User')
+const GoogleStrategy = require('passport-google-oauth2').Strategy
+const config = require('../../config/key')
+//const { userError } = require('@angular/compiler-cli/src/transformers/util')
 const CALLBACK_URL = 'http://localhost:3000/google/callback'
-const user = new User()
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 
@@ -16,7 +15,7 @@ passport.deserializeUser((user, done) => {
     done(null, user)
 })
 
-passport.use(
+passport.use('/google',
     new GoogleStrategy({
         callbackURL: CALLBACK_URL,
         clientID: config.GOOGLE_CLIENTID,
@@ -47,7 +46,7 @@ passport.use(
     )
 )
 
-passport.use('local-signup', new LocalStrategy(
+passport.use('local-login', new LocalStrategy(
     async (email, password, done) => {
         User.findOne({email: email}, (err, user) => {
             if (err){
