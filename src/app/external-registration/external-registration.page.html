@@ -10,24 +10,14 @@
   <div class = "login-logo">
     <img src = "assets/img/StudyJioLogo.png">
   </div>
+
   <ion-card color = "clear">
     <ion-card-header>
-      <ion-card-title>Details</ion-card-title>
+      <ion-card-title>Details (External Registration)</ion-card-title>
     </ion-card-header>
 
+
     <ion-card-content>
-      <ion-item>
-        <ion-label position = "floating">Email</ion-label>
-        <ion-input type = "email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position = "floating">Password</ion-label>
-        <ion-input type = "password"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position = "floating">Confirm Password</ion-label>
-        <ion-input type = "password"></ion-input>
-      </ion-item>
       <ion-item>
         <ion-label position = "floating">User Name</ion-label>
         <ion-input type = "text"></ion-input>
@@ -42,7 +32,7 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Work Level</ion-card-title>
+      <ion-card-title>Education Level</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
@@ -58,7 +48,7 @@
         </ion-item>
     
         <ion-item>
-          <ion-label>Junior College</ion-label>
+          <ion-label>Pre-Tertiary</ion-label>
           <ion-radio value="Pre_Tertiary"></ion-radio>
         </ion-item>
     
@@ -76,6 +66,4 @@
   </ion-card>
 
   <ion-button size = full (click)="register()">Register</ion-button>
-
-
 </ion-content>

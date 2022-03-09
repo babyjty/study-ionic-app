@@ -41,7 +41,16 @@ const routes: Routes = [
   {
     path: 'map',
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
-  }, 
+  },   
+  {
+    path: 'external-registration',
+    loadChildren: () => import('./external-registration/external-registration.module').then( m => m.ExternalRegistrationPageModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  }
+
 
 ];
 @NgModule({
