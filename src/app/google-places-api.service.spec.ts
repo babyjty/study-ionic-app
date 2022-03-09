@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GooglePlacesAPIService } from './google-places-api.service';
+import { GooglePlacesAPIService } from './service/google-places-api.service';
 
 describe('GooglePlacesAPIService', () => {
   let service: GooglePlacesAPIService;

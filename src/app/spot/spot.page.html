@@ -11,5 +11,8 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-item>
+    <ion-input [(ngModel)]="radius" placeholder="Enter radius"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="fetchLocations()">Search</ion-button>
 </ion-content>
