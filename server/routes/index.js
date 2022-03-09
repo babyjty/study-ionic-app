@@ -1,12 +1,20 @@
 const express = require('express');
-const router = express.Router();
+const mainRouter = express.Router();
+const mongoose = require('mongoose')
+const config = require('../config/key')
 
-router.use('/api/user', require('./userController'))
-router.use('/api/jio', require('./jioController'))
+mainRouter.use('/api/user', require('./userRoutes/registerController'))
+mainRouter.use('/api/jio', require('./jioRoutes/jioController'))
+mainRouter.use('/api/auth', require('./userRoutes/authController'))
 
 
-router.get('/test', (req, res) => {
-    res.send('Test route')
+mongoose.connect(
+    config.mongoURI, {})
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.log(err))
+
+mainRouter.get('/test', (req, res) => {
+    res.send('Test dumb')
 })
 
-module.exports = router;
+module.exports = mainRouter;

@@ -3,26 +3,22 @@ const router = express.Router();
 const req = require('express/lib/request');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const { User } = require("../models/User")
-const config = require('../config/key')
+const { User } = require("../../models/User")
+const config = require('../../config/key')
 const { response, application } = require('express')
 const cookieparser = require('cookie-parser')
-const { auth } = require('../middleware/auth')
+const { auth } = require('../../middleware/auth')
 
-
-router.get('/', (req, res) => {
-    res.render("../views/index.ejs")
-})
 
 //application/x-www-form-urlencoded 
 router.use(bodyParser.urlencoded({extended: true}))
 router.use(bodyParser.json())
 router.use(cookieparser())
 
-mongoose.connect(
-    config.mongoURI, {})
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err))
+// mongoose.connect(
+//     config.mongoURI, {})
+//     .then(() => console.log('MongoDB connected'))
+//     .catch(err => console.log(err))
 
 
 
