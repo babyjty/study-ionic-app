@@ -2,19 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  selector: 'app-external-registration',
+  templateUrl: './external-registration.page.html',
+  styleUrls: ['./external-registration.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class ExternalRegistrationPage implements OnInit {
 
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
-
   register(){
     this.router.navigate(['tabs']);
   }
-
 }
