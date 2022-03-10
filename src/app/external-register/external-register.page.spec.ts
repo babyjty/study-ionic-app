@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ExternalRegistrationPage } from './external-registration.page';
+import { ExternalRegisterPage } from './external-register.page';
 
-describe('ExternalRegistrationPage', () => {
-  let component: ExternalRegistrationPage;
-  let fixture: ComponentFixture<ExternalRegistrationPage>;
+describe('ExternalRegisterPage', () => {
+  let component: ExternalRegisterPage;
+  let fixture: ComponentFixture<ExternalRegisterPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExternalRegistrationPage ],
+      declarations: [ ExternalRegisterPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ExternalRegistrationPage);
+    fixture = TestBed.createComponent(ExternalRegisterPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -1,0 +1,84 @@
+
+<ion-content>
+
+  <ion-fab vertical = "top" horizontal = "start">
+    <ion-fab-button color = "clear" routerLink = '/login'>
+      <ion-icon name = "arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+  <form [formGroup]="extRegisterForm.getForm()" (ngSubmit)="register()">
+    <div class = "login-logo">
+      <img src = "assets/img/StudyJioLogo.png">
+    </div>
+    <ion-card color = "clear">
+      <ion-card-header>
+        <ion-card-title>Details</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <!-- <ion-label position = "floating">Email</ion-label> -->
+          <ion-label>{{email}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <!-- <ion-label position = "floating">agent</ion-label> -->
+          <ion-label>{{agent}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position = "floating">User Name</ion-label>
+          <ion-input type = "text"  formControlName="username"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "extRegisterForm.getForm().get('username')" error = "required" message = "Username is required"></app-error-message>
+
+        <ion-item>
+          <ion-label position = "floating">Bio</ion-label>
+          <ion-input type = "text"  formControlName="bio"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "extRegisterForm.getForm().get('bio')" error = "required" message = "Bio is required"></app-error-message>
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Work Level</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-radio-group formControlName = "worklevel">
+          <ion-item>
+            <ion-label>Primary</ion-label>
+            <ion-radio value="Primary"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Secondary</ion-label>
+            <ion-radio value="Secondary"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Junior College</ion-label>
+            <ion-radio value="Junior_College"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Polytechnic</ion-label>
+            <ion-radio value="Polytechnic"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>University</ion-label>
+            <ion-radio value="University"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <app-error-message [field]= "extRegisterForm.getForm().get('worklevel')" error = "required" message = "Bio is required"></app-error-message>
+
+
+      </ion-card-content>
+    </ion-card>
+    <ion-button type="submit" size = full [disabled] = "!extRegisterForm.getForm().valid" >Register</ion-button>
+  </form>
+</ion-content>
