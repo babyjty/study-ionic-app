@@ -49,7 +49,11 @@ const routes: Routes = [
   {
     path: 'external-register',
     loadChildren: () => import('./external-register/external-register.module').then( m => m.ExternalRegisterPageModule)
+  },  {
+    path: 'external-registration',
+    loadChildren: () => import('./external-registration/external-registration.module').then( m => m.ExternalRegistrationPageModule)
   }
+
 
 
 

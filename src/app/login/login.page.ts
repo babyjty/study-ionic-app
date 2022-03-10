@@ -38,14 +38,14 @@ export class LoginPage implements OnInit {
   }
 
   toGoogle(){
-    this.email = "alwin@gmail.com";
+    this.email = "hello@gmail.com";
     this.agent = "Google"
     //this.router.navigate(['external-register', {state:{email: this.email, agent: this.agent}}]);
     this.router.navigateByUrl('/external-register', {state: {email: this.email, agent: this.agent}})
   }
 
   toFacebook(){
-    this.email = "alwin@gmail.com"
+    this.email = "hello@gmail.com"
     this.agent = "Facebook"
     //this.router.navigate(["external-register", {state:{email: this.email, agent: this.agent}}]);
     this.router.navigateByUrl('/external-register', {state: {email: this.email, agent: this.agent}})
