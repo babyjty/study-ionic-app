@@ -17,10 +17,6 @@ const routes: Routes = [
   {
     path: 'chat-indiv',
     loadChildren: () => import('./chat-indiv/chat-indiv.module').then( m => m.ChatIndivPageModule)
-  },
-  {
-    path: 'test',
-    loadChildren: () => import('./test/test.module').then( m => m.TestPageModule)
   }
 ];
 @NgModule({
