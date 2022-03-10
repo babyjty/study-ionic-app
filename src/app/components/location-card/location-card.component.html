@@ -1,0 +1,30 @@
+<ion-card color="light">
+
+  <img class=large *ngIf="image==0 && name=='Starbucks'" src="https://insideretail.asia/wp-content/uploads/2020/09/starbuckschina-2.jpg" />
+
+  <img *ngIf="image==1 && name=='Starbucks'" src="https://insideretail.asia/wp-content/uploads/2020/09/starbuckschina-2.jpg" />
+  <img *ngIf="image==1 && name=='LWN Library'" src="https://askntuds.sirv.com/StoryMap%20-%20LWNL%20New%20Spaces/Photos%20of%20Zones/Trantor.jpg" />
+  <img *ngIf="image==1 && name=='Business Library'" src="https://www.ntu.edu.sg/images/default-source/default-album/education/ntu-library/7-libraries/lib-7libs-busle36ea895-757b-426e-8fb5-d23fc88376dd.png?sfvrsn=11930433_3" />
+  <img *ngIf="image==1 && name=='Cafe Hotshot'" src="http://www.jayyeo.com/projects/nanyangchronicle/wp-content/uploads/2014/03/cafehotshot-1024x682.jpg" />
+  <img *ngIf="image==1 && name=='NIE Library'" src="https://library.nie.edu.sg/sites/default/files/2018-07/LearningHub%20Thumbnail.jpg" />
+  <img *ngIf="image==1 && name=='Chinese Library'" src="https://www.ntu.edu.sg/images/librariesprovider39/chc-wgw-library/wgw-library53d0151b-ce5e-413b-8e5c-f8c6e130e7a8.jpg?sfvrsn=77078b6c_11" />
+  <ion-card-content color="light">
+    <ion-item lines="none" color="light">
+      <ion-label>
+        <ion-card-title><strong>{{name}}</strong></ion-card-title>
+        <p>{{address}}</p>
+        <p>{{distanceFromUser}}</p>
+        <p *ngIf="price==0">$$$</p>
+        <p *ngIf="price==1"><span style="font-weight:bold">$</span>$$</p>
+        <p *ngIf="price==2"><span style="font-weight:bold">$$</span>$</p>
+        <p *ngIf="price==3"><span style="font-weight:bold">$$$</span>$</p>
+        <p *ngIf="busy==1"><span style="color:red">Live: </span>Not so busy</p>
+        <p *ngIf="busy==2"><span style="color:red">Live: </span>A little busy</p>
+        <p *ngIf="busy==3"><span style="color:red">Live: </span>Very busy</p>
+      </ion-label>
+    </ion-item>
+    <!-- <ion-item lines="none" color="light">
+      <ion-icon *ngIf="place==cafe" name="trophy" slot="end"></ion-icon>
+    </ion-item> -->
+  </ion-card-content>
+</ion-card>
