@@ -94,11 +94,11 @@ passport.deserializeUser((id, done) => {
 
 passport.use('google',
     new GoogleStrategy({
-        callbackURL: 'http://localhost:4200/login/google/callback',
+        callbackURL: 'http://localhost:4200/api/google/google/callback',
         clientID: config.GOOGLE_CLIENTID,
         clientSecret: config.GOOGLE_CLIENTSECRET,
-        userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
-        scope: ['profile']
+        //userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
+        //scope: ['profile']
     }, async (accessToken, refreshToken, profile, done) => {
         console.log(profile)
         
@@ -121,7 +121,7 @@ passport.use('google',
                 done(null, user)
             }
         } catch (err) {
-            console('caught error')
+            console.log('caught error')
             console.log(err)
         }
     })
