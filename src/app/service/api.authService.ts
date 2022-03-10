@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http
 })
 
 export class AuthApiService{
+    _isLoggedIn: boolean = false;
     baseUri: string = 'http://localhost:3000/api/auth';
     headers = new HttpHeaders().set('Content-Type', 'application/json');
     constructor(private http: HttpClient){}
