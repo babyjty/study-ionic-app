@@ -25,6 +25,8 @@
     "@capacitor/keyboard": "1.2.2",
     "@capacitor/status-bar": "1.0.8",
     "@ionic/angular": "^6.0.0",
+    "axios": "^0.26.0",
+    "cors": "^2.8.5",
     "ng": "^0.0.0",
     "rxjs": "~6.6.0",
     "rxjs-operators": "^1.1.3",

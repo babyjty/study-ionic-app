@@ -9,12 +9,14 @@ import { GooglePlacesAPIService } from '../service/google-places-api.service';
 })
 export class SpotPage {
   public radius:any;
+  public locationData:any;
 
   constructor(public api:GooglePlacesAPIService) {}
 
   fetchLocations(radius){
     this.api.getLocations(this.radius).subscribe(result=>{
       console.log(result);
+      this.locationData = result;
     })
   }
 }

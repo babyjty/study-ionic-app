@@ -7,12 +7,22 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar></ion-searchbar>
+  <ion-searchbar placeholder="Enter radius" [(ngModel)]="radius" (keydown.enter)="fetchLocations()" animated></ion-searchbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-input [(ngModel)]="radius" placeholder="Enter radius"></ion-input>
-  </ion-item>
-  <ion-button expand="block" (click)="fetchLocations()">Search</ion-button>
+  <ion-card *ngFor="let item of locationData" color="light">
+   <ion-card-title>
+     {{item.name}}
+   </ion-card-title>
+   <ion-card-content>
+      <h4>
+        Rating: {{item.rating}}
+      </h4>
+      <h4>
+        Address: {{item.vicinity}}
+      </h4>
+   </ion-card-content>
+  </ion-card>
 </ion-content>
+
