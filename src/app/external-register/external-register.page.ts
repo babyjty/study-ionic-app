@@ -35,7 +35,6 @@ export class ExternalRegisterPage implements OnInit {
   }
 
   private createForm(){
-    //this.extRegisterForm = new ExternalRegisterPageForm(this.formbuilder)
     this.extRegisterForm = new ExternalRegisterPageForm(this.email, this.agent, this.formbuilder)
   }
 }
