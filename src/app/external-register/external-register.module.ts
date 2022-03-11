@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ForgetPageRoutingModule } from './forget-routing.module';
+import { ExternalRegisterPageRoutingModule } from './external-register-routing.module';
 
-import { ForgetPage } from './forget.page';
+import { ExternalRegisterPage } from './external-register.page';
 import { ErrorMessageModule } from '../components/error-message/error-message.module';
 
 @NgModule({
@@ -14,10 +14,10 @@ import { ErrorMessageModule } from '../components/error-message/error-message.mo
     CommonModule,
     FormsModule,
     IonicModule,
-    ForgetPageRoutingModule,
+    ExternalRegisterPageRoutingModule,
     ReactiveFormsModule,
     ErrorMessageModule
   ],
-  declarations: [ForgetPage]
+  declarations: [ExternalRegisterPage]
 })
-export class ForgetPageModule {}
+export class ExternalRegisterPageModule {}
