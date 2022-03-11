@@ -1,0 +1,98 @@
+
+<ion-content>
+
+  <ion-fab vertical = "top" horizontal = "start">
+    <ion-fab-button color = "clear" routerLink = '/login'>
+      <ion-icon name = "arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <form [formGroup]="registerForm.getForm()">
+    <div class = "login-logo">
+      <img src = "assets/img/StudyJioLogo.png">
+    </div>
+    <ion-card color = "clear">
+      <ion-card-header>
+        <ion-card-title>Details</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label position = "floating" >Email</ion-label>
+          <!-- Checks the email field of the form -->
+          <ion-input type = "email" formControlName="email"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "registerForm.getForm().get('email')" error = "required" message = "Email is required"></app-error-message>
+        <app-error-message [field]= "registerForm.getForm().get('email')" error = "email" message = "Email is invalid"></app-error-message>
+
+        <ion-item>
+          <ion-label position = "floating">Password</ion-label>
+          <ion-input type = "password" formControlName="password"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "registerForm.getForm().get('password')" error = "required" message = "Password is required"></app-error-message>
+        <app-error-message [field]= "registerForm.getForm().get('password')" error = "minlength" message = "Password has to be minimum 8 characters"></app-error-message>
+
+
+        <ion-item>
+          <ion-label position = "floating">Confirm Password</ion-label>
+          <ion-input type = "password"  formControlName="cpassword"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "registerForm.getForm().get('cpassword')" error = "required" message = "Password is required"></app-error-message>
+        <app-error-message [field]= "registerForm.getForm().get('cpassword')" error = "notMatch" message = "Passwords do not match"></app-error-message>
+        
+
+        <ion-item>
+          <ion-label position = "floating">User Name</ion-label>
+          <ion-input type = "text"  formControlName="username"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "registerForm.getForm().get('username')" error = "required" message = "Username is required"></app-error-message>
+
+        <ion-item>
+          <ion-label position = "floating">Bio</ion-label>
+          <ion-input type = "text"  formControlName="bio"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "registerForm.getForm().get('bio')" error = "required" message = "Bio is required"></app-error-message>
+
+      </ion-card-content>
+
+
+    </ion-card>
+
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Work Level</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-radio-group formControlName="worklevel">
+          <ion-item>
+            <ion-label>Primary</ion-label>
+            <ion-radio value="Primary"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Secondary</ion-label>
+            <ion-radio value="Secondary"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Junior College</ion-label>
+            <ion-radio value="Pre_Tertiary"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Polytechnic</ion-label>
+            <ion-radio value="Polytechnic"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>University</ion-label>
+            <ion-radio value="University"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+      </ion-card-content>
+    </ion-card>
+    <ion-button size = full (click)="register()" [disabled] = "!registerForm.getForm().valid" >Register</ion-button>
+  </form>
+</ion-content>

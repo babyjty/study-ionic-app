@@ -26,7 +26,6 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         minLength: 10,
-        required: true
     }, 
     workLevel: {
         type: String,
@@ -46,6 +45,9 @@ const userSchema = mongoose.Schema({
     provider: {
         type: String,
         enum: ['google', 'local']
+    },
+    googleid: {
+        type: String
     }
     
 })
@@ -114,7 +116,10 @@ userSchema.statics.findByToken = function (token, cb){
     })
 }
 
-userSchema.methods.addGoogleUser = 
+userSchema.methods.getToken = function(token, cb){
+    return this.token
+}
+
 
 const User = mongoose.model('User', userSchema)
 module.exports = {User}
