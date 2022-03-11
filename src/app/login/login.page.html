@@ -14,7 +14,7 @@
         <ion-card-content>
           <ion-item>
             <ion-label position="floating">Email</ion-label>
-            <ion-input type = "email" formControlName = "email"></ion-input>
+            <ion-input class = "registerEmail" type = "email" formControlName = "email"></ion-input>
           </ion-item>
 
           <!-- check if field is touched & check if there is error in the email field and if the error is of type required -->
@@ -38,16 +38,16 @@
         </ion-card-content>
         <ion-button size = full (click) = "login()" [disabled] = "!form.valid">LOGIN</ion-button>
         <ion-button fill = "clear" size = full (click) = "register()">Register</ion-button>
-        <ion-button color="dark" fill = "clear" size = full routerLink = '/forget' [disabled] = "!form.get('email').valid">Forget Password</ion-button>
+        <ion-button color="dark" fill = "clear" size = full routerLink = '/forget'>Forget Password</ion-button>
         <div class = "ion-text-center">
           <p> ________________________ </p>
           <p> Sign Up Using</p>
         </div>
         <div class = 'ion-text-center'>
-          <ion-button color = "clear">
+          <ion-button color = "clear" (click) = "toGoogle()">
             <img src = "assets/img/GoogleLogo.png" style = "width:100% ; height: 100%">
           </ion-button>
-          <ion-button color = "clear">
+          <ion-button color = "clear" (click) = "toFacebook()">
             <img src = "assets/img/FacebookLogo.png" style = "width:100% ; height: 100%">
           </ion-button>
         </div>

@@ -41,17 +41,15 @@ const routes: Routes = [
   {
     path: 'map',
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
-  },   
-  {
-    path: 'external-registration',
-    loadChildren: () => import('./external-registration/external-registration.module').then( m => m.ExternalRegistrationPageModule)
   },
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },
+  {
+    path: 'external-register',
+    loadChildren: () => import('./external-register/external-register.module').then( m => m.ExternalRegisterPageModule)
   }
-
-
 ];
 @NgModule({
   imports: [

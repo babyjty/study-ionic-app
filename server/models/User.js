@@ -116,6 +116,10 @@ userSchema.statics.findByToken = function (token, cb){
     })
 }
 
+userSchema.methods.getToken = function(token, cb){
+    return this.token
+}
+
 
 const User = mongoose.model('User', userSchema)
 module.exports = {User}
