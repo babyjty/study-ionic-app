@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="columns">
+
+    <div class="column">
+      <app-location-card image=1 name="Starbucks" address="76 Nanyang Drive 01-06 NTU North Spine, 637331"
+      distanceFromUser="500m" price=1 busy=1 place="cafe" (click)="openLocation()"></app-location-card>
+    </div>
+
+    <div class="column">
+      <app-location-card image="1" name="LWN Library" address="50 Nanyang Avenue, Blk NS3-03-01, 639798"
+      distanceFromUser="300m" price=0 busy=3 place="cafe"></app-location-card>
+    </div>
+
+  </div>
+
+  <div class="columns">
+
+    <div class="column">
+      <app-location-card image=1 name="Business Library" address="50 Nanyang Avenue N2-B2b-07, Nanyang Technological University, 639798"
+      distanceFromUser="150m" price=0 busy=2 place="cafe"></app-location-card>
+    </div>
+
+    <div class="column">
+      <app-location-card image=1 name="Cafe Hotshot" address="1 Nanyang Walk, Singapore 637616"
+      distanceFromUser="300m" price=1 busy=1 place="cafe"></app-location-card>
+    </div>
+
+  </div>
+
+  <div class="columns">
+
+    <div class="column">
+      <app-location-card image=1 name="NIE Library" address="1 Nanyang Walk, Singapore 637616"
+      distanceFromUser="250m" price=0 busy=1 place="cafe"></app-location-card>
+    </div>
+
+    <div class="column">
+      <app-location-card image=1 name="Chinese Library" address="50 Nanyang Ave, Singapore 639798"
+      distanceFromUser="300m" price=0 busy=1 place="cafe"></app-location-card>
+    </div>
+
+  </div>
+  
+</ion-content>
