@@ -2,10 +2,9 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonSearchbar } from '@ionic/angular';
 import { defaultMaxListeners } from 'events';
 import { fromEventPattern } from 'rxjs';
-
+import { GooglePlacesAPIService } from '../service/google-places-api.service';
 
 declare var google: any;
-
 
 @Component({
   selector: 'app-map',
@@ -13,16 +12,15 @@ declare var google: any;
   styleUrls: ['map.page.scss']
 })
 export class MapPage {
-
-  map: any;
+  public radius:any;
+  map:any;
   
-
   @ViewChild('map', {read: ElementRef, static: false}) mapRef: ElementRef;
 
   @ViewChild('search', {static: false}) search: IonSearchbar;
 
   infoWindows: any = [];
-  markers: any = [
+  public markers: any = [
     {
       title: "Singapore",
       latitude: "1.3521",
@@ -35,7 +33,23 @@ export class MapPage {
     }
   ]
   
-  constructor() {}
+  constructor(public api:GooglePlacesAPIService) {}
+
+  updateSearchResults(){
+    this.api.getLocations(this.radius).subscribe(result=>{
+      let locationData = result;
+      let newLocation:object;
+      for (let key in locationData){
+        newLocation = {
+          title: locationData[key].name,
+          latitute: String(locationData[key].geometry.location.lat),
+          longitude: String(locationData[key].geometry.location.lng)
+        }
+        this.markers.push(newLocation);
+      }
+      console.log(this.markers);
+    })
+  }
 
   ionViewDidEnter(){
     this.showMap();
@@ -93,10 +107,7 @@ export class MapPage {
     }
   }
 
-
-
   showMap(){
-    
     const location = new google.maps.LatLng(1.3521, 103.8198);
     const options = {
       center: location,
@@ -192,8 +203,6 @@ export class MapPage {
 
   ionChange(event){
     console.log(event.detail.value);
-
-
   }
 
   // initMap() {
