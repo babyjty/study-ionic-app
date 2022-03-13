@@ -19,10 +19,6 @@ const routes: Routes = [
     loadChildren: () => import('./chat-indiv/chat-indiv.module').then( m => m.ChatIndivPageModule)
   },
   {
-    path: 'test',
-    loadChildren: () => import('./test/test.module').then( m => m.TestPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },

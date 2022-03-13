@@ -7,10 +7,11 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar></ion-searchbar>
+  <ion-searchbar #search showCancelButton="focus" (ionInput)="UpdateSeachResults()" debounce="1000"></ion-searchbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-
+  <div #map id="map"></div>
 </ion-content>
+
+<!-- yoooo -->
