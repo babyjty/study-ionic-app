@@ -47,7 +47,8 @@ export class MapPage {
         }
         this.markers.push(newLocation);
       }
-      console.log(this.markers);
+      // console.log(this.markers);
+      this.showMap();
     })
   }
 
@@ -199,6 +200,7 @@ export class MapPage {
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options)
     this.addMarkersToMap(this.markers);
+    console.log(this.markers);
   }
 
   ionChange(event){
