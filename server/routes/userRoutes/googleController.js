@@ -21,19 +21,25 @@ router.get('/logout', (req, res) => {
 
 router.get('/google', 
     passport.authenticate('google', {
-        scope: ['profile', 'email', 'https://www.googleapis.com/auth/contacts.readonly'] //'https://www.googleapis.com/auth/plus.profile.emails.read']
+        scope: [ 'profile', 'email',
+                //'https://www.googleapis.com/auth/plus.login'
+            //'https://www.googleapis.com/auth/userinfo.profile', 
+            //'https://www.googleapis.com/auth/userinfo.email'
+        ] //'https://www.googleapis.com/auth/plus.profile.emails.read']
 })    
 )
 
 router.get('/google/callback',
     passport.authenticate('google', {
-        failureRedirect: '/loginfailure', 
+        failureRedirect: '/loginfailure',
         //successRedirect: '/loginSuccess'
     }),
     function(req, res) {
         console.log('success')
     }
 )
+
+
 
 
 
