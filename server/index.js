@@ -4,7 +4,7 @@ const app = express()
 
 const session = require('express-session')
 const passportconfig = require('./routes/userRoutes/passport')
-const port = 4200
+const port = 3000
 const authconfig = require('./config/key')
 const key = require('./config/key')
 const passport = require('passport')
