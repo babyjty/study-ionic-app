@@ -8,7 +8,8 @@ const LocalStrategy = require('passport-local')//.Strategy
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const { async } = require('rxjs')
-
+const { NgSwitchDefault } = require('@angular/common')
+require('mongoose-findorcreate')
 
 
 passport.serializeUser((user, done) => {
@@ -19,8 +20,8 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
     console.log('deserialise entered')
-    User.findById(id, (err, user) => {
-        done(err, user)
+    User.findById(id).then((user) => {
+        done(null, user)
     })
 })
 
@@ -92,42 +93,68 @@ passport.deserializeUser((id, done) => {
 //     })
 // )
 
-passport.use('google',
+// passport.use('google',
+//     new GoogleStrategy({
+//         callbackURL: 'http://localhost:4200/api/google/google/callback',
+//         clientID: config.GOOGLE_CLIENTID,
+//         clientSecret: config.GOOGLE_CLIENTSECRET,
+//         //userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
+//         //scope: ['profile']
+//     }, async (accessToken, refreshToken, profile, done) => {
+//         console.log('access token: ' + accessToken)
+//         console.log('refresh token: ' + refreshToken)
+//         const newUser = {
+//             googleid: profile.id,
+//             firstname: 'google',
+//             lastname: 'google',
+//             provider: 'google',
+//             email: profile.emails[0].value
+//         }
+        
+//         try {
+//             let user = await User.findOne({ googleid: profile.id })
+//             if (user){
+//                 console.log('user exists')
+//                 done(null, user)
+//             } else {
+//                 console.log('user doesnt exist')
+//                 user = await User.create(newUser)
+//                 done(null, user)
+//             }
+//         } catch (err) {
+//             console.log('caught error')
+//             console.log(err)
+//         }
+//     })
+// )
+    
+
+
+passport.use('google', 
     new GoogleStrategy({
         callbackURL: 'http://localhost:4200/api/google/google/callback',
         clientID: config.GOOGLE_CLIENTID,
-        clientSecret: config.GOOGLE_CLIENTSECRET,
-        //userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
-        //scope: ['profile']
-    }, async (accessToken, refreshToken, profile, done) => {
-        console.log(profile)
-        
-        const newUser = {
-            googleid: profile.id,
-            firstname: 'google',
-            lastname: 'google',
-            provider: 'google',
-            email: profile.emails[0].value
-        }
-        
-        try {
-            let user = await User.findOne({ googleid: profile.id })
-            if (user){
-                console.log('user exists')
-                done(null, user)
+        clientSecret: config.GOOGLE_CLIENTSECRET
+    }, (accessToken, refreshToken, profile, done) => {
+        console.log(profile.emails[0].value)
+        User.findOne({ googleid: profile.id }).then(user => {
+            if (user) {
+                console.log("existing")
+                return done(null, user)
             } else {
-                console.log('user doesnt exist')
-                user = await User.create(newUser)
-                done(null, user)
+                new User({
+                    googleid: profile.id,
+                    firstname: 'google',
+                    lastname: 'google',
+                    provider: 'google',
+                    email: profile.emails[0].value
+                }).save().then(
+                    newUser => done(null, newUser)
+                )
             }
-        } catch (err) {
-            console.log('caught error')
-            console.log(err)
-        }
+        })
     })
 )
-    
-
 
 passport.use('local-login', new LocalStrategy({
     email: 'email',
