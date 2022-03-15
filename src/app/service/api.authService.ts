@@ -17,7 +17,8 @@ export class AuthApiService{
     //data should store email address and the password 
     //in json format
     localLogin(data): Observable<any>{
-        let url = `${this.baseUri}/local-login`;
+        //let url = `${this.baseUri}/local-login`;
+        let url = `${this.baseUri}/api/localauth/local-login`;
         return this.http.post(url, data)
             .pipe(
                 catchError(this.errorMgmt)

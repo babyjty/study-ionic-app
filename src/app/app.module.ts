@@ -10,22 +10,18 @@ import { AppComponent } from './app.component';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { AuthApiService } from './service/api.authService';
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-// <<<<<<< jiam
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, GoogleMapsModule, HttpClientModule],
-  providers: [Geolocation, NativeGeocoder, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-// =======
-//   imports: [BrowserModule, 
-//           IonicModule.forRoot(),  
-//           AppRoutingModule,
-//           HttpClientModule],
-//   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-// >>>>>>> main
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, GoogleMapsModule, 
+    HttpClientModule],
+  providers: [Geolocation, NativeGeocoder, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-3
