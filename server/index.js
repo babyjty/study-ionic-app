@@ -7,14 +7,12 @@ const session = require('express-session')
 const passportconfig = require('./routes/userRoutes/passport')
 const port = 3000
 //const passportconfig = require('./routes/userRoutes/passport')
-const authconfig = require('./config/key')
+const config = require('./config/key')
 const key = require('./config/key')
 const passport = require('passport')
-const bodyParser = require('body-parser')
+const routes = require('./routes')
 const mongoose = require('mongoose')
-const config = require('./config/key')
-const passportsetup = require('./passport')
-//require('https').globalAgent.options.rejectUnauthorized = false
+
 
 mongoose.connect(
     config.mongoURI, {})
@@ -22,23 +20,14 @@ mongoose.connect(
     .catch(err => console.log(err))
 // app.use(passport.initialize())
 
-app.use(session({
-    secret: 'randomtext',
-    saveUninitialized: false,
-    resave: false
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(bodyParser.urlencoded({extended: false}))
+// app.use(session({
+//     secret: 'randomtext',
+//     saveUninitialized: false,
+//     resave: false
+// }))
 
-app.use(cors({
-    origin: 'http://localhost:4200',
-    methods: 'GET, POST, PUT, DELETE',
-    credentials: true
-}) )
 
-app.use('/auth', authRoute)
-
+app.use('', routes)
 app.get('/', (req, res) => {
     res.send('welcome')
 })
