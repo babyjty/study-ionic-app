@@ -8,6 +8,7 @@ const port = 3000
 const authconfig = require('./config/key')
 const key = require('./config/key')
 const passport = require('passport')
+const routes = require('./routes')
 
 // app.use(passport.initialize())
 
@@ -16,19 +17,9 @@ const passport = require('passport')
 //     saveUninitialized: false,
 //     resave: false
 // }))
-app.get('/login', 
-    passportconfig.authenticate('google', {
-        scope: ['profile', 'email'] //'https://www.googleapis.com/auth/plus.profile.emails.read']
-})    
-)
 
-app.get('/login/google/callback',
-    passportconfig.authenticate('google', {failureRedirect: '/', }),
-    (req, res) => {
-        console.log('success')
-    }
-)
 
+app.use('', routes)
 app.get('/', (req, res) => {
     res.send('welcome')
 })
