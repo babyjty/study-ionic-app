@@ -1,0 +1,22 @@
+ion-content{// to set background color
+    --background: rgb(255, 255, 255);
+}
+
+ion-button{
+    margin: 10px;
+}
+
+.login-logo {
+    min-height: 200px;
+    text-align: center;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 40px;
+    border-bottom: 20px;
+}
+
+ion-card {
+    border-top: 3px solid gray;
+    border-bottom: 3px solid gray;
+ }
+

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
+import { GooglePlacesAPIService } from '../service/google-places-api.service';
 
 @Component({
   selector: 'app-spot',
@@ -6,7 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['spot.page.scss']
 })
 export class SpotPage {
+  public radius:any;
+  public locationData:any;
 
-  constructor() {}
+  constructor(public api:GooglePlacesAPIService) {}
 
+  fetchLocations(radius){
+    this.api.getLocations(this.radius).subscribe(result=>{
+      console.log(result);
+      this.locationData = result;
+    })
+  }
 }
