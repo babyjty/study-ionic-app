@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 
 import { RegisterPage } from '../register/register.page';
 import { LoginPageForm } from './login.page.form';
+import { AuthApiService } from './../service/api.authService';
+
+
 
 @Component({
   selector: 'app-login',
@@ -11,12 +14,19 @@ import { LoginPageForm } from './login.page.form';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  constructor(private router: Router, private formBuilder: FormBuilder) {} // this component is using the router
+  // Declare class variables
+  private form: FormGroup;
+  private email: String;
+  private agent: String;
+  private submit: JSON;
+
+  constructor(
+    private router: Router,  // this component is using the router
+    private formBuilder: FormBuilder, 
+    private AuthApiService: AuthApiService
+  ) {}
   // constructor(public afAuth: AngularFireAuth) { }
-  form: FormGroup;
-  email: String;
-  agent: String;
-  isSubmitted = false;
+
 
   ngOnInit() {
     // Create form as soon as page is initialized --> have to create inside ngOnInIt() 
@@ -24,12 +34,19 @@ export class LoginPage implements OnInit {
   }
 
   login(){
-    this.router.navigate(['tabs']);
-    this.isSubmitted = true;
     if(!this.form.valid) {
-      console.log("Invalid registration")
-    } else {
-      console.log(this.form.value)
+      console.log("Invalid registration");
+    } 
+    else {
+      console.log(this.form.value);
+      let outcome = this.AuthApiService.localLogin(JSON.stringify(this.form));
+      if(outcome){
+        this.router.navigate(['tabs']);      
+      }
+      else {
+        console.log("No such account");
+        this.form = new LoginPageForm(this.formBuilder).createForm();
+      }
     }
   }
 
