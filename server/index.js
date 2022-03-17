@@ -1,4 +1,3 @@
-
 const express = require('express', '4.17.1')
 const app = express()
 
@@ -16,6 +15,9 @@ const passport = require('passport')
 //     saveUninitialized: false,
 //     resave: false
 // }))
+
+app.use(require("./routes"));
+
 app.get('/login', 
     passportconfig.authenticate('google', {
         scope: ['profile', 'email'] //'https://www.googleapis.com/auth/plus.profile.emails.read']
@@ -34,14 +36,3 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
-
-
-
-app.use(require('./routes'))
-
-
-
-
-
-

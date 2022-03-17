@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const places = require('./routes/places');
-var cors = require('cors')
+const cors = require('cors')
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
