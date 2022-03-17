@@ -13,6 +13,7 @@ const passport = require('passport')
 const routes = require('./routes')
 const mongoose = require('mongoose')
 
+app.use(cors());
 
 mongoose.connect(
     config.mongoURI, {})
@@ -27,7 +28,7 @@ mongoose.connect(
 // }))
 
 
-app.use('', routes)
+app.use('/api', routes)
 app.get('/', (req, res) => {
     res.send('welcome')
 })

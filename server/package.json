@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.3",
     "mongoose-findorcreate": "^3.0.0",
+    "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-google-oauth-token": "^1.0.3",
     "passport-google-oauth2": "^0.2.0",
@@ -28,8 +29,5 @@
     "passport-google-oidc": "^0.1.0",
     "passport-local": "^1.0.0",
     "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
   }
 }

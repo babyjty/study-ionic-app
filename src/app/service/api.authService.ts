@@ -11,17 +11,18 @@ export class AuthApiService{
     _isLoggedIn: boolean = false;
     baseUri: string = 'http://localhost:3000';
     headers = new HttpHeaders().set('Content-Type', 'application/json');
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient){
+        
+    }
 
     //Login for local users
     //data should store email address and the password 
     //in json format
     localLogin(data): Observable<any>{
         //let url = `${this.baseUri}/local-login`;
-        //console.log("API Start")
+        console.log(data)
         let url = `${this.baseUri}/api/localauth/local-login`;
         //console.log("API Middle")
-
         return this.http.post(url, data)
             .pipe(
                 catchError(this.errorMgmt)
@@ -37,7 +38,7 @@ export class AuthApiService{
 
 
     errorMgmt(error: HttpErrorResponse){
-        let errorMessage = '';
+        let errorMessage = 'no response';
         if (error.error instanceof ErrorEvent){
             //Get client-side error
             errorMessage = error.error.message;
