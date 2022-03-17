@@ -21,16 +21,16 @@ export class MapPage {
 
   infoWindows: any = [];
   public markers: any = [
-    {
-      title: "Singapore",
-      latitude: "1.3521",
-      longitude: "103.8198"
-    },
-    {
-      title: "Singapore2",
-      latitude: "1.3722",
-      longitude: "103.8299"
-    }
+    // {
+    //   title: "Singapore",
+    //   latitude: "1.3521",
+    //   longitude: "103.8198"
+    // },
+    // {
+    //   title: "Singapore2",
+    //   latitude: "1.3722",
+    //   longitude: "103.8299"
+    // }
   ]
   
   constructor(public api:GooglePlacesAPIService) {}
@@ -42,12 +42,23 @@ export class MapPage {
       for (let key in locationData){
         newLocation = {
           title: locationData[key].name,
-          latitute: String(locationData[key].geometry.location.lat),
-          longitude: String(locationData[key].geometry.location.lng)
+          latitude: String(locationData[key].geometry.location.lat),
+          longitude: String(locationData[key].geometry.location.lng),
+          rating: locationData[key].rating,
+          price: "dont know"
         }
         this.markers.push(newLocation);
       }
     })
+    const location = new google.maps.LatLng(1.3521, 103.8198);
+    // const options = {
+    //   center: location,
+    //   zoom: 12,
+    //   disableDefaultUI: true,
+    //   keyboardShortcuts: false
+    // }
+    // this.map = new google.maps.Map(this.mapRef.nativeElement, options)
+    this.addMarkersToMap(this.markers);
   }
 
   ionViewDidEnter(){
@@ -61,7 +72,9 @@ export class MapPage {
         position: position,
         title: marker.title,
         latitude: marker.latitude,
-        longitude: marker.longitude
+        longitude: marker.longitude,
+        rating: marker.rating,
+        price: marker.price
       });
 
       mapMarker.setMap(this.map);
@@ -72,8 +85,8 @@ export class MapPage {
   addInfoWindowToMarker(marker){
     let infoWindowContent = '<div id="content" style="color:black">' + 
                               '<h2 id="firstHeading" class="firstHeading">' + marker.title + '</h2>' +
-                              '<p>Latitude: ' + marker.latitude + '</p>' +
-                              '<p>Longitude: ' + marker.longitude + '</p>' +
+                              '<p>Rating: ' + marker.rating + '/5</p>' +
+                              '<p>Price: ' + marker.price+ '</p>' +
                               '<ion-button id="navigate">Navigate</ion-button>' +
                             '</div>';
 
@@ -110,89 +123,89 @@ export class MapPage {
     const location = new google.maps.LatLng(1.3521, 103.8198);
     const options = {
       center: location,
-      zoom: 10,
+      zoom: 12,
       disableDefaultUI: true,
       keyboardShortcuts: false,
-      styles: [
-        { elementType: "geometry", stylers: [{ color: "#1b2430" }] },
-        // 242f3e
-        { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-        { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-        {
-          featureType: "administrative.locality",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#d59563" }],
-        },
-        {
-          featureType: "poi",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#d59563" }],
-        },
-        {
-          featureType: "poi.park",
-          elementType: "geometry",
-          stylers: [{ color: "#263c3f" }],
-        },
-        {
-          featureType: "poi.park",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#6b9a76" }],
-        },
-        {
-          featureType: "road",
-          elementType: "geometry",
-          stylers: [{ color: "#38414e" }],
-        },
-        {
-          featureType: "road",
-          elementType: "geometry.stroke",
-          stylers: [{ color: "#212a37" }],
-        },
-        {
-          featureType: "road",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#9ca5b3" }],
-        },
-        {
-          featureType: "road.highway",
-          elementType: "geometry",
-          stylers: [{ color: "#746855" }],
-        },
-        {
-          featureType: "road.highway",
-          elementType: "geometry.stroke",
-          stylers: [{ color: "#1f2835" }],
-        },
-        {
-          featureType: "road.highway",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#f3d19c" }],
-        },
-        {
-          featureType: "transit",
-          elementType: "geometry",
-          stylers: [{ color: "#2f3948" }],
-        },
-        {
-          featureType: "transit.station",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#d59563" }],
-        },
-        {
-          featureType: "water",
-          elementType: "geometry",
-          stylers: [{ color: "#17263c" }],
-        },
-        {
-          featureType: "water",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#515c6d" }],
-        },
-        {
-          featureType: "water",
-          elementType: "labels.text.stroke",
-          stylers: [{ color: "#17263c" }]
-        }]
+      // styles: [
+      //   { elementType: "geometry", stylers: [{ color: "#1b2430" }] },
+      //   // 242f3e
+      //   { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+      //   { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+      //   {
+      //     featureType: "administrative.locality",
+      //     elementType: "labels.text.fill",
+      //     stylers: [{ color: "#d59563" }],
+      //   },
+      //   {
+      //     featureType: "poi",
+      //     elementType: "labels.text.fill",
+      //     stylers: [{ color: "#d59563" }],
+      //   },
+      //   {
+      //     featureType: "poi.park",
+      //     elementType: "geometry",
+      //     stylers: [{ color: "#263c3f" }],
+      //   },
+      //   {
+      //     featureType: "poi.park",
+      //     elementType: "labels.text.fill",
+      //     stylers: [{ color: "#6b9a76" }],
+      //   },
+      //   {
+      //     featureType: "road",
+      //     elementType: "geometry",
+      //     stylers: [{ color: "#38414e" }],
+      //   },
+      //   {
+      //     featureType: "road",
+      //     elementType: "geometry.stroke",
+      //     stylers: [{ color: "#212a37" }],
+      //   },
+      //   {
+      //     featureType: "road",
+      //     elementType: "labels.text.fill",
+      //     stylers: [{ color: "#9ca5b3" }],
+      //   },
+      //   {
+      //     featureType: "road.highway",
+      //     elementType: "geometry",
+      //     stylers: [{ color: "#746855" }],
+      //   },
+      //   {
+      //     featureType: "road.highway",
+      //     elementType: "geometry.stroke",
+      //     stylers: [{ color: "#1f2835" }],
+      //   },
+      //   {
+      //     featureType: "road.highway",
+      //     elementType: "labels.text.fill",
+      //     stylers: [{ color: "#f3d19c" }],
+      //   },
+      //   {
+      //     featureType: "transit",
+      //     elementType: "geometry",
+      //     stylers: [{ color: "#2f3948" }],
+      //   },
+      //   {
+      //     featureType: "transit.station",
+      //     elementType: "labels.text.fill",
+      //     stylers: [{ color: "#d59563" }],
+      //   },
+      //   {
+      //     featureType: "water",
+      //     elementType: "geometry",
+      //     stylers: [{ color: "#17263c" }],
+      //   },
+      //   {
+      //     featureType: "water",
+      //     elementType: "labels.text.fill",
+      //     stylers: [{ color: "#515c6d" }],
+      //   },
+      //   {
+      //     featureType: "water",
+      //     elementType: "labels.text.stroke",
+      //     stylers: [{ color: "#17263c" }]
+      //   }]
       
     }
 
