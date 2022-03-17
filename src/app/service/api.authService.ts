@@ -9,7 +9,7 @@ import { FormGroup } from "@angular/forms";
 
 export class AuthApiService{
     _isLoggedIn: boolean = false;
-    baseUri: string = 'http://localhost:3000/api/auth';
+    baseUri: string = 'http://localhost:3000';
     headers = new HttpHeaders().set('Content-Type', 'application/json');
     constructor(private http: HttpClient){}
 
@@ -18,7 +18,10 @@ export class AuthApiService{
     //in json format
     localLogin(data): Observable<any>{
         //let url = `${this.baseUri}/local-login`;
+        //console.log("API Start")
         let url = `${this.baseUri}/api/localauth/local-login`;
+        //console.log("API Middle")
+
         return this.http.post(url, data)
             .pipe(
                 catchError(this.errorMgmt)

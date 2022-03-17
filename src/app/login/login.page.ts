@@ -47,14 +47,20 @@ export class LoginPage implements OnInit {
     } 
     else {
       console.log(this.form.value);
-      let temp = this.form.getRawValue();
-      console.log(temp);
-      console.log("Login Start")
-      let outcome = this.AuthApiService.localLogin(JSON.stringify(temp));
-      console.log("Login Middle")
+      //let temp = this.form.getRawValue();
+      //console.log(temp);
+      //console.log("Login Start")
+      //let outcome = this.AuthApiService.localLogin(JSON.stringify(temp));
+      //console.log("Login Middle")
 
+      let outcome = this.AuthApiService.localLogin(this.form.value).subscribe({
+        complete: () => {
+          console.log('Login Successful')
+          console.log(outcome);
+        }
+      })
       console.log(outcome);
-      if(outcome._isScalar){
+      if(outcome){
         this.router.navigate(['tabs']);     
         console.log("Login End")
  
