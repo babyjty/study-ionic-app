@@ -7,7 +7,7 @@ import { GooglePlacesAPIService } from '../service/google-places-api.service';
   styleUrls: ['spot.page.scss']
 })
 export class SpotPage {
-  public radius:any;
+  public radius: Number;
   public locationData:any;
 
   orderHeader: String = '';
@@ -17,7 +17,6 @@ export class SpotPage {
 
   fetchLocations(){
     this.api.getLocations(this.radius).subscribe(result=>{
-      //console.log(result);
       this.locationData = result;
     })
   }

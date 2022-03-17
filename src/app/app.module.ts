@@ -26,4 +26,3 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-3
