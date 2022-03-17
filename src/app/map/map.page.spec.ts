@@ -4,7 +4,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { MapPage } from './map.page';
 
-describe('Tab1Page', () => {
+describe('MapPage', () => {
   let component: MapPage;
   let fixture: ComponentFixture<MapPage>;
 

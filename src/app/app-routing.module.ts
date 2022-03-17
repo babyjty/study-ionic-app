@@ -19,10 +19,6 @@ const routes: Routes = [
     loadChildren: () => import('./chat-indiv/chat-indiv.module').then( m => m.ChatIndivPageModule)
   },
   {
-    path: 'test',
-    loadChildren: () => import('./test/test.module').then( m => m.TestPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
@@ -41,21 +37,15 @@ const routes: Routes = [
   {
     path: 'map',
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
-  },   
-  {
-    path: 'external-registration',
-    loadChildren: () => import('./external-registration/external-registration.module').then( m => m.ExternalRegistrationPageModule)
   },
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
-  },  {
-    path: 'spot-details',
-    loadChildren: () => import('./spot-details/spot-details.module').then( m => m.SpotDetailsPageModule)
+  },
+  {
+    path: 'external-register',
+    loadChildren: () => import('./external-register/external-register.module').then( m => m.ExternalRegisterPageModule)
   }
-
-
-
 ];
 @NgModule({
   imports: [

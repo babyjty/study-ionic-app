@@ -19,3 +19,7 @@ ion-card {
     border-top: 3px solid gray;
     border-bottom: 3px solid gray;
  }
+
+ion-input[type=email]{
+    text-transform: lowercase;
+}

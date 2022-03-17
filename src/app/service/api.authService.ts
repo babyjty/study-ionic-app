@@ -2,12 +2,13 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from 'rxjs/operators'
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
-
+import { FormGroup } from "@angular/forms";
 @Injectable({
     providedIn: 'root'
 })
 
 export class AuthApiService{
+    _isLoggedIn: boolean = false;
     baseUri: string = 'http://localhost:3000/api/auth';
     headers = new HttpHeaders().set('Content-Type', 'application/json');
     constructor(private http: HttpClient){}
