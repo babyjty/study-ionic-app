@@ -11,6 +11,9 @@ export class SpotPage {
   public radius:any;
   public locationData:any;
 
+  orderHeader: String = '';
+  isDescOrder: boolean = true;
+
   constructor(public api:GooglePlacesAPIService) {}
 
   fetchLocations(radius){
@@ -18,5 +21,10 @@ export class SpotPage {
       console.log(result);
       this.locationData = result;
     })
+  }
+
+  sort(headerName: String) {
+    this.isDescOrder = !this.isDescOrder;
+    this.orderHeader = headerName;
   }
 }

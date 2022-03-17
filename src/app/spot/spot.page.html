@@ -7,22 +7,47 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
+      
   <ion-searchbar placeholder="Enter radius" [(ngModel)]="radius" (keydown.enter)="fetchLocations()" animated></ion-searchbar>
+    
+  <div class="header">
+    <ion-button color="medium" expand="block" (click)="sort('name')" class="option">Name</ion-button>
+    <ion-button color="medium" expand="block" class="option">Distance</ion-button>
+    <ion-button color="medium" expand="block" (click)="sort('vicinity')" class="option">Address</ion-button>
+    <ion-button color="medium" expand="block" (click)="sort('rating')" class="option">Rating</ion-button>
+  </div>
+    
 </ion-header>
-
+    
 <ion-content>
-  <ion-card *ngFor="let item of locationData" color="light">
-   <ion-card-title>
-     {{item.name}}
-   </ion-card-title>
-   <ion-card-content>
-      <h4>
-        Rating: {{item.rating}}
-      </h4>
-      <h4>
-        Address: {{item.vicinity}}
-      </h4>
-   </ion-card-content>
+  <ion-card *ngFor="let item of locationData | orderBy: orderHeader: isDescOrder" color="light">
+
+    <ion-card-content color="light">
+    
+      <ion-item lines="none" color="light">
+        <ion-label>
+          <ion-card-subtitle class="subtitle">{{item.types[0]}}</ion-card-subtitle>
+          <ion-card-title class="title">{{item.name}}</ion-card-title>
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none" color="light">
+
+        <ion-thumbnail>
+          <ion-img src="https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg"></ion-img>
+        </ion-thumbnail>
+        
+        <ion-label>
+          
+          <p><strong>Address: </strong> {{item.vicinity}}</p>
+          <p><strong>Rating: </strong>{{item.rating}}/5</p>
+          <p><strong>Price: $</strong>$$</p>
+          <p><span style="color:red; font-weight: bold">Live: </span>Not so busy</p>
+        </ion-label>
+            
+      </ion-item>
+    
+    </ion-card-content>
   </ion-card>
 </ion-content>
-
+ 
