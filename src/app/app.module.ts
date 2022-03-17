@@ -7,6 +7,7 @@ import { AngularDelegate, IonicModule, IonicRouteStrategy } from '@ionic/angular
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 import { GoogleMapsModule } from '@angular/google-maps'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
@@ -46,11 +47,11 @@ import {
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('69384076572-jof55kj6sctfp7ctd6fe2jol7s8blivf.apps.googleusercontent.com')
+            provider: new GoogleLoginProvider('364897496119-rrteeo2ddr72f6j3je7nj5t39b7uc7ve.apps.googleusercontent.com')
           },
           /*{
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('69384076572-jof55kj6sctfp7ctd6fe2jol7s8blivf.apps.googleusercontent.com')
+            provider: new FacebookLoginProvider('')
           }*/
         ]
       } as SocialAuthServiceConfig,
