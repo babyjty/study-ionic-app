@@ -12,7 +12,7 @@ const key = require('./config/key')
 const passport = require('passport')
 const routes = require('./routes')
 const mongoose = require('mongoose')
-
+app.use(cors())
 
 mongoose.connect(
     config.mongoURI, {})

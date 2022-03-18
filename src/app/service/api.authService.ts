@@ -17,15 +17,29 @@ export class AuthApiService{
     //data should store email address and the password 
     //in json format
     localLogin(data): Observable<any>{
-        //let url = `${this.baseUri}/local-login`;
-        //console.log("API Start")
         let url = `${this.baseUri}/api/localauth/local-login`;
-        //console.log("API Middle")
+        return this.http.post(url, data).pipe(catchError(this.errorMgmt));
+        // let outcome = this.http.post(url, data).subscribe(dataR => {
+        //     data = dataR;
+        // });
+        // return data;
 
-        return this.http.post(url, data)
-            .pipe(
-                catchError(this.errorMgmt)
-            )
+
+        // return this.http.post(url, data).pipe(
+        //      catchError(this.errorMgmt)
+        // )
+
+        // return this.http.post(url, data).pipe(
+        //     map(this.dataExtract),
+        //     catchError(this.errorManagement)
+        // )
+ 
+        // this.http.post(url, data).subscribe((dataR) => {
+        //     result.next(JSON.parse(JSON.stringify(dataR)));
+        //     result.complete()
+        //     console.log(dataR);
+        // });
+
     }
 
     // googleLogin(data): Observable<any>{
@@ -33,9 +47,9 @@ export class AuthApiService{
 
     // }
 
+
+
     //Signup
-
-
     errorMgmt(error: HttpErrorResponse){
         let errorMessage = '';
         if (error.error instanceof ErrorEvent){
