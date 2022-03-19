@@ -3,6 +3,7 @@ import { IonSearchbar } from '@ionic/angular';
 import { defaultMaxListeners } from 'events';
 import { fromEventPattern } from 'rxjs';
 import { GooglePlacesAPIService } from '../service/google-places-api.service';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 declare var google: any;
 
@@ -20,22 +21,34 @@ export class MapPage {
   @ViewChild('search', {static: false}) search: IonSearchbar;
 
   infoWindows: any = [];
-  public markers: any = [
-    // {
-    //   title: "Singapore",
-    //   latitude: "1.3521",
-    //   longitude: "103.8198"
-    // },
-    // {
-    //   title: "Singapore2",
-    //   latitude: "1.3722",
-    //   longitude: "103.8299"
-    // }
-  ]
+  public markers: any = []
+
+  private currentLoc: any = []
+
+  // constructor(public api:GooglePlacesAPIService){}
+
+  constructor(public api:GooglePlacesAPIService, private geolocation: Geolocation) {}
   
-  constructor(public api:GooglePlacesAPIService) {}
+  ngOnInit(){}
+
+
+  getCurrentLocation(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+      let current:object;
+      current = {
+        latitude:resp.coords.latitude,
+        longitude:resp.coords.longitude
+      }
+      this.currentLoc.push(current);    
+      console.log(current);
+      this.addMarkersToMap(this.currentLoc);
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+  }
 
   updateSearchResults(){
+    console.log("clicked")
     this.api.getLocations(this.radius).subscribe(result=>{
       let locationData = result;
       let newLocation:object;
@@ -50,7 +63,8 @@ export class MapPage {
         this.markers.push(newLocation);
       }
     })
-    const location = new google.maps.LatLng(1.3521, 103.8198);
+
+    const location = new google.maps.LatLng(this.currentLoc.latitude , this.currentLoc.longitude);
     // const options = {
     //   center: location,
     //   zoom: 12,
@@ -59,11 +73,20 @@ export class MapPage {
     // }
     // this.map = new google.maps.Map(this.mapRef.nativeElement, options)
     this.addMarkersToMap(this.markers);
+    console.log("clicked")
   }
 
   ionViewDidEnter(){
     this.showMap();
+    this.getCurrentLocation();
   }
+
+  // addMarkerToMap(marker){
+  //   let position = new google.maps.LatLng(marker.latitude, marker.longitude);
+  //   let mapMarker = new google.maps.Marker({position: position});
+  //   mapMarker.setMap(this.map);
+  //   console.log(marker + "within add function")
+  // }
 
   addMarkersToMap(markers){
     for(let marker of markers){
