@@ -7,7 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+// import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 @NgModule({
@@ -21,7 +22,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 //           IonicModule.forRoot(),  
 //           AppRoutingModule,
 //           HttpClientModule],
-//   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+//   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],  
 // >>>>>>> main
   bootstrap: [AppComponent],
 })
