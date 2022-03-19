@@ -151,36 +151,148 @@ export class SpotPage {
   // FILTERING
 
 
-  filter(array: string, func: any) {
-    let array2 = [];
-    for ( var counter = 0; counter < array.length; counter++) {       
-      if (func(array[counter], counter, array )) {
-        array2.push(array[counter]);
-      }
-    }
-    return array2;
-  }
+  // filter(array: string, func: any) {
+  //   let array2 = [];
+  //   for ( var counter = 0; counter < array.length; counter++) {       
+  //     if (func(array[counter], counter, array )) {
+  //       array2.push(array[counter]);
+  //     }
+  //   }
+  //   return array2;
+  // }
 
   async filtering() {
 
     const actionSheet = await this.actionSheetController.create({
-      header: 'SORT BY',
+      header: 'FILTER BY',
       buttons: [{
-        text: 'Name',
+        text: 'Radius',
+        data: 'Data value',
+        handler: () => {
+          this.filteringRadius();
+        }
+      }, {
+        text: 'Rating',
+        handler: () => {
+          // this.filter('rating',function(value: number) {return value >3});
+          this.filteringRating();
+        }
+      }, {
+        text: 'Price',
+        data: 10,
+        handler: () => {
+          this.filteringPrice();
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    // console.log('onDidDismiss resolved with role and data', role, data);
+
+  }
+
+  async filteringRadius() {
+
+    const actionSheet = await this.actionSheetController.create({
+      header: 'FILTER BY RADIUS',
+      buttons: [{
+        text: '2000m',
         data: 10,
         handler: () => {
           
         }
       }, {
-        text: 'Address',
+        text: '3000m',
         data: 'Data value',
         handler: () => {
           
         }
       }, {
-        text: 'Rating',
+        text: '5000m',
         handler: () => {
-          this.filter('rating',function(value: number) {return value >3});
+          
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    // console.log('onDidDismiss resolved with role and data', role, data);
+
+  }
+
+  async filteringRating() {
+
+    const actionSheet = await this.actionSheetController.create({
+      header: 'FILTER BY RATING',
+      buttons: [{
+        text: 'Above 4/5',
+        data: 10,
+        handler: () => {
+          
+        }
+      }, {
+        text: 'Above 3/5',
+        data: 'Data value',
+        handler: () => {
+          
+        }
+      }, {
+        text: 'Above 2/5',
+        handler: () => {
+          
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    // console.log('onDidDismiss resolved with role and data', role, data);
+
+  }
+
+  async filteringPrice() {
+
+    const actionSheet = await this.actionSheetController.create({
+      header: 'FILTER BY PRICE',
+      buttons: [{
+        text: '$',
+        data: 10,
+        handler: () => {
+          
+        }
+      }, {
+        text: '$$',
+        data: 'Data value',
+        handler: () => {
+          
+        }
+      }, {
+        text: '$$$',
+        handler: () => {
+          
         }
       }, {
         text: 'Cancel',
