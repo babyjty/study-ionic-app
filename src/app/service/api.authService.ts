@@ -34,9 +34,9 @@ export class AuthApiService{
 
     // }
 
+
+
     //Signup
-
-
     errorMgmt(error: HttpErrorResponse){
         let errorMessage = 'no response';
         if (error.error instanceof ErrorEvent){

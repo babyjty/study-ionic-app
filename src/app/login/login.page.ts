@@ -42,33 +42,20 @@ export class LoginPage implements OnInit {
   }
 
   login(){
+    console.log(this.form.value);
     if(!this.form.valid) {
       console.log("Invalid registration");
     } 
     else {
-      console.log(this.form.value);
-      //let temp = this.form.getRawValue();
-      //console.log(temp);
-      //console.log("Login Start")
-      //let outcome = this.AuthApiService.localLogin(JSON.stringify(temp));
-      //console.log("Login Middle")
-
-      let outcome = this.AuthApiService.localLogin(this.form.value).subscribe({
-        complete: () => {
-          console.log('Login Successful')
-          console.log(outcome);
-        }
-      })
-      console.log(outcome);
-      if(outcome){
-        this.router.navigate(['tabs']);     
-        console.log("Login End")
- 
-      }
-      else {
-        console.log("No such account");
-        this.form = new LoginPageForm(this.formBuilder).createForm();
-      }
+      // console.log(this.form.value);
+      let outcome = this.AuthApiService.localLogin(this.form.value).subscribe(dataR => {
+        console.log(dataR)
+        if(dataR.loginSuccess) {this.router.navigate(['tabs'])}
+        else {
+          console.log("No such account");
+          this.form = new LoginPageForm(this.formBuilder).createForm();
+        }     
+    });
     }
   }
 
