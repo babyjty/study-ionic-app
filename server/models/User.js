@@ -51,7 +51,12 @@ const userSchema = mongoose.Schema({
         type: String
     },
     photoURL: {
-        type: String
+        type: String,
+        default: 'none'
+    },
+    photoKey: {
+        type: String,
+        default: 'none'
     }
     
 })
