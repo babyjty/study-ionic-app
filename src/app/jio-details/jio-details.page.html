@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Jio
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class = 'description'>
+  <ion-card color = 'medium'>
+  
+    <ion-card-content> 
+      <p>Hi, my name is Tzi Yu! and I am studying in NTU business and computing, would love to make new friends </p> 
+      <!-- {{jios.description}} -->
+    </ion-card-content>
+  
+    <ion-avatar>
+      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      <!-- {{jios.photo}} -->
+    </ion-avatar>
+  
+  </ion-card>
+
+  <ion-card class = 'location' color = 'medium'>
+    <ion-card-header>
+      <p>
+        Starbucks
+        <!-- {{jios.name}} -->
+      </p>
+    </ion-card-header>
+    <ion-card-content> 
+      <p1>
+      Address: 76 Nanyang Drive 01-06 NTU North Spine, 637331
+      <!-- {{jios.address}} -->
+      <br>
+      Hours : Open - Closes 10PM
+      <!-- {{jios.closing}} -->
+      <br>
+      Phone : 6910 1245 
+      <!-- {{jios.contact}} -->
+      <br>
+      </p1>
+      <ion-text color = 'danger'>
+        Live:
+      </ion-text>
+      <ion-text>
+        <p3>
+          A little busy
+          <!-- {{jios.crowdesness}} -->
+        </p3>
+      </ion-text>
+      <br>
+      <br>
+      <p2>
+      Start Time: 
+      </p2>
+      16:00
+      <!-- {{jios.opening}} -->
+      <br>
+      <br>
+      <p4>
+        End Time:
+      </p4>
+      18:00
+      <!-- {{jios.closing}} -->
+      <br>
+      <br>
+      <p5>
+      Description:
+      </p5>
+      Wouldn't mind some dinner!
+      <!-- {{jios.message}} -->
+      <br>
+      <br>
+      <ion-button color = 'secondary' [disabled]="!isenabled" (click)="removeJio(jio)" >
+        <b>Cancel / Withdraw</b>
+      </ion-button>
+
+    </ion-card-content>
+</ion-card>
+  
+</ion-content>

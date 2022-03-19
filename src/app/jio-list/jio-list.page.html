@@ -1,0 +1,89 @@
+ 
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        My Jios
+      </ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+    <ion-button fill="outline" size="small">
+      Filters
+    </ion-button>
+    <ion-button fill="outline" size="small">
+      Sort
+    </ion-button>
+    <br>
+    <br>
+    <ion-row class="ion-align-items-center ion-no-padding" >
+      <p1>
+      Pending Jios
+      </p1>
+    </ion-row>
+    <ion-card class = 'jio' color = 'medium' (click)="nextpage()">
+      <ion-grid>
+       <ion-row>
+        <ion-col>
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-col>
+      <ion-col> 
+      <ion-card-content>
+        <p>Seeking to study from 2-4pm. 
+          Friendly BCG Student!</p>
+      </ion-card-content>
+      </ion-col>
+       </ion-row>
+       <ion-card-content>
+        <p1>Starbucks 300m $$$ Live: A little so busy</p1>
+      </ion-card-content>
+      </ion-grid>
+    </ion-card>
+    <br>
+    <ion-text class = 'ion-text-center'>
+      Upcoming Jios
+    </ion-text>
+  
+    <ion-card class = 'jio' color = 'medium' (click)="nextpage()">
+      <ion-grid>
+       <ion-row>
+        <ion-col>
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-col>
+      <ion-col> 
+      <ion-card-content>
+        <p>Seeking to study from 2-4pm. 
+          Friendly BCG Student!</p>
+      </ion-card-content>
+      </ion-col>
+       </ion-row>
+       <ion-card-content>
+        <p1>Starbucks 300m $$$ Live: A little so busy</p1>
+      </ion-card-content>
+      </ion-grid>
+    </ion-card>
+  
+  
+  
+  
+  
+    <!-- <ion-card class = 'jio' color = 'medium' (click)="nextpage()" *ngFor = 'let card of jioList'>
+        <ion-grid>
+         <ion-row>
+          <ion-col>
+            <img src="{{jioList.picture}}">
+          </ion-col>
+        <ion-col> 
+        <ion-card-content>
+          <p>{{jioList.message}}</p>
+        </ion-card-content>
+        </ion-col>
+         </ion-row>
+         <ion-card-content>
+          <p1>{{jioList.location}} {{jioList.distance}} {{jioList.cost}} {{jioList.crowdesness}}</p1>
+        </ion-card-content>
+        </ion-grid>
+      </ion-card> -->

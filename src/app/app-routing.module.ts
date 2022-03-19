@@ -45,7 +45,23 @@ const routes: Routes = [
   {
     path: 'external-register',
     loadChildren: () => import('./external-register/external-register.module').then( m => m.ExternalRegisterPageModule)
+  },  {
+    path: 'jio-details',
+    loadChildren: () => import('./jio-details/jio-details.module').then( m => m.JioDetailsPageModule)
+  },
+  {
+    path: 'jio-list',
+    loadChildren: () => import('./jio-list/jio-list.module').then( m => m.JioListPageModule)
+  },
+  {
+    path: 'jio-form',
+    loadChildren: () => import('./jio-form/jio-form.module').then( m => m.JioFormPageModule)
+  },
+  {
+    path: 'jio-details-accept',
+    loadChildren: () => import('./jio-details-accept/jio-details-accept.module').then( m => m.JioDetailsAcceptPageModule)
   }
+
 ];
 @NgModule({
   imports: [
