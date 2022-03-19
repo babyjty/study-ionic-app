@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 //salt round represents how many salt 
 const saltRounds = 10
 const jwt = require('jsonwebtoken')
+const { async } = require('rxjs')
 
 const userSchema = mongoose.Schema({
     firstname: {
@@ -77,15 +78,31 @@ userSchema.pre('save', function(next){
     }
 })
 
-userSchema.methods.comparePassword = function(plainPassword, cb){
+userSchema.methods.comparePassword = async function(plainPassword, cb){
     //plainpassword is the password entered by the user
     //we cannot decrypt the encrypted password to compare with the plain password
     //so we encrypt the plainpassword then compare it with the encrypted string
-    bcrypt.compare(plainPassword, this.password, (err, isMatch) => {
-        if (err) return cb(err),
-            cb(null, isMatch) //if password match, return null as error and return isMatch = True
+    console.log('within user method')
+    console.log(plainPassword)
+    
+    console.log(this.password)
+    // await bcrypt.compare(plainPassword, this.password, function (err, isMatch)  {
+    //     //console.log(isMatch)
+    //     console.log('Comparing Password')
+    //     console.log(isMatch)
+    //     if (err) return cb(err),
+    //         cb(null, isMatch)
+        
+    //     //if password match, return null as error and return isMatch = True
 
-    })
+    // })
+    
+    try {
+        return await bcrypt.compare(plainPassword, this.password)
+    } catch (error) {
+        console.log(error)
+    }
+    return false
 }
 
 userSchema.methods.generateToken = function(callback){

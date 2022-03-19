@@ -46,7 +46,7 @@ router.post('/local-login', (req, res) => {
     console.log('api reached')
     //first find whether requested email address exists in the database
     //mongodb method
-    User.findOne({email: req.body.email}, (err, user) => {
+    User.findOne({email: req.body.email}, async (err, user) => {
         if(!user){ //if user does not exist
             return res.json({
                 loginSuccess: false,
@@ -55,19 +55,31 @@ router.post('/local-login', (req, res) => {
         } 
         console.log('user found')
     //if email address exists in the database check whether password is correct
-        user.comparePassword(req.body.password, (err, isMatch) => {
-            if(!isMatch){
-                return res.json({
-                    loginSuccess: false,
-                    message: "Incorrect Password"
-                })
-            } 
-        }) 
+        // await user.comparePassword(req.body.password, (err, isMatch) => {
+        //     //console.log('dumb')
+        //     //console.log(isMatch)
+        //     console.log('inside')
+        //     if(!isMatch){
+        //         console.log('within if')
+        //         return res.json({
+        //             loginSuccess: false,
+        //             message: "Incorrect Password"
+        //         })
+        //     } 
+
+        // }) 
+        const validated = await user.comparePassword(req.body.password)
+        if (!validated){
+            console.log('within if')
+            return res.json({
+                loginSuccess: false,
+                message: "Incorrect Password"
+            })
+        }
         console.log('password correct')
     //if password correct, create a token for the user
         user.generateToken((err, user) => {
             if (err) return res.status(400).send(err) //400 means error
-            console.log('no error')
             // user contains token. we need to save it somewhere (cookie? local storage?)
             //to save it to cookie we need cookieparser
             res.cookie("x_auth", user.token)
