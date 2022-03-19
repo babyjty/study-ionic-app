@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActionSheetController } from '@ionic/angular';
 import { GooglePlacesAPIService } from '../service/google-places-api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
@@ -15,8 +16,9 @@ export class SpotPage {
 
   orderHeader: String = '';
   isDescOrder: boolean = true;
+  filterResult: any;
 
-  constructor(public api:GooglePlacesAPIService, private geolocation:Geolocation) {
+  constructor(public api:GooglePlacesAPIService, private geolocation:Geolocation, private actionSheetController: ActionSheetController) {
     this.getCurrentLocation();
   }
 
@@ -73,8 +75,126 @@ export class SpotPage {
       })
   }
 
+
+  // SORTING
+
+
   sort(headerName: String) {
     this.isDescOrder = !this.isDescOrder;
-    this.orderHeader = headerName;
+    this.orderHeader = headerName; 
+  }
+
+  async sorting() {
+
+    const actionSheet = await this.actionSheetController.create({
+      header: 'SORT BY',
+      buttons: [{
+        text: 'Name',
+        data: 10,
+        handler: () => {
+          this.sort('name')
+        }
+      }, {
+        text: 'Address',
+        data: 'Data value',
+        handler: () => {
+          this.sort('vicinity');
+        }
+      }, {
+        text: 'Rating',
+        handler: () => {
+          this.sort('rating');
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          // console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    // console.log('onDidDismiss resolved with role and data', role, data);
+
+  }
+
+
+  // SEARCH BAR
+
+
+  search() {
+
+    const searchbar = document.getElementById("search-bar");
+    // const items = Array.from(document.querySelector('ion-list').children);
+    const items = this.locationData;
+
+    searchbar.addEventListener('ionInput', handleInput);
+
+    function handleInput(event) {
+      const query = event.target.value.toLowerCase();
+      requestAnimationFrame(() => {
+        items.forEach((item) => {
+          const shouldShow = item.textContent.toLowerCase().indexOf(query) > -1;
+          item.style.display = shouldShow ? 'block' : 'none';
+        });
+      });
+    }
+
+  }
+
+
+
+
+  // FILTERING
+
+
+  filter(array: string, func: any) {
+    let array2 = [];
+    for ( var counter = 0; counter < array.length; counter++) {       
+      if (func(array[counter], counter, array )) {
+        array2.push(array[counter]);
+      }
+    }
+    return array2;
+  }
+
+  async filtering() {
+
+    const actionSheet = await this.actionSheetController.create({
+      header: 'SORT BY',
+      buttons: [{
+        text: 'Name',
+        data: 10,
+        handler: () => {
+          
+        }
+      }, {
+        text: 'Address',
+        data: 'Data value',
+        handler: () => {
+          
+        }
+      }, {
+        text: 'Rating',
+        handler: () => {
+          this.filter('rating',function(value: number) {return value >3});
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    // console.log('onDidDismiss resolved with role and data', role, data);
+
   }
 }
