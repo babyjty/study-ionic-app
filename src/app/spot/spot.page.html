@@ -12,7 +12,7 @@
     
   <div class="header">
     <ion-button color="medium" expand="block" (click)="sort('name')" class="option">Name</ion-button>
-    <ion-button color="medium" expand="block" class="option">Distance</ion-button>
+    <ion-button color="medium" expand="block" (click)="sort('distance') "class="option">Distance</ion-button>
     <ion-button color="medium" expand="block" (click)="sort('vicinity')" class="option">Address</ion-button>
     <ion-button color="medium" expand="block" (click)="sort('rating')" class="option">Rating</ion-button>
   </div>
@@ -34,14 +34,15 @@
       <ion-item lines="none" color="light">
 
         <ion-thumbnail>
-          <ion-img src="https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg"></ion-img>
+          <ion-img [src]="item.src"></ion-img>
         </ion-thumbnail>
         
         <ion-label>
           
           <p><strong>Address: </strong> {{item.vicinity}}</p>
           <p><strong>Rating: </strong>{{item.rating}}/5</p>
-          <p><strong>Price: </strong>$$$</p>
+          <p><strong>Walking Distance: </strong>{{item.distance}}</p>
+          <p><strong>Price: $</strong>$$</p>
           <p><span style="color:red; font-weight: bold">Live: </span>Not so busy</p>
         </ion-label>
             
