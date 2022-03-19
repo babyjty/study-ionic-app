@@ -8,6 +8,7 @@ const config = require('../../config/key')
 const { response, application } = require('express')
 const cookieparser = require('cookie-parser')
 const { auth } = require('../../middleware/auth')
+//const imageController = require('./imageController')
 
 
 //application/x-www-form-urlencoded 
@@ -134,6 +135,7 @@ router.get('/local-logout', auth, (req, res) => {
 
     //just removing token
 })
+
 
 
 
