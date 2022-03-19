@@ -60,6 +60,14 @@ const routes: Routes = [
   {
     path: 'jio-details-accept',
     loadChildren: () => import('./jio-details-accept/jio-details-accept.module').then( m => m.JioDetailsAcceptPageModule)
+  },
+  {
+    path: 'jio-history',
+    loadChildren: () => import('./jio-history/jio-history.module').then( m => m.JioHistoryPageModule)
+  },
+  {
+    path: 'jio-details-pending',
+    loadChildren: () => import('./jio-details-pending/jio-details-pending.module').then( m => m.JioDetailsPendingPageModule)
   }
 
 ];

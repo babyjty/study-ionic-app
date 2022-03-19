@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-jio-details',
-  templateUrl: './jio-details.page.html',
-  styleUrls: ['./jio-details.page.scss'],
+  selector: 'app-jio-details-pending',
+  templateUrl: './jio-details-pending.page.html',
+  styleUrls: ['./jio-details-pending.page.scss'],
 })
-export class JioDetailsPage implements OnInit {
+export class JioDetailsPendingPage implements OnInit {
 
   constructor(private route: Router) { }
 
@@ -17,16 +17,8 @@ export class JioDetailsPage implements OnInit {
   ngOnInit() {
   }
 
-  // removeJio(jio){
-  //   let index = this.jios.indexOf(jio);
-
-  //   if(index > -1){
-  //     this.jios.splice(index, 1);
-  //   }
 }
-
-
-  // jios = [
+ // jios = [
   //   {
   //     message: 'Message 1';,
  //      name: 'Name 1';,

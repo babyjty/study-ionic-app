@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+
+
 @Component({
   selector: 'app-jio-list',
   templateUrl: './jio-list.page.html',
@@ -10,6 +12,9 @@ export class JioListPage implements OnInit {
 
   constructor(private route: Router) { }
 
+  orderHeader: String = '';
+  isDescOrder: boolean = true;
+
   nextpage() {
     this.route.navigate(['/jio-details']);
   }
@@ -17,6 +22,16 @@ export class JioListPage implements OnInit {
   nextpage2() {
     this.route.navigate(['/jio-form']);
   }
+
+  nextpage1() {
+    this.route.navigate(['/jio-details-pending']);
+  }
+
+  sort(headerName: String) {
+    this.isDescOrder = !this.isDescOrder;
+    this.orderHeader = headerName;
+  }
+
   
   isenabled() {
 

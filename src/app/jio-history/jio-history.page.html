@@ -25,7 +25,7 @@
       Pending Jios
       </p1>
     </ion-row>
-    <ion-card class = 'jio' color = 'medium' (click)="nextpage1()">
+    <ion-card class = 'jio' color = 'medium' (click)="nextpage()">
       <ion-grid>
        <ion-row>
         <ion-col>
@@ -73,10 +73,21 @@
       </ion-grid>
     </ion-card>
 
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" (click)="nextpage3()">
+        <ion-tab-button tab="schedule">
+          <ion-label>Current</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="speakers">
+          <ion-label>History</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
   
   
   
-    <!-- <ion-card class = 'jio' color = 'medium' (click)="nextpage()" orderBy: orderHeader: isDescOrder" *ngFor = 'let card of jioList'>
+    <!-- <ion-card class = 'jio' color = 'medium' (click)="nextpage()" *ngFor = 'let card of jioList'>
         <ion-grid>
          <ion-row>
           <ion-col>
