@@ -8,14 +8,9 @@ const jwt = require('jsonwebtoken')
 const { async } = require('rxjs')
 
 const userSchema = mongoose.Schema({
-    firstname: {
+    username: {
         type: String,
-        maxLength: 50,
-        required: true
-    },
-    lastname: {
-        type: String,
-        maxLength: 20,
+        maxLength: 30,
         required: true
     },
     email: {
@@ -31,7 +26,8 @@ const userSchema = mongoose.Schema({
     workLevel: {
         type: String,
         enum: ['Secondary School', 'Junior College', 
-                'Polytechnic', 'University', 'Professional Work']
+                'Polytechnic', 'University', 'Professional Work'],
+        required: true
     },
     bio: {
         type: String,
@@ -45,9 +41,16 @@ const userSchema = mongoose.Schema({
     },
     provider: {
         type: String,
-        enum: ['google', 'local']
+        enum: ['google', 'local', 'facebook'],
+        required: true
     },
     googleid: {
+        type: String
+    },
+    facebookid : {
+        type: String
+    },
+    photoURL: {
         type: String
     }
     

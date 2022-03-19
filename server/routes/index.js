@@ -6,7 +6,7 @@ const config = require('../config/key')
 mainRouter.use('/localauth', require('./userRoutes/localAuthController'))
 mainRouter.use('/jio', require('./jioRoutes/jioController'))
 mainRouter.use('/google', require('./userRoutes/googleController'))
-
+mainRouter.use('/profile', require('./userRoutes/profileController'))
 
 
 mainRouter.get('/test', (req, res) => {

@@ -8,6 +8,7 @@ const config = require('../../config/key')
 const { response, application } = require('express')
 const cookieparser = require('cookie-parser')
 const { auth } = require('../../middleware/auth')
+//const imageController = require('./imageController')
 
 
 //application/x-www-form-urlencoded 
@@ -31,6 +32,14 @@ router.post('/local-signup', (req, res) => {
     //회원가입할때 필요한 정보들을 client에서 가져오면 그것들을 데이터베이스에 넣어준다
     const user = new User(req.body)
     //crypting password before saving to the database
+    User.findOne({email: req.body.email}, async (err, user) => {
+        if (user.googleid){
+            return res.json({
+                success: false,
+                message: "User already has an account signed up through gmail"
+            })
+        }
+    })
     user.save((err, doc) => {
         console.log(doc)
         if (err) return res.json({ success: false, err})
@@ -126,6 +135,7 @@ router.get('/local-logout', auth, (req, res) => {
 
     //just removing token
 })
+
 
 
 
