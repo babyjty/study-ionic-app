@@ -9,7 +9,7 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
   styleUrls: ['spot.page.scss']
 })
 export class SpotPage {
-  public radius: number = 2000;
+  public radius: number = 500;
   public locationData:any;
   public currentCoord:String = undefined;
   public preferredLoc:String = undefined;
@@ -49,7 +49,7 @@ export class SpotPage {
               destination = 'place_id:' + this.locationData[i].place_id;
               this.fetchDistance(placeID, destination, i);
               this.locationData[i].src = "https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg";
-
+              
               // if (!this.locationData[i].photos){
               //   this.locationData[i].src = "https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg";
               // }

@@ -6,9 +6,9 @@ const getLocations = (req, res) => {
     const { radius, location } = req.query;
     // const USER_COORDINATE = "1.356220%2C103.691551";
 
-    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&key=${PLACES_KEY}&radius=${radius}&type=cafe`)
+    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&key=${PLACES_KEY}&radius=${radius}&type=cafe&language=en`)
     .then(resp1 => {
-        axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&key=${PLACES_KEY}&radius=${radius}&type=library`)
+        axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&key=${PLACES_KEY}&radius=${radius}&type=library&language=en`)
           .then(resp2 => {
             return res
               .status(200)
@@ -28,7 +28,7 @@ const getLocations = (req, res) => {
 const getDistance = (req, res) => {
     const { origin, destination } = req.query;
     const UNITS = 'metric';
-    const MODE = 'walking';
+    const MODE = 'transit';
 
     if (!origin || !destination){
         return res

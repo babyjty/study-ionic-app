@@ -9,9 +9,9 @@
     </ion-buttons>
   </ion-toolbar>
       
-  <ion-searchbar placeholder="Enter radius" [(ngModel)]="radius" (keydown.enter)="fetchLocations()" animated></ion-searchbar>
+  <!-- <ion-searchbar placeholder="Find a place to study..." [(ngModel)]="preferredLoc" (keydown.enter)="fetchLocations()" animated></ion-searchbar> -->
   
-  <!-- <ion-searchbar placeholder="Enter location" id="search-bar"></ion-searchbar> -->
+  <ion-searchbar placeholder="Enter location" [(ngModel)]="preferredLoc" (keydown.enter)="fetchLocations()" id="search-bar"></ion-searchbar>
   
   <div class="filter-sort">
     <ion-button color="medium" expand="block" (click)="filtering()" class="fliter">FILTER</ion-button>
