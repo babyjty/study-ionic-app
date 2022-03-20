@@ -49,7 +49,8 @@ export class MapPage {
 
   updateSearchResults(){
     console.log("clicked")
-    this.api.getLocations(this.radius, this.currentLoc[0]).subscribe(result=>{
+    let loc = String(this.currentLoc[0].latitude) + '%2C' + String(this.currentLoc[0].longitude);
+    this.api.getLocations(this.radius, loc).subscribe(result=>{
       let locationData = result;
       let newLocation:object;
       for (let key in locationData){

@@ -23,4 +23,8 @@ export class GooglePlacesAPIService {
   getPlaceCoordinates( placeID:String ){
     return this.http.get(`http://localhost:3000/api/locations/placecoordinates?placeid=${placeID}`);
   }
+
+  getPlaceDetails( placeID:String ){
+    return this.http.get(`http://localhost:3000/api/locations/placedetails?placeid=${placeID}`);
+  } 
 }

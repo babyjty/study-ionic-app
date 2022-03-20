@@ -39,7 +39,7 @@ const getDistance = (req, res) => {
     axios.get(
       `https://maps.googleapis.com/maps/api/distancematrix/json?key=${DISTANCE_KEY}&destinations=${destination}&origins=place_id:${origin}&units=${UNITS}&mode=${MODE}`
     ).then(resp => {
-        return res.status(200).json(resp.data.rows[0].elements[0].distance.text);
+        return res.status(200).json(resp.data.rows[0].elements[0].distance.value);
     })
     .catch(err => {
         console.error(err);
@@ -73,20 +73,43 @@ const getPlaceCoordinates = (req,res) => {
         `https://maps.googleapis.com/maps/api/place/details/json?key=${PLACES_KEY}&place_id=${placeid}&fields=${FIELD}`
       )
       .then((resp) => {
-        let coord =
-          String(resp.data.result.geometry.location.lat) +
-          "%2C" +
-          String(resp.data.result.geometry.location.lng);
-        return res.status(200).json(coord);
+        let lat = resp.data.result.geometry.location.lat;
+        let lng = resp.data.result.geometry.location.lng;
+        let coord = lat + "%2C" + lng;
+        return res.status(200).json({
+            coordinate: coord,
+            lat: lat,
+            lng: lng
+        });
       })
       .catch((err) => {
         console.error(err);
         return res.status(400).json({ success: false });
       });
 }
+
+const getPlaceDetails = (req,res) => {
+    const { placeid } = req.query;
+    const FIELD = 'name,formatted_address,type,rating,geometry,photos,website';
+
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/place/details/json?key=${PLACES_KEY}&place_id=${placeid}&fields=${FIELD}`
+      )
+      .then((resp) => {
+        return res.status(200).json(resp.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        return res.status(400).json({ success: false });
+      });
+}
+
+
 module.exports = {
     getLocations,
     getDistance,
     getPlaceSearchID,
-    getPlaceCoordinates
+    getPlaceCoordinates,
+    getPlaceDetails
 };

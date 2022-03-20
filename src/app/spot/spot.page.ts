@@ -9,8 +9,9 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
   styleUrls: ['spot.page.scss']
 })
 export class SpotPage {
-  public radius: number = 500;
+  public radius: number = 2000;
   public locationData:any;
+  public filteredLocations:any;
   public currentCoord:String = undefined;
   public preferredLoc:String = undefined;
 
@@ -19,7 +20,7 @@ export class SpotPage {
   filterResult: any;
 
   constructor(public api:GooglePlacesAPIService, private geolocation:Geolocation, private actionSheetController: ActionSheetController) {
-    this.getCurrentLocation();
+    
   }
 
   getCurrentLocation(){
@@ -38,16 +39,40 @@ export class SpotPage {
           return;
         }
         this.api.getPlaceCoordinates(String(placeID)).subscribe(resultCoord =>{
-          let placeCoord:String = String(resultCoord);
-          
-          this.api.getLocations(this.radius, placeCoord).subscribe(result=>{
+          let coord:String, lat:number, lng:number;
+
+          for (let key in resultCoord){
+            if (resultCoord.hasOwnProperty(key)){
+              if (key == 'lat'){
+                lat = resultCoord[key];
+              }
+              else if (key == 'lng'){
+                lng = resultCoord[key]
+              }
+              else{
+                coord = resultCoord[key];
+              }
+            }
+          }
+
+          this.api.getLocations(this.radius, coord).subscribe(result=>{
             this.locationData = result;
             let destination:String;
             
-            // Get the place_ids for all the locations retrieved from Google Places
+            // Get the distances for all the locations retrieved from Google Places
             for (let i = 0; i < this.locationData.length; i++){
               destination = 'place_id:' + this.locationData[i].place_id;
+              // Get walking distance
               this.fetchDistance(placeID, destination, i);
+
+
+              let lat2 = this.locationData[i].geometry.location.lat;
+              let lng2 = this.locationData[i].geometry.location.lng;
+              
+              // Get straight line distance using Haversine Formula
+              this.locationData[i].linearDistance = this.getDistanceFromLatLonInKm(lat, lng, lat2, lng2);
+              
+              // Add picture for each location
               this.locationData[i].src = "https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg";
               
               // if (!this.locationData[i].photos){
@@ -62,19 +87,43 @@ export class SpotPage {
             }
 
             console.log(this.locationData);
+            this.filteredLocations = this.locationData;
           })
 
         })
       })
   }
 
+  fetchLocation(place_id:String){
+    this.api.getPlaceDetails(place_id).subscribe(result => {
+      console.log(result);
+    })
+  }
+
   fetchDistance(origin:String, destination:String, index:number ){
     // Google Distance Matrix API call 
       this.api.getDistance(origin, destination).subscribe(result =>{
-        this.locationData[index].distance = result;
+        this.locationData[index].walkingDistance = Number(result) / 1000;
       })
   }
 
+  getDistanceFromLatLonInKm(lat1:number, lon1:number, lat2:number, lon2:number) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = this.deg2rad(lat2-lat1); 
+    var dLon = this.deg2rad(lon2-lon1); 
+    var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return Math.round(d * 1000) / 1000;
+  }
+
+  deg2rad( deg:number ) {
+    return deg * (Math.PI/180)
+  }
 
   // SORTING
 
@@ -104,6 +153,11 @@ export class SpotPage {
         text: 'Rating',
         handler: () => {
           this.sort('rating');
+        }
+      }, {
+        text: 'Distance',
+        handler: () => {
+          this.sort('linearDistance');
         }
       }, {
         text: 'Cancel',
@@ -204,21 +258,29 @@ export class SpotPage {
     const actionSheet = await this.actionSheetController.create({
       header: 'FILTER BY RADIUS',
       buttons: [{
-        text: '2000m',
+        text: '500m',
         data: 10,
         handler: () => {
-          
+          this.filteredLocations = this.locationData.filter(item=>{
+            if (item.linearDistance <= 0.5){
+              return item;
+            }
+          })
         }
       }, {
-        text: '3000m',
+        text: '1000m',
         data: 'Data value',
         handler: () => {
-          
+          this.filteredLocations = this.locationData.filter(item=>{
+            if (item.linearDistance <= 1.0){
+              return item;
+            }
+          })
         }
       }, {
-        text: '5000m',
+        text: '2000m',
         handler: () => {
-          
+          this.filteredLocations = this.locationData;
         }
       }, {
         text: 'Cancel',
@@ -244,18 +306,30 @@ export class SpotPage {
         text: 'Above 4/5',
         data: 10,
         handler: () => {
-          
+          this.filteredLocations = this.locationData.filter(item=>{
+            if (item.rating >= 4.0){
+              return item;
+            }
+          })
         }
       }, {
         text: 'Above 3/5',
         data: 'Data value',
         handler: () => {
-          
+          this.filteredLocations = this.locationData.filter(item=>{
+            if (item.rating >= 3.0){
+              return item;
+            }
+          })
         }
       }, {
         text: 'Above 2/5',
         handler: () => {
-          
+          this.filteredLocations = this.locationData.filter(item=>{
+            if (item.rating >= 2.0){
+              return item;
+            }
+          })
         }
       }, {
         text: 'Cancel',

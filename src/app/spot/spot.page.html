@@ -22,7 +22,7 @@
     
 <ion-content>
 
-  <ion-card *ngFor="let item of locationData | orderBy: orderHeader: isDescOrder" color="light">
+  <ion-card *ngFor="let item of filteredLocations | orderBy: orderHeader: isDescOrder" color="light">
 
     <ion-card-content color="light">
     
@@ -43,6 +43,8 @@
           
           <p><strong>ADDRESS: </strong> {{item.vicinity}}</p>
           <p><strong>RATING: </strong>{{item.rating}}/5</p>
+          <p><strong>DISTANCE: </strong> {{item.linearDistance}} km</p>
+
           <p><strong>PRICE: $</strong>$$</p>
           <p><span style="color:red; font-weight: bold">LIVE: </span>Not so busy</p>
         </ion-label>
