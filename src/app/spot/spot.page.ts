@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { GooglePlacesAPIService } from '../service/google-places-api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-spot',
@@ -19,7 +20,8 @@ export class SpotPage {
   isDescOrder: boolean = true;
   filterResult: any;
 
-  constructor(public api:GooglePlacesAPIService, private geolocation:Geolocation, private actionSheetController: ActionSheetController) {
+  constructor(public api:GooglePlacesAPIService, private geolocation:Geolocation, 
+    private actionSheetController: ActionSheetController, private router: Router) {
     
   }
 
@@ -94,11 +96,11 @@ export class SpotPage {
       })
   }
 
-  fetchLocation(place_id:String){
-    this.api.getPlaceDetails(place_id).subscribe(result => {
-      console.log(result);
-    })
-  }
+  // fetchLocation(place_id:String){
+  //   this.api.getPlaceDetails(place_id).subscribe(result => {
+  //     console.log(result);
+  //   })
+  // }
 
   fetchDistance(origin:String, destination:String, index:number ){
     // Google Distance Matrix API call 
@@ -220,10 +222,10 @@ export class SpotPage {
     const actionSheet = await this.actionSheetController.create({
       header: 'FILTER BY',
       buttons: [{
-        text: 'Radius',
+        text: 'Distance',
         data: 'Data value',
         handler: () => {
-          this.filteringRadius();
+          this.filteringDistance();
         }
       }, {
         text: 'Rating',
@@ -253,12 +255,12 @@ export class SpotPage {
 
   }
 
-  async filteringRadius() {
+  async filteringDistance() {
 
     const actionSheet = await this.actionSheetController.create({
-      header: 'FILTER BY RADIUS',
+      header: 'FILTER BY DISTANCE',
       buttons: [{
-        text: '500m',
+        text: 'Within 500m',
         data: 10,
         handler: () => {
           this.filteredLocations = this.locationData.filter(item=>{
@@ -268,7 +270,7 @@ export class SpotPage {
           })
         }
       }, {
-        text: '1000m',
+        text: 'Within 1000m',
         data: 'Data value',
         handler: () => {
           this.filteredLocations = this.locationData.filter(item=>{
@@ -278,7 +280,7 @@ export class SpotPage {
           })
         }
       }, {
-        text: '2000m',
+        text: 'Within 2000m',
         handler: () => {
           this.filteredLocations = this.locationData;
         }
@@ -323,10 +325,10 @@ export class SpotPage {
           })
         }
       }, {
-        text: 'Above 2/5',
+        text: 'ALL',
         handler: () => {
           this.filteredLocations = this.locationData.filter(item=>{
-            if (item.rating >= 2.0){
+            if (item.rating >= 0.0){
               return item;
             }
           })
@@ -383,4 +385,17 @@ export class SpotPage {
     // console.log('onDidDismiss resolved with role and data', role, data);
 
   }
+
+
+  // GO TO DETAILS PAGE
+
+
+  goToDetailsPage(place_id: string) {
+    sessionStorage.setItem("place_id", place_id);
+    this.router.navigate(['spot-details', place_id]);
+  }
+
+  
 }
+
+

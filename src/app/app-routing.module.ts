@@ -45,7 +45,11 @@ const routes: Routes = [
   {
     path: 'external-register',
     loadChildren: () => import('./external-register/external-register.module').then( m => m.ExternalRegisterPageModule)
-  }
+  },
+  {
+    path: 'spot-details/:place_id',
+    loadChildren: () => import('./spot-details/spot-details.module').then((m) => m.SpotDetailsPageModule),
+  },
 ];
 @NgModule({
   imports: [

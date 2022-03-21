@@ -14,42 +14,53 @@
   <ion-searchbar placeholder="Enter location" [(ngModel)]="preferredLoc" (keydown.enter)="fetchLocations()" id="search-bar"></ion-searchbar>
   
   <div class="filter-sort">
-    <ion-button color="medium" expand="block" (click)="filtering()" class="fliter">FILTER</ion-button>
-    <ion-button color="medium" expand="block" (click)="sorting()" class="sort">SORT</ion-button>
+    <ion-button expand="block" (click)="filtering()" class="fliter">FILTER</ion-button>
+    <ion-button expand="block" (click)="sorting()" class="sort">SORT</ion-button>
   </div>
     
 </ion-header>
     
 <ion-content>
 
-  <ion-card *ngFor="let item of filteredLocations | orderBy: orderHeader: isDescOrder" color="light">
+  <ion-card *ngFor="let item of filteredLocations | orderBy: orderHeader: isDescOrder" color="light" (click)="goToDetailsPage(item.place_id)">
 
     <ion-card-content color="light">
     
-      <ion-item lines="none" color="light">
-        <ion-label>
+      <ion-item lines="none" color="light" class="p1">
+
+        <ion-label class="titles">
+
           <ion-card-subtitle class="subtitle">{{item.types[0]}}</ion-card-subtitle>
+
           <ion-card-title class="title">{{item.name}}</ion-card-title>
+
         </ion-label>
+
       </ion-item>
 
-      <ion-item lines="none" color="light">
+      <ion-item lines="none" color="light" class="p2">
 
         <ion-thumbnail>
           <ion-img [src]="item.src"></ion-img>
         </ion-thumbnail>
         
-        <ion-label>
+        <ion-label class="p-items">
           
-          <p><strong>ADDRESS: </strong> {{item.vicinity}}</p>
-          <p><strong>RATING: </strong>{{item.rating}}/5</p>
-          <p><strong>DISTANCE: </strong> {{item.linearDistance}} km</p>
+          <p class="p-item"><strong>DISTANCE: </strong>{{item.linearDistance}} km</p>
+          <p class="p-item"><strong>ADDRESS: </strong>{{item.vicinity}}</p>
+          <p class="p-item"><strong>RATING: </strong>{{item.rating}}/5</p>
 
-          <p><strong>PRICE: $</strong>$$</p>
-          <p><span style="color:red; font-weight: bold">LIVE: </span>Not so busy</p>
+          <!-- <p><strong>PRICE: $</strong>$$</p>
+          <p><span style="color:red; font-weight: bold">LIVE: </span>Not so busy</p> -->
         </ion-label>
             
       </ion-item>
+
+      <ion-buttons>
+        <ion-button>
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     
     </ion-card-content>
   </ion-card>
