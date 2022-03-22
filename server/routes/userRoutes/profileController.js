@@ -38,7 +38,6 @@ const upload = (bucketName) =>
     })
 
 
-
 router.post('/setprofilepic', auth, (req, res, next) => {
     //console.log(req.file)
 
@@ -106,6 +105,9 @@ router.post('/deleteprofilepic', auth, async (req, res) => {
 
 })
 
+router.post('/googlesignup', (req, res) => {
+
+})
 
 
 module.exports = router

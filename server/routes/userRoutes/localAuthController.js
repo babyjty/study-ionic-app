@@ -38,6 +38,11 @@ router.post('/local-signup', (req, res) => {
                 success: false,
                 message: "User already has an account signed up through gmail"
             })
+        } else if (user.facebookid){
+            return res.json({
+                success: false,
+                message: "User already has an account signed up through facebook"
+            })
         }
     })
     user.save((err, doc) => {
@@ -47,7 +52,6 @@ router.post('/local-signup', (req, res) => {
             success: true
         })
     })
-
 })
 
 
@@ -100,6 +104,8 @@ router.post('/local-login', (req, res) => {
         })
     })
 })
+
+
 
 
 router.get('/auth', auth, (req, res) => {  //middleware implementation

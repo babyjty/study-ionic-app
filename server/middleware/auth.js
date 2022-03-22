@@ -14,7 +14,7 @@ let auth = (req, res, next) => {
         })
 
         req.token = token //the reason why we put token and user in request is to use them in the app.get
-        req.user = user
+        req.user = user //attaches user object to the request so the next() function has a reference to the user who is using our application
         next()  //if there is no next it will be stuck in the middleware
     })
     //if user exists authenticate
@@ -22,7 +22,7 @@ let auth = (req, res, next) => {
     //if no user dont authenticate
 }
 
-
+//too see how this middleware is used, pls refer to profileController/setprofilepic
 
 
 

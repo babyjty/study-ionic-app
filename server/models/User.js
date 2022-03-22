@@ -45,18 +45,20 @@ const userSchema = mongoose.Schema({
         required: true
     },
     googleid: {
-        type: String
+        type: String,
+        default: null
     },
     facebookid : {
-        type: String
+        type: String,
+        default: null
     },
     photoURL: {
         type: String,
-        default: 'none'
+        default: null
     },
     photoKey: {
         type: String,
-        default: 'none'
+        default: null
     }
     
 })
