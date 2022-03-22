@@ -7,7 +7,7 @@
     </ion-fab-button>
   </ion-fab>
   
-  <form [formGroup]="extRegisterForm.getForm()" (ngSubmit)="register()">
+  <form [formGroup]="extRegisterForm.getForm()">
     <div class = "login-logo">
       <img src = "assets/img/StudyJioLogo.png">
     </div>
@@ -24,7 +24,7 @@
 
         <ion-item>
           <!-- <ion-label position = "floating">agent</ion-label> -->
-          <ion-label>{{agent}}</ion-label>
+          <ion-label>{{provider}}</ion-label>
         </ion-item>
 
         <ion-item>
@@ -48,7 +48,7 @@
       </ion-card-header>
 
       <ion-card-content>
-        <ion-radio-group formControlName = "worklevel">
+        <ion-radio-group formControlName = "workLevel">
           <ion-item>
             <ion-label>Primary</ion-label>
             <ion-radio value="Primary"></ion-radio>
@@ -74,11 +74,11 @@
             <ion-radio value="University"></ion-radio>
           </ion-item>
         </ion-radio-group>
-        <app-error-message [field]= "extRegisterForm.getForm().get('worklevel')" error = "required" message = "Bio is required"></app-error-message>
+        <app-error-message [field]= "extRegisterForm.getForm().get('workLevel')" error = "required" message = "Work Level is required"></app-error-message>
 
 
       </ion-card-content>
     </ion-card>
-    <ion-button type="submit" size = full [disabled] = "!extRegisterForm.getForm().valid" >Register</ion-button>
+    <ion-button (click) = "extRegister()" size = full [disabled] = "!extRegisterForm.getForm().valid" >Register</ion-button>
   </form>
 </ion-content>

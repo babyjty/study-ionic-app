@@ -30,18 +30,19 @@ router.get('/', (req, res) => res.send('stfu bitch'))
 
 router.post('/local-signup', (req, res) => {
     //회원가입할때 필요한 정보들을 client에서 가져오면 그것들을 데이터베이스에 넣어준다
+    console.log('Backend: Local SignUp')
     const user = new User(req.body)
     //crypting password before saving to the database
-    User.findOne({email: req.body.email}, async (err, user) => {
-        if (user.googleid){
-            return res.json({
-                success: false,
-                message: "User already has an account signed up through gmail"
-            })
-        }
-    })
-    user.save((err, doc) => {
-        console.log(doc)
+    // User.findOne({email: req.body.email}, async (err, user) => {
+    //     if (user.googleid == null){
+    //         return res.json({
+    //             success: false,
+    //             message: "User already has an account signed up through gmail"
+    //         })
+    //     }
+    // })
+    user.save((err, user) => {
+        console.log(user)
         if (err) return res.json({ success: false, err})
         return res.status(200).json({
             success: true
@@ -95,6 +96,29 @@ router.post('/local-login', (req, res) => {
             .status(200) //means success
             .json({
                 loginSuccess: true,
+                userID: user._id
+            })
+        })
+    })
+})
+
+// Verify if account exists via email matching
+router.post('/verify-account', (req, res) => {
+    User.findOne({email:req.body.email}, async (err, user) => {
+        console.log(req.body.email + "verify account");
+        if(!user){
+            return res.json({
+                result: false
+            })
+        }
+        user.generateToken((err, user) => {
+            if (err) return res.status(400).send(err) //400 means error
+            // user contains token. we need to save it somewhere (cookie? local storage?)
+            //to save it to cookie we need cookieparser
+            res.cookie("x_auth", user.token)
+            .status(200) //means success
+            .json({
+                result: true,
                 userID: user._id
             })
         })
