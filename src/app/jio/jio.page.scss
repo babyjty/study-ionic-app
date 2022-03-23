@@ -13,3 +13,67 @@
     font-weight: bold;
     white-space: pre-wrap;
 }
+
+
+
+body {
+    margin: 0;
+}
+
+ion-card-content {
+    margin: 0;
+    padding: 10px;
+    font-family: "Georgia";
+}
+
+ion-thumbnail {
+    margin: 0px 30px 0px 0px;
+}
+
+ion-img {
+    width: 70px;
+    height: 100%;
+    object-fit: cover;
+    padding: 0px;
+    margin: 0px;
+}
+
+ion-item {
+    padding: 0;
+    margin: 0;
+}
+
+ion-label {
+    padding: 0;
+    margin: 0;
+}
+
+p {
+    margin: 4px 4px 4px 0px;
+    font-family: "Trebuchet MS";
+}
+
+.title {
+    font-family: "Georgia";
+    font-weight: bold;
+}
+
+.subtitle {
+    text-transform: uppercase;
+    font-family: "Georgia";
+    font-size: 10px;
+    // color: lightgoldenrodyellow;
+}
+
+.header {
+    display: flex;
+    padding: 0px 0px 5px 0px;
+}
+
+.option {
+    width: 100px;
+    margin: 0px 5px;
+    padding: 0;
+    font-family: "Trebuchet MS";
+    text-transform: uppercase;
+}
