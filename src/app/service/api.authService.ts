@@ -20,21 +20,25 @@ export class AuthApiService{
     //in json format
     localLogin(data): Observable<any>{
         //let url = `${this.baseUri}/local-login`;
-        console.log(data)
+        console.log("login function")
         let url = `${this.baseUri}/api/localauth/local-login`;
         //console.log("API Middle")
-        return this.http.post(url, data)
-            .pipe(
-                catchError(this.errorMgmt)
-            )
+        return this.http.post(url, data).pipe(catchError(this.errorMgmt))
     }
 
-    // googleLogin(data): Observable<any>{
-    //     let url = `${this.baseUri}/google`;
+    // Verify if account exists via email matching 
+    verifyAccount(user): Observable<any>{
+        console.log("API: Verify Account");
+        let url = `${this.baseUri}/api/localauth/verify-account`;
+        return this.http.post(url, user).pipe(catchError(this.errorMgmt));
+    }
 
-    // }
-
-
+    // External Registration
+    extRegister(data): Observable<any>{
+        console.log('API: External Register')
+        let url = `${this.baseUri}/api/localauth/local-signup`;
+        return this.http.post(url, data).pipe(catchError(this.errorMgmt));
+    }
 
     //Signup
     errorMgmt(error: HttpErrorResponse){

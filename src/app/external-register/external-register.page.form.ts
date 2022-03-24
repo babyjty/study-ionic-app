@@ -5,23 +5,28 @@ export class ExternalRegisterPageForm{
     private formBuilder: FormBuilder;
     private extRegisterForm: FormGroup;
     private email: String;
-    private agent: String;
+    private provider: String;
+    private providerID: String;
 
-    constructor(email: String, agent: String, formBuilder: FormBuilder){
+    constructor(email: String, provider: String, providerID: String, formBuilder: FormBuilder){
         this.email = email; 
-        this.agent = agent;
+        this.provider = provider;
+        this.providerID = providerID;
         this.formBuilder = formBuilder;
-        this.extRegisterForm = this.createForm(this.email, this.agent);
+        this.extRegisterForm = this.createForm(this.email, this.provider, this.providerID);
     }
 
-    createForm(email, agent):FormGroup {
+    createForm(email, provider, provID):FormGroup {
+        console.log("CreateForm")
         this.extRegisterForm = this.formBuilder.group({
-            email:[this.email],
-            agent: [this.agent],
+            email:[email],
+            provider: [provider],
             username: ['', [Validators.required]],
-            bio: ['', [Validators.required, Validators.maxLength(250)]],
-            worklevel: ['', [Validators.required]]
+            bio: ['', [Validators.required, Validators.maxLength(200)]],
+            workLevel: ['', [Validators.required]],
+            providerID: [provID]
         });
+        console.log(this.extRegisterForm.value)
         return this.extRegisterForm;
     }
 
