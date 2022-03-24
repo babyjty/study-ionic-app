@@ -68,7 +68,8 @@ export class LoginPage implements OnInit {
       } catch (error) {
         console.log(error)      
     }
-  }
+  } 
+  // jsk
 
   async toFacebook(){
     try{
