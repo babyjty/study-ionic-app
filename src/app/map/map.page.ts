@@ -127,8 +127,9 @@ export class MapPage {
         google.maps.event.addListenerOnce(infoWindow, 'domready', ()=> {
           document.getElementById('navigate').addEventListener('click', ()=>{
             console.log('button clicked!');
-  
-            window.open('https://maps.google.com/maps?saddr=Current+Location&daddr=' + marker.latitude + ',' + marker.longitude);
+            window.open('https://www.google.com/maps/dir/?api=1&origin=' + this.currentLoc.latitude + ',' 
+            + this.currentLoc.longitude + '&destination=' + marker.latitude + ',' + marker.longitude);
+            // window.open('https://maps.google.com/maps?saddr=Current+Location&daddr=' + marker.latitude + ',' + marker.longitude);
             // window.open('https://www.google.com/maps/dir/?api1=&destination=' + marker.latitude + ',' + marker.longitude);
           });
 
