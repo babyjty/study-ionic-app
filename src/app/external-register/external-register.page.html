@@ -34,6 +34,12 @@
         <app-error-message [field]= "extRegisterForm.getForm().get('username')" error = "required" message = "Username is required"></app-error-message>
 
         <ion-item>
+          <ion-label position = "floating">Telegram/Contact</ion-label>
+          <ion-input type = "text"  formControlName="telegram"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "extRegisterForm.getForm().get('telegram')" error = "required" message = "Telegram/Contact is required"></app-error-message>
+
+        <ion-item>
           <ion-label position = "floating">Bio</ion-label>
           <ion-input type = "text"  formControlName="bio"></ion-input>
         </ion-item>
@@ -49,19 +55,15 @@
 
       <ion-card-content>
         <ion-radio-group formControlName = "workLevel">
-          <ion-item>
-            <ion-label>Primary</ion-label>
-            <ion-radio value="Primary"></ion-radio>
-          </ion-item>
 
           <ion-item>
-            <ion-label>Secondary</ion-label>
-            <ion-radio value="Secondary"></ion-radio>
+            <ion-label>Secondary School</ion-label>
+            <ion-radio value="Secondary School"></ion-radio>
           </ion-item>
       
           <ion-item>
             <ion-label>Junior College</ion-label>
-            <ion-radio value="Junior_College"></ion-radio>
+            <ion-radio value="Junior College"></ion-radio>
           </ion-item>
       
           <ion-item>

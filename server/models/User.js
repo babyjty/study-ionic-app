@@ -26,8 +26,9 @@ const userSchema = mongoose.Schema({
     workLevel: {
         type: String,
         enum: ['Secondary School', 'Junior College', 
-                'Polytechnic', 'University', 'Professional Work'],
+                'Polytechnic', 'University'],
         // required: true
+        // edited secondary school to secondary, removed working
     },
     bio: {
         type: String,
@@ -43,6 +44,10 @@ const userSchema = mongoose.Schema({
         type: String,
         enum: ['GOOGLE', 'LOCAL', 'FACEBOOK'],
         // required: true
+    },
+    telegram: {
+        type: String,
+        default: null
     },
     googleid: {
         type: String,

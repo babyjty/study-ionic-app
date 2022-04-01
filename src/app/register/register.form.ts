@@ -19,6 +19,7 @@ export class RegisterPageForm{
             username: ['', [Validators.required]],
             bio: ['', [Validators.required, Validators.maxLength(200)]],
             worklevel: ['',[Validators.required]],
+            telegram: ['', [Validators.required]],
             provider: ['LOCAL']
         });
         
