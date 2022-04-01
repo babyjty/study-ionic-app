@@ -24,6 +24,7 @@ export class ExternalRegisterPageForm{
             username: ['', [Validators.required]],
             bio: ['', [Validators.required, Validators.maxLength(200)]],
             workLevel: ['', [Validators.required]],
+            telegram: ['', [Validators.required]],
             providerID: [provID]
         });
         console.log(this.extRegisterForm.value)
