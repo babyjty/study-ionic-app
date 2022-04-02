@@ -59,7 +59,7 @@ export class MapPage {
           latitude: String(locationData[key].geometry.location.lat),
           longitude: String(locationData[key].geometry.location.lng),
           rating: locationData[key].rating,
-          price: "dont know"
+          price: "TBC"
         }
         this.markers.push(newLocation);
       }
