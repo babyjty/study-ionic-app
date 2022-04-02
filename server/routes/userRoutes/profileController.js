@@ -17,6 +17,30 @@ router.use(bodyParser.urlencoded({extended: true}))
 router.use(bodyParser.json())
 router.use(cookieParser())
 
+router.post('/get-profile'), (req, res) => {
+    console.log("profile Controller: getprofile")
+    User.findOne({_id:req}, async (err, user) => {
+        if(!user){
+            return res.json({
+                result: false
+            })
+        }
+        return res.json({
+            result: true,
+            username: user.username,
+            telegram: user.telegram,
+            bio:user.bio
+        })
+    })
+}
+
+
+
+router.get('/', (req, res) => res.send('Profile Controller'))
+
+
+
+
 const s3 = new aws.S3({
     accessKeyId: config.S3_ACCESS_KEY,
     secretAccessKey: config.S3_SECRETACCESS,
@@ -36,8 +60,6 @@ const upload = (bucketName) =>
             }
         })
     })
-
-
 
 router.post('/setprofilepic', auth, (req, res, next) => {
     //console.log(req.file)
@@ -96,7 +118,7 @@ router.post('/deleteprofilepic', auth, async (req, res) => {
             catch (err){
                 console.log('Error in file deleting: '+ JSON.stringify(err))
             }
-        } 
+        }
         catch (err){
             console.log('File not found error: '+ err.code)
         }
@@ -104,6 +126,30 @@ router.post('/deleteprofilepic', auth, async (req, res) => {
     user.photoURL = 'none'
     user.photoKey = 'none'
 
+})
+
+router.post('/get-profile', (req, res) => {
+    console.log(req.body.userid)
+    User.findById(req.body.userid, async (err, user) => {
+        if(!user){
+            return res.json({
+                result: false
+            })
+        }
+        res.json({
+            result: true,
+            userID: user._id,
+            username: user.username,
+            telegram: user.telegram,
+            worklevel: user.workLevel,
+            bio: user.bio
+
+        })
+    })
+})
+
+router.get('/get-profile', (req, res) => {
+    res.json(data)
 })
 
 

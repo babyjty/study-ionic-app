@@ -28,9 +28,9 @@ router.get('/', (req, res) => res.send('stfu bitch'))
 //The following function is mounted on the /register path. It is executed for any type
 //of HTTP request on the /register path
 
-router.post('/local-signup', (req, res) => {
+router.post('/local-register', (req, res) => {
     //회원가입할때 필요한 정보들을 client에서 가져오면 그것들을 데이터베이스에 넣어준다
-    console.log('Backend: Local SignUp')
+    console.log('Backend: Local Register')
     const user = new User(req.body)
     //crypting password before saving to the database
     // User.findOne({email: req.body.email}, async (err, user) => {
@@ -45,7 +45,8 @@ router.post('/local-signup', (req, res) => {
         console.log(user)
         if (err) return res.json({ success: false, err})
         return res.status(200).json({
-            success: true
+            success: true,
+            userID: user._id
         })
     })
 
@@ -87,6 +88,8 @@ router.post('/local-login', (req, res) => {
             })
         }
         console.log('password correct')
+        console.log(user)
+
     //if password correct, create a token for the user
         user.generateToken((err, user) => {
             if (err) return res.status(400).send(err) //400 means error
@@ -124,6 +127,23 @@ router.post('/verify-account', (req, res) => {
         })
     })
 })
+
+router.post('/get-profile'), (req, res) => {
+    console.log("profile Controller: getprofile")
+    User.findOne({_id:req}, async (err, user) => {
+        if(!user){
+            return res.json({
+                result: false
+            })
+        }
+        return res.json({
+            result: true,
+            username: user.username,
+            telegram: user.telegram,
+            bio:user.bio
+        })
+    })
+}
 
 
 router.get('/auth', auth, (req, res) => {  //middleware implementation
