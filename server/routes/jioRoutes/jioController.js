@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/createjio', auth, (req, res) => {
+    console.log('within create jio')
     req.body.jioer = req.session.user._id
     req.body.jioStatus = 'pending'
     const newJio = req.body  //identify user

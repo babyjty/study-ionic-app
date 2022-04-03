@@ -93,7 +93,7 @@ router.post('/local-login', (req, res) => {
 })
 
 // Verify if account exists via email matching
-router.post('/verify-account', (req, res) => {
+router.post('/verify-account', auth, (req, res) => {
     User.findOne({email:req.body.email}, async (err, user) => {
         console.log(req.body.email + "verify account");
         if(!user){

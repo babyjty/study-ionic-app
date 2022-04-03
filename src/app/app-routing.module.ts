@@ -45,7 +45,8 @@ const routes: Routes = [
   {
     path: 'external-register',
     loadChildren: () => import('./external-register/external-register.module').then( m => m.ExternalRegisterPageModule)
-  },  {
+  },
+  {
     path: 'jio-details',
     loadChildren: () => import('./jio-details/jio-details.module').then( m => m.JioDetailsPageModule)
   },
@@ -72,11 +73,11 @@ const routes: Routes = [
   {
     path: 'create-jio',
     loadChildren: () => import('./create-jio/create-jio.module').then( m => m.CreateJioPageModule)
-  },
-  {
-    path: 'jio-create',
-    loadChildren: () => import('./jio-create/jio-create.module').then( m => m.JioCreatePageModule)
   }
+  // {
+  //   path: 'jio-create',
+  //   loadChildren: () => import('./jio-create/jio-create.module').then( m => m.JioCreatePageModule)
+  // }
 
 ];
 @NgModule({
