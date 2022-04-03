@@ -43,7 +43,10 @@ router.post('/createjio', auth, (req, res) => {
 
 router.post('/acceptjio', auth, (req, res) => {
     //request should contain the jio _id
-    Jio.findOne({ _id: req.session.user._id }, async (err, jio) => {
+    Jio.find({ $or: [
+        { jioer: req.session.user._id },
+        { jioee: req.session.user._id }
+    ] }, async (err, jio) => {
         if (jio) {
             return res.json({
                 createSuccess: false,
@@ -51,7 +54,17 @@ router.post('/acceptjio', auth, (req, res) => {
             })
         }
     })
+    Jio.findOneAndUpdate({ _id: req.body._id }, 
+        { jioStatus: 'accepted' },
+        { new: true }, (err, doc) => {
+            if (err){
+                console.log('Error in updating jio status')
+            }
+            console.log(doc)
+        })
 })
+
+
 
     
     //check if user has overlapping jio in the jio db 
