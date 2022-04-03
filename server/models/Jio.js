@@ -8,7 +8,7 @@ const JioSchema = Schema({
 
     jioer: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User',
-        required: true
+        // required: true
     },
 
     jioee: {
@@ -19,35 +19,35 @@ const JioSchema = Schema({
 
     jio_Date: {
         type: Date,
-        required: true
+        // required: true
     },
 
     jioStatus: {
         type: String,
         enum: ['accepted', 'pending'],
-        required: true
+        // required: true
     },
 
     jio_time: {
         jio_start_time: {
             type: Date,
-            required: true
+            // required: true
         },
         jio_end_time: {
             type: Date,
-            required: true
+            // required: true
         }
     },
 
     jio_description: {
         type: String,
         maxLength: 200,
-        required: true 
+        // required: true 
     },
 
     location_id: {
         type: String,
-        required: true
+        // required: true
     }
 })
 

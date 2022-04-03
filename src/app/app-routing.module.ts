@@ -68,6 +68,14 @@ const routes: Routes = [
   {
     path: 'jio-details-pending',
     loadChildren: () => import('./jio-details-pending/jio-details-pending.module').then( m => m.JioDetailsPendingPageModule)
+  },
+  {
+    path: 'create-jio',
+    loadChildren: () => import('./create-jio/create-jio.module').then( m => m.CreateJioPageModule)
+  },
+  {
+    path: 'jio-create',
+    loadChildren: () => import('./jio-create/jio-create.module').then( m => m.JioCreatePageModule)
   }
 
 ];
