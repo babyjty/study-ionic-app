@@ -21,6 +21,11 @@ const LocationSchema = Schema({
     ratings: {
         upvote: [Number],
         downvote: [Number],
+    },
+    googleid: {
+        type: String,
+        required: true,
+        unique: true
     }
 })
 

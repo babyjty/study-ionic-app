@@ -3,29 +3,51 @@ const Schema = mongoose.Schema
 
 const JioSchema = Schema({
     jioLocation: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Location'
+        type: String,
     },
 
     jioer: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+        type: mongoose.Schema.Types.ObjectId, ref: 'User',
+        required: true
     },
 
     jioee: {
-        type: mongose.Schema.Types.ObjectId, ref: 'User'
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
 
-    jio_created_date: Date.now,
+    // jio_created_date: Date.now,
 
-    jio_Date: Date,
+    jio_Date: {
+        type: Date,
+        required: true
+    },
+
+    jioStatus: {
+        type: String,
+        enum: ['accepted', 'pending', 'terminated'],
+        required: true
+    },
 
     jio_time: {
-        jio_start_time: Date,
-        jio_end_time: Date
+        jio_start_time: {
+            type: Date,
+            required: true
+        },
+        jio_end_time: {
+            type: Date,
+            required: true
+        }
     },
 
     jio_description: {
         type: String,
-        maxLength: 200 
+        maxLength: 200,
+        required: true 
+    },
+
+    location_id: {
+        type: String,
+        required: true
     }
 })
 

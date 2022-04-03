@@ -15,11 +15,10 @@ const { auth } = require('../../middleware/auth')
 router.use(bodyParser.urlencoded({extended: true}))
 router.use(bodyParser.json())
 router.use(cookieparser())
+router.use(express.json())
+//router.use(express.bodyParser())
 
-// mongoose.connect(
-//     config.mongoURI, {})
-//     .then(() => console.log('MongoDB connected'))
-//     .catch(err => console.log(err))
+
 
 
 
@@ -33,22 +32,26 @@ router.post('/local-signup', (req, res) => {
     console.log('Backend: Local SignUp')
     const user = new User(req.body)
     //crypting password before saving to the database
-    // User.findOne({email: req.body.email}, async (err, user) => {
-    //     if (user.googleid == null){
-    //         return res.json({
-    //             success: false,
-    //             message: "User already has an account signed up through gmail"
-    //         })
-    //     }
-    // })
-    user.save((err, user) => {
-        console.log(user)
+    User.findOne({email: req.body.email}, async (err, user) => {
+        if (user.googleid){
+            return res.json({
+                success: false,
+                message: "User already has an account signed up through gmail"
+            })
+        } else if (user.facebookid){
+            return res.json({
+                success: false,
+                message: "User already has an account signed up through facebook"
+            })
+        }
+    })
+    user.save((err, doc) => {
+        console.log(doc)
         if (err) return res.json({ success: false, err})
         return res.status(200).json({
             success: true
         })
     })
-
 })
 
 
@@ -64,20 +67,7 @@ router.post('/local-login', (req, res) => {
             })
         } 
         console.log('user found')
-    //if email address exists in the database check whether password is correct
-        // await user.comparePassword(req.body.password, (err, isMatch) => {
-        //     //console.log('dumb')
-        //     //console.log(isMatch)
-        //     console.log('inside')
-        //     if(!isMatch){
-        //         console.log('within if')
-        //         return res.json({
-        //             loginSuccess: false,
-        //             message: "Incorrect Password"
-        //         })
-        //     } 
 
-        // }) 
         const validated = await user.comparePassword(req.body.password)
         if (!validated){
             console.log('within if')
@@ -86,19 +76,17 @@ router.post('/local-login', (req, res) => {
                 message: "Incorrect Password"
             })
         }
-        console.log('password correct')
-    //if password correct, create a token for the user
-        user.generateToken((err, user) => {
-            if (err) return res.status(400).send(err) //400 means error
-            // user contains token. we need to save it somewhere (cookie? local storage?)
-            //to save it to cookie we need cookieparser
-            res.cookie("x_auth", user.token)
-            .status(200) //means success
-            .json({
-                loginSuccess: true,
-                userID: user._id
-            })
-        })
+        //console.log(user)
+        req.session.user = user 
+        req.session.save()
+        console.log(req.session)
+    })
+    console.log(req.session['user'])
+    req.session.save()
+
+    res.status(200).json({
+        loginSuccess: true,
+        //email: req.session.user['email']
     })
 })
 
@@ -124,6 +112,9 @@ router.post('/verify-account', (req, res) => {
         })
     })
 })
+
+
+
 
 
 router.get('/auth', auth, (req, res) => {  //middleware implementation
