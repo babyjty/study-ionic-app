@@ -1,0 +1,57 @@
+<ion-content>
+  <ion-fab vertical = "top" horizontal = "start">
+    <ion-fab-button color = "clear" routerLink = '/tabs'>
+      <ion-icon name = "arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <form [formGroup]="jioForm.getForm()">
+    <div class = "login-logo">
+      <img src = "assets/img/StudyJioLogo.png">
+    </div>
+    <ion-card color = "clear">
+      <ion-card-header>
+        <ion-card-title>Location Details</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Contents of Location Data</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card color = "clear">
+      <ion-card-header>
+        <ion-card-title>Create Jio</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Jio Header</ion-label>
+          <ion-input type = "text" placeholder="Input Jio Header" formControlName="header"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "jioForm.getForm().get('header')" error = "required" message = "Jio header is required"></app-error-message>
+
+        <ion-item (click) = "showCal = !showCal">
+          <ion-label>Date</ion-label>
+          <ion-text slot = "end">
+            {{formattedString}}
+          </ion-text>
+        </ion-item>
+        <ion-datetime *ngIf = "showCal" #datetime formControlName = 'datetime' [value] = "dateValue" size = "cover" (ionChange)="dateChanged(datetime.value)" showDefaultButtons = "true" (ionCancel)="showCal = false" ></ion-datetime>
+        <app-error-message [field]= "jioForm.getForm().get('datetime')" error = "required" message = "Date is required"></app-error-message>
+        
+        <ion-item>
+          <ion-label>Duration (Hours)</ion-label>
+          <ion-input type="number" formControlName ="duration" position = "end"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "jioForm.getForm().get('duration')" error = "notMatch" message = "Passwords do not match"></app-error-message>
+
+        <ion-item>
+          <ion-label>Jio Description</ion-label>
+          <ion-input type = "text" placeholder="Input Message" formControlName="description"></ion-input>
+        </ion-item>
+        <app-error-message [field]= "jioForm.getForm().get('description')" error = "negative" message = "Invalid duration"></app-error-message>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button size = full (click)="createJio()" [disabled] = "!jioForm.getForm().valid" >Create Jio</ion-button>
+  </form>
+</ion-content>

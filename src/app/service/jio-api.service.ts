@@ -15,7 +15,7 @@ export class JioApiService {
   createJio(jioDetails): Observable<any>{
     console.log("Within API: CreateJio");
     console.log(jioDetails);
-    let url = `${this.baseUri}/api/jio/create-jio`;
+    let url = `${this.baseUri}/api/jio/createjio`;
     return this.http.post(url, jioDetails).pipe(catchError(this.errorMgmt));
   }
 
