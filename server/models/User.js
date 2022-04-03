@@ -33,16 +33,10 @@ const userSchema = mongoose.Schema({
         type: String,
         maxlength: 200
     },
-    token: {
-        type: String
-    },
-    tokenExp: {
-        type: Number
-    },
     provider: {
         type: String,
         enum: ['google', 'local', 'facebook'],
-        required: true
+        //required: true
     },
     googleid: {
         type: String,
