@@ -49,10 +49,10 @@ import {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider('364897496119-rrteeo2ddr72f6j3je7nj5t39b7uc7ve.apps.googleusercontent.com')
           },
-          /*{
+          {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('')
-          }*/
+            provider: new FacebookLoginProvider('1008674980068196')
+          }
         ]
       } as SocialAuthServiceConfig,
     }
