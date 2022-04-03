@@ -23,12 +23,11 @@ export class ProfileApiService {
   //   return this.http.post(url, userID).pipe(catchError(this.errorMgmt));
   // }
 
-  getProfile(userID): Observable<any>{
+  getProfile(): Observable<any>{
     console.log("Profile-API: Get Profile")
-    console.log(userID)
-    let url =  `${this.baseUri}/api/profile/get-profile`;
+    let url =  `${this.baseUri}/api/profile/getprofile`;
     console.log(url)
-    return this.http.post(url, userID).pipe(catchError(this.errorMgmt));
+    return this.http.get(url).pipe(catchError(this.errorMgmt));
 
   }
 

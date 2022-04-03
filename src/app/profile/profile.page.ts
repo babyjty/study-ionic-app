@@ -45,9 +45,9 @@ export class ProfilePage implements OnInit {
       console.log(str)
       const obj = JSON.parse(str)
       console.log(obj.userid)
-      await this.profileApiService.getProfile(obj).subscribe(dataP => {
+      await this.profileApiService.getProfile().subscribe(dataP => {
         this.profile = dataP;
-        this.profileForm.setValue({username: dataP.username, telegram: dataP.telegram, worklevel: dataP.worklevel, bio: dataP.bio})
+        // this.profileForm.setValue({username: dataP.username, telegram: dataP.telegram, worklevel: dataP.worklevel, bio: dataP.bio})
         localStorage.setItem("profile", dataP)
         console.log(dataP)
       });

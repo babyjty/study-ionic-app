@@ -17,7 +17,7 @@ router.use(bodyParser.urlencoded({extended: true}))
 router.use(bodyParser.json())
 router.use(cookieParser())
 
-router.post('/get-profile'), (req, res) => {
+router.get('/get-profile'), (req, res) => {
     console.log("profile Controller: getprofile")
     User.findOne({_id:req}, async (err, user) => {
         if(!user){
@@ -128,29 +128,38 @@ router.post('/deleteprofilepic', auth, async (req, res) => {
 
 })
 
-router.post('/get-profile', (req, res) => {
-    console.log(req.body.userid)
-    User.findById(req.body.userid, async (err, user) => {
-        if(!user){
-            return res.json({
-                result: false
-            })
-        }
-        res.json({
-            result: true,
-            userID: user._id,
-            username: user.username,
-            telegram: user.telegram,
-            worklevel: user.workLevel,
-            bio: user.bio
+// router.post('/get-profile', (req, res) => {
+//     console.log(req.body.userid)
+//     User.findById(req.body.userid, async (err, user) => {
+//         if(!user){
+//             return res.json({
+//                 result: false
+//             })
+//         }
+//         res.json({
+//             result: true,
+//             userID: user._id,
+//             username: user.username,
+//             telegram: user.telegram,
+//             worklevel: user.workLevel,
+//             bio: user.bio
 
-        })
+//         })
+//     })
+// })
+
+router.get('/getprofile', auth, (req, res) => {
+    
+    res.status(200).json({
+        _id: req.session.user._id,
+        result: true,
+        username: req.session.user.username
     })
 })
 
-router.get('/get-profile', (req, res) => {
-    res.json(data)
-})
+// router.get('/get-profile', (req, res) => {
+//     res.json(data)
+// })
 
 
 
