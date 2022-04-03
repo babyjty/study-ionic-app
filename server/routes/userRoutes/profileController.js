@@ -61,20 +61,21 @@ const upload = (bucketName) =>
         })
     })
 
+
 router.post('/setprofilepic', auth, (req, res, next) => {
     //console.log(req.file)
 
     const uploadSingle = upload('choibucket').single(
         "image-upload"
     )
-
+    
     uploadSingle(req, res, (err) => {
         if (err) return res.status(400).json({ success: false, message: err.message })
         
         console.log(req.file.location)
         //res.status(200).json({data: req.file.location})
         User.findOneAndUpdate({
-            _id: req.user._id
+            _id: req.session.user._id
         },
         {
             photoURL: req.file.location,
@@ -93,11 +94,11 @@ router.post('/setprofilepic', auth, (req, res, next) => {
 })
 
 router.post('/deleteprofilepic', auth, async (req, res) => {
-    console.log(req.user)
+    //console.log(req.user)
     // const user = User.findById(req.user._id, err => {
     //     if (err) console.log(err)
     // })
-    const user = req.user
+    const user = req.session.user
     console.log(user)
     if (user.photoKey == 'none'){
         return res.json({
@@ -128,26 +129,6 @@ router.post('/deleteprofilepic', auth, async (req, res) => {
 
 })
 
-// router.post('/get-profile', (req, res) => {
-//     console.log(req.body.userid)
-//     User.findById(req.body.userid, async (err, user) => {
-//         if(!user){
-//             return res.json({
-//                 result: false
-//             })
-//         }
-//         res.json({
-//             result: true,
-//             userID: user._id,
-//             username: user.username,
-//             telegram: user.telegram,
-//             worklevel: user.workLevel,
-//             bio: user.bio
-
-//         })
-//     })
-// })
-
 router.get('/getprofile', auth, (req, res) => {
     
     res.status(200).json({
@@ -157,9 +138,16 @@ router.get('/getprofile', auth, (req, res) => {
     })
 })
 
-// router.get('/get-profile', (req, res) => {
-//     res.json(data)
-// })
+
+router.post('/editprofile', auth, (req, res) => {
+    User.findOneAndUpdate({ _id: req.session.user._id }, {
+        //req.body
+    })
+})
+
+router.post('/googlesignup', (req, res) => {
+
+})
 
 
 

@@ -1,0 +1,55 @@
+.speaker-card ion-card-header {
+    padding: 0;
+  }
+  
+  .speaker-card ion-card-content {
+    flex: 1 1 auto;
+  
+    padding: 0;
+  }
+  
+  .ios ion-list {
+    margin-bottom: 10px;
+  }
+  
+  .md ion-list {
+    border-top: 1px solid var(--ion-color-step-150, #d7d8da);
+  
+    padding: 0;
+  }
+
+ion-avatar {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    height: 100px;
+    width: 100px;
+}
+
+.description p {
+    width: 75%;
+}
+
+.location p {
+    font-weight: bold;
+}
+
+.location p1 {
+    font-weight: bold;
+}
+
+.location p2 {
+    font-weight: bold;
+}
+
+.location p3 {
+    font-weight: bold;
+}
+
+.location p4 {
+    font-weight: bold;
+}
+
+.location p5 {
+    font-weight: bold;
+}

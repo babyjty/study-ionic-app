@@ -34,12 +34,6 @@ const userSchema = mongoose.Schema({
         type: String,
         maxlength: 200
     },
-    token: {
-        type: String
-    },
-    tokenExp: {
-        type: Number
-    },
     provider: {
         type: String,
         enum: ['GOOGLE', 'LOCAL', 'FACEBOOK'],
@@ -59,11 +53,11 @@ const userSchema = mongoose.Schema({
     },
     photoURL: {
         type: String,
-        default: 'none'
+        default: null
     },
     photoKey: {
         type: String,
-        default: 'none'
+        default: null
     }
     
 })

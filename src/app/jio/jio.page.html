@@ -17,4 +17,49 @@
   <ion-button fill="outline" size="small">
     Sort
   </ion-button>
-</ion-content>
+
+<ion-card class = 'jio' (click)="nextpage()" color = 'medium'>
+  <ion-grid>
+   <ion-row>
+    <ion-col>
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg">
+    </ion-col>
+  <ion-col> 
+  <ion-card-content color="light">
+    <p>Message</p>
+  </ion-card-content>
+  </ion-col>
+   </ion-row>
+   <ion-card-content>
+    <p><strong>Address: </strong> {{item.vicinity}}</p>
+    <p><strong>Rating: </strong>{{item.rating}}/5</p>
+    <p><strong>Price: $</strong>$$</p>
+    <p><strong>Work Level: </strong></p>
+    <p><span style="color:red; font-weight: bold">Live: </span>Not so busy</p>
+  </ion-card-content>
+  </ion-grid>
+</ion-card>
+
+
+
+    <!-- <ion-card class = 'jio' color = 'medium' *ngFor = 'let card of cards'>
+      <ion-grid>
+       <ion-row>
+        <ion-col>
+          <img src="{{card.picture}}">
+        </ion-col>
+      <ion-col> 
+      <ion-card-content>
+        <p>{{card.message}}</p>
+      </ion-card-content>
+      </ion-col>
+       </ion-row>
+       <ion-card-content>
+        <p1>{{card.location}} {{card.distance}} {{card.cost}} {{card.crowdesness}}</p1>
+      </ion-card-content>
+      </ion-grid>
+    </ion-card> -->
+	
+	
+	
+	
