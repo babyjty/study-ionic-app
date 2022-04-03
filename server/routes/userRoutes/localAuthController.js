@@ -103,6 +103,10 @@ router.post('/verify-account', (req, res) => {
         }
         req.session.user = user
         req.session.save()
+        return res.json({
+            _id: req.session.user._id,
+            result: true
+        })
     })
 })
 
