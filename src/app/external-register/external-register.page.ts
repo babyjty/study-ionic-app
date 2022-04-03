@@ -46,6 +46,7 @@ export class ExternalRegisterPage implements OnInit {
           async dataR => {
             console.log(dataR);
             if(dataR.success){
+              localStorage.setItem('userID', JSON.stringify(dataR.userID));
               this.presentAlert('Registration Successful', 'Hi '+ this.extRegisterForm.getForm().get('username').value + "! Enjoy your StudyJio experience" )
               this.router.navigate(['tabs'])
             }
