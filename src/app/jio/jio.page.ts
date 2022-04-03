@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-jio',
@@ -7,6 +8,23 @@ import { Component } from '@angular/core';
 })
 export class JioPage {
 
-  constructor() {}
+  constructor(private route: Router) { }
+
+  nextpage() {
+    this.route.navigate(['/jio-details-accept']);
+  }
 
 }
+
+// cards = [
+  //   {
+  //     location: 'Location 1';,
+  //     distance: 'Distance 1';,
+  //     cost: 'Cost 1';,
+  //     crowedness: 'Crowdedness 1';,
+  //     message: 'Message 1';
+  //     picture: 'Picture 1';
+      
+
+  //   }
+  // ]
