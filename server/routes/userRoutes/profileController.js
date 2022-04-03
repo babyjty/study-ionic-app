@@ -108,9 +108,15 @@ router.post('/deleteprofilepic', auth, async (req, res) => {
 router.get('/getprofile', auth, (req, res) => {
     
     res.status(200).json({
-        _id: req.session.user,
+        _id: req.session.user._id,
         result: true,
         username: req.session.user.username
+    })
+})
+
+router.post('/editprofile', auth, (req, res) => {
+    User.findOneAndUpdate({ _id: req.session.user._id }, {
+        //req.body
     })
 })
 

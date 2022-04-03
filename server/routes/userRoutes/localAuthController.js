@@ -117,6 +117,7 @@ router.post('/verify-account', (req, res) => {
 
 
 
+
 router.get('/auth', auth, (req, res) => {  //middleware implementation
     //by the fact that auth did not throw any error, anuthentication is true
     res.status(200).json({
