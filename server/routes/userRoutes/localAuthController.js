@@ -81,9 +81,9 @@ router.post('/local-login', (req, res) => {
         //console.log(user)
         req.session.user = user 
         req.session.save()
-        console.log(req.session)
+        console.log(req.session.user)
     })
-    console.log(req.session['user'])
+    console.log(req.session)
     req.session.save()
 
     res.status(200).json({
