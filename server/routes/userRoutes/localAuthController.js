@@ -99,17 +99,8 @@ router.post('/verify-account', (req, res) => {
                 result: false
             })
         }
-        user.generateToken((err, user) => {
-            if (err) return res.status(400).send(err) //400 means error
-            // user contains token. we need to save it somewhere (cookie? local storage?)
-            //to save it to cookie we need cookieparser
-            res.cookie("x_auth", user.token)
-            .status(200) //means success
-            .json({
-                result: true,
-                userID: user._id
-            })
-        })
+        req.session.user = user
+        req.session.save()
     })
 })
 
