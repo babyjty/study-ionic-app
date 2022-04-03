@@ -11,13 +11,13 @@ const userSchema = mongoose.Schema({
     username: {
         type: String,
         maxLength: 30,
-        required: true
+        // required: true
     },
     email: {
         type: String,
         trim: true, //removes all the whitespaces
         unique: 1,
-        required: true
+        // required: true
     },
     password: {
         type: String,
@@ -26,8 +26,9 @@ const userSchema = mongoose.Schema({
     workLevel: {
         type: String,
         enum: ['Secondary School', 'Junior College', 
-                'Polytechnic', 'University', 'Professional Work'],
-        required: true
+                'Polytechnic', 'University'],
+        // required: true
+        // edited secondary school to secondary, removed working
     },
     bio: {
         type: String,
@@ -35,8 +36,12 @@ const userSchema = mongoose.Schema({
     },
     provider: {
         type: String,
-        enum: ['google', 'local', 'facebook'],
-        //required: true
+        enum: ['GOOGLE', 'LOCAL', 'FACEBOOK'],
+        // required: true
+    },
+    telegram: {
+        type: String,
+        default: null
     },
     googleid: {
         type: String,
