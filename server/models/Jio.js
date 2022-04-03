@@ -24,7 +24,7 @@ const JioSchema = Schema({
 
     jioStatus: {
         type: String,
-        enum: ['accepted', 'pending', 'terminated'],
+        enum: ['accepted', 'pending'],
         required: true
     },
 
