@@ -63,8 +63,15 @@ router.post('/acceptjio', auth, (req, res) => {
             console.log(doc)
         })
 })
-//dd
 
+router.post('/cancel', auth, (req, res) => {
+    Jio.deleteOne({ jioee: req.session.user._id }, (err) => {
+        return res.json({
+            deleteSuccess: false,
+            message: "Jio does not exist or error"
+        })
+    })
+})
 
     
     //check if user has overlapping jio in the jio db 
