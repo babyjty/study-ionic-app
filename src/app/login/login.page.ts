@@ -25,19 +25,20 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder, 
     private authApiService: AuthApiService,
     private authService: SocialAuthService,
-    private alertController: AlertController
-  ) {}
-  // constructor(public afAuth: AngularFireAuth) { }
+    private alertController: AlertController,
+  ) { }
 
 
   ngOnInit() {
     // Create form as soon as page is initialized --> have to create inside ngOnInIt() 
     this.form = new LoginPageForm(this.formBuilder).createForm();
      this.authService.authState.subscribe((user) => {
-       localStorage.setItem('profile', JSON.stringify(user));
+      localStorage.setItem('profile', JSON.stringify(user));
        this.user = user;
        this.loggedIn = (user != null);
     })
+    
+
   }
 
   register(){
@@ -55,7 +56,10 @@ export class LoginPage implements OnInit {
         if(this.user != null){
           try {let outcome = this.authApiService.verifyAccount(this.user).subscribe((dataR) => {
             console.log(dataR);
-            if(dataR.result) {this.router.navigateByUrl('/tabs', {state: {email: this.user.email, userID: dataR.userID}})}
+            if(dataR.result) {
+              this.router.navigateByUrl('/tabs', {state: {email: this.user.email, userID: dataR.userID}})
+              localStorage.setItem('userID', JSON.stringify(dataR.userID));
+            }
             else{
               console.log(this.user);
               console.log('external')
@@ -69,7 +73,6 @@ export class LoginPage implements OnInit {
         console.log(error)      
     }
   } 
-  // jsk
 
   async toFacebook(){
     try{
@@ -81,7 +84,10 @@ export class LoginPage implements OnInit {
         if(this.user != null){
           try {let outcome = await this.authApiService.verifyAccount(this.user.email).subscribe((dataR) => {
             console.log(dataR);
-            if(dataR.result) {this.router.navigateByUrl('/tabs', {state: {email: this.user.email, userID: dataR.userID}})}
+            if(dataR.result) {
+              localStorage.setItem('userID', JSON.stringify(dataR.userID));
+              this.router.navigateByUrl('/tabs', {state: {email: this.user.email, userID: dataR.userID}});
+            }
             else{
               console.log(this.user);
               console.log('external')
@@ -98,6 +104,7 @@ export class LoginPage implements OnInit {
   }
 
   logOut() {
+    localStorage.setItem('userID', JSON.stringify(''));
     this.authService.signOut();
   }
 
@@ -110,7 +117,10 @@ export class LoginPage implements OnInit {
       try{
         let outcome = this.authApiService.localLogin(this.form.value).subscribe(async dataR => {
           console.log(dataR)
-          if(dataR.loginSuccess) {this.router.navigate(['tabs'])}
+          if(dataR.loginSuccess) {
+            this.router.navigate(['tabs']);
+            localStorage.setItem('userID', JSON.stringify(dataR.userID));
+          }
           else {
             await this.presentAlert("Invalid Email/Password", "Kindly key in valid email and password");
             console.log("No such account");

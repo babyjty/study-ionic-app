@@ -36,9 +36,15 @@ export class AuthApiService{
     // External Registration
     extRegister(data): Observable<any>{
         console.log('API: External Register')
-        let url = `${this.baseUri}/api/localauth/local-signup`;
+        let url = `${this.baseUri}/api/localauth/local-register`;
         return this.http.post(url, data).pipe(catchError(this.errorMgmt));
     }
+
+    getProfile(userID): Observable<any>{
+        console.log("Profile-API: Get Profile")
+        let url =  `${this.baseUri}/api/localauth/get-profile`;
+        return this.http.post(url, userID).pipe(catchError(this.errorMgmt));
+      }
 
     //Signup
     errorMgmt(error: HttpErrorResponse){
