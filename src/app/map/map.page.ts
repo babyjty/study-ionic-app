@@ -13,7 +13,7 @@ declare var google: any;
   styleUrls: ['map.page.scss']
 })
 export class MapPage {
-  public radius:any;
+  public radius:number = 2000;
   map:any;
   
   @ViewChild('map', {read: ElementRef, static: false}) mapRef: ElementRef;
@@ -31,26 +31,24 @@ export class MapPage {
   
   ngOnInit(){}
 
-
-  getCurrentLocation(){
-    this.geolocation.getCurrentPosition().then((resp) => {
-      let current:object;
-      current = {
+  async getCurrentLocation() {
+    await this.geolocation.getCurrentPosition().then((resp) => {
+      this.currentLoc = [{
         latitude:resp.coords.latitude,
         longitude:resp.coords.longitude
-      }
-      this.currentLoc.push(current);    
-      console.log(current);
+      }];    
       this.addMarkersToMap(this.currentLoc);
+      this.getLocationsNearUser();
+
      }).catch((error) => {
        console.log('Error getting location', error);
      });
+
   }
 
-  updateSearchResults(){
-    console.log("clicked")
+  async getLocationsNearUser(){
     let loc = String(this.currentLoc[0].latitude) + '%2C' + String(this.currentLoc[0].longitude);
-    this.api.getLocations(this.radius, loc).subscribe(result=>{
+    await this.api.getLocations(this.radius, loc).subscribe(result=>{
       let locationData = result;
       let newLocation:object;
       for (let key in locationData){
@@ -59,28 +57,24 @@ export class MapPage {
           latitude: String(locationData[key].geometry.location.lat),
           longitude: String(locationData[key].geometry.location.lng),
           rating: locationData[key].rating,
-          price: "TBC"
         }
         this.markers.push(newLocation);
       }
     })
 
-    const location = new google.maps.LatLng(this.currentLoc.latitude , this.currentLoc.longitude);
-    // const options = {
-    //   center: location,
-    //   zoom: 12,
-    //   disableDefaultUI: true,
-    //   keyboardShortcuts: false
-    // }
-    // this.map = new google.maps.Map(this.mapRef.nativeElement, options)
     this.addMarkersToMap(this.markers);
     console.log("clicked")
   }
 
   ionViewDidEnter(){
     this.showMap();
+    // this.getCurrentLocation();
+  }
+
+  ionViewWillEnter(){
     this.getCurrentLocation();
   }
+
 
   // addMarkerToMap(marker){
   //   let position = new google.maps.LatLng(marker.latitude, marker.longitude);
