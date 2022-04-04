@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { SpotPage } from './spot.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { SpotPageRoutingModule } from './spot-routing.module';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { SpotPageRoutingModule } from './spot-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    SpotPageRoutingModule
+    SpotPageRoutingModule,
+    OrderModule
   ],
   declarations: [SpotPage]
 })

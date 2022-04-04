@@ -7,11 +7,13 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar #search showCancelButton="focus" (ionInput)="UpdateSeachResults()" debounce="1000"></ion-searchbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div #map id="map"></div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="locate" (click)="moveCamera()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
-
-<!-- yoooo -->

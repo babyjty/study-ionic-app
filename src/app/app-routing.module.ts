@@ -15,10 +15,6 @@ const routes: Routes = [
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   },
   {
-    path: 'chat-indiv',
-    loadChildren: () => import('./chat-indiv/chat-indiv.module').then( m => m.ChatIndivPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
@@ -45,7 +41,11 @@ const routes: Routes = [
   {
     path: 'external-register',
     loadChildren: () => import('./external-register/external-register.module').then( m => m.ExternalRegisterPageModule)
-  }
+  },
+  {
+    path: 'spot-details/:place_id',
+    loadChildren: () => import('./spot-details/spot-details.module').then((m) => m.SpotDetailsPageModule),
+  },
 ];
 @NgModule({
   imports: [

@@ -1,11 +1,10 @@
-
 const express = require('express', '4.17.1')
 const app = express()
 const cors = require('cors')
 const authRoute = require('./routes/auth')
 const session = require('express-session')
 const passportconfig = require('./routes/userRoutes/passport')
-const port = 3000
+const port = 4200
 //const passportconfig = require('./routes/userRoutes/passport')
 const config = require('./config/key')
 const key = require('./config/key')
@@ -18,6 +17,7 @@ mongoose.connect(
     config.mongoURI, {})
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err))
+
 // app.use(passport.initialize())
 
 // app.use(session({
@@ -26,21 +26,9 @@ mongoose.connect(
 //     resave: false
 // }))
 
-
 app.use('', routes)
 app.get('/', (req, res) => {
     res.send('welcome')
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
-
-
-
-//app.use(require('./routes/index2'))
-
-
-
-
-
-
