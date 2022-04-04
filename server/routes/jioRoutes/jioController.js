@@ -49,7 +49,7 @@ router.post('/createjio', (req, res) => {
                 return res.json({ success: false, err})
             } else {
                 return res.status(200).json({
-                    success: true
+                    createSuccess: true
                 })
             }     
         })
@@ -58,7 +58,7 @@ router.post('/createjio', (req, res) => {
 
 })
 
-router.post('/acceptjio', (req, res) => {
+router.post('/acceptjio', auth, (req, res) => {
     //request should contain the jio _id
     if (req.session.user){
         console.log(req.session.user)
@@ -74,14 +74,14 @@ router.post('/acceptjio', (req, res) => {
         { jioer: req.session.user._id },
         { jioee: req.session.user._id }
     ] }, async (err, jio) => {
-        if (jio) {
+        if (jio.length > 0 ) {
             return res.json({
                 createSuccess: false,
                 message: "User already has a jio, cant create or accpet another"
             })
         }
     })
-    Jio.findOneAndUpdate({ _id: req.body._id }, 
+    Jio.findOneAndUpdate({ _id: req.session.user._id }, 
         { jioStatus: 'accepted' },
         { new: true }, (err, doc) => {
             if (err){
@@ -112,9 +112,20 @@ router.post('/cancel', auth, (req, res) => {
 
 
 
-router.post('/acceptjio', auth, (req, res) => {
-    const user = req.user
-    
+router.get('/getjios', auth, (req, res) => {
+    Jio.find({ $and: [
+        { jioer: {$ne: req.session.user._id} },
+        { jioee: {$ne: req.session.user._id} }
+    ]}, (err) => {
+        if (err) {
+            return res.json({
+                findSuccess: false,
+                message: "No jio in the database"
+            })
+        } else {
+            return res.json(jio)
+        }
+    })
 })
 
 

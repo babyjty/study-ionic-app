@@ -19,6 +19,7 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig
  } from 'angularx-social-login';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {
     AppRoutingModule, 
     GoogleMapsModule, 
     HttpClientModule,
-    SocialLoginModule
+    SocialLoginModule,
+    AuthModule
   ],
   providers: [
     Geolocation, 
