@@ -8,6 +8,7 @@ mainRouter.use('/localauth', require('./userRoutes/localAuthController'))
 mainRouter.use('/jio', require('./jioRoutes/jioController'))
 mainRouter.use('/google', require('./userRoutes/googleController'))
 mainRouter.use('/profile', require('./userRoutes/profileController'))
+mainRouter.use('/locations', require('./placesRoutes/places'))
 
 mainRouter.get('/test', (req, res) => {
     res.send('Test dumb')
