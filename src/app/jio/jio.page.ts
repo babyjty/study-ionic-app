@@ -13,6 +13,9 @@ export class JioPage {
   nextpage() {
     this.route.navigate(['/jio-details-accept']);
   }
+  createJio(){
+    this.route.navigate(['/create-jio'])
+  }
 
 }
 

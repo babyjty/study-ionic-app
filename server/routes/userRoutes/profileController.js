@@ -115,20 +115,12 @@ router.post('/deleteprofilepic', auth, async (req, res) => {
 
 router.get('/getprofile', auth, (req, res) => {
     
-    User.findOne({ _id: req.session.user._id }, async (err, user) => {
-        if (user){
-            return res.json({
-                username: user.username,
-                worklevel: user.worklevel,
-                profilepic: user.photoURL,
-                telegram: user.telegram,
-                bio: user.bio
-            })
-        } else {
-            return res.json({
-                found: false
-            })
-        }
+    return res.json({
+        username: req.session.user.username,
+        worklevel: req.session.user.workLevel,
+        profilepic: req.session.user.photoURL,
+        telegram: req.session.user.telegram,
+        bio: req.session.user.bio
     })
 })
 
