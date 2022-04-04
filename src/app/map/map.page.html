@@ -12,4 +12,9 @@
 
 <ion-content [fullscreen]="true">
   <div #map id="map"></div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="locate" (click)="getCurrentLocation()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -4,6 +4,7 @@ import { defaultMaxListeners } from 'events';
 import { fromEventPattern } from 'rxjs';
 import { GooglePlacesAPIService } from '../service/google-places-api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { LocationDetailsPageRoutingModule } from '../location-details/location-details-routing.module';
 
 declare var google: any;
 
@@ -25,11 +26,15 @@ export class MapPage {
 
   private currentLoc: any = []
 
+  private sg_lat = 1.3521
+  private sg_lng = 103.8198
+
   // constructor(public api:GooglePlacesAPIService){}
 
   constructor(public api:GooglePlacesAPIService, private geolocation: Geolocation) {}
   
-  ngOnInit(){}
+  ngOnInit(){
+  }
 
 
   getCurrentLocation(){
@@ -42,10 +47,14 @@ export class MapPage {
       this.currentLoc.push(current);    
       console.log(current);
       this.addMarkersToMap(this.currentLoc);
+      this.map.panTo({lat: this.currentLoc[0].latitude , lng: this.currentLoc[0].longitude})
+
+      
      }).catch((error) => {
        console.log('Error getting location', error);
      });
   }
+
 
   updateSearchResults(){
     console.log("clicked")
@@ -59,13 +68,12 @@ export class MapPage {
           latitude: String(locationData[key].geometry.location.lat),
           longitude: String(locationData[key].geometry.location.lng),
           rating: locationData[key].rating,
-          price: "TBC"
         }
         this.markers.push(newLocation);
       }
     })
 
-    const location = new google.maps.LatLng(this.currentLoc.latitude , this.currentLoc.longitude);
+    // const location = new google.maps.LatLng(this.currentLoc.latitude , this.currentLoc.longitude);
     // const options = {
     //   center: location,
     //   zoom: 12,
@@ -78,8 +86,11 @@ export class MapPage {
   }
 
   ionViewDidEnter(){
-    this.showMap();
-    this.getCurrentLocation();
+    this.showMap(this.sg_lat, this.sg_lng);
+    // this.getCurrentLocation();
+    // this.addMarkersToMap(this.currentLoc);
+    // this.showMap(this.currentLoc.latitude, this.currentLoc.longitude);
+    
   }
 
   // addMarkerToMap(marker){
@@ -109,8 +120,6 @@ export class MapPage {
   addInfoWindowToMarker(marker){
     let infoWindowContent = '<div id="content" style="color:black">' + 
                               '<h2 id="firstHeading" class="firstHeading">' + marker.title + '</h2>' +
-                              '<p>Rating: ' + marker.rating + '/5</p>' +
-                              '<p>Price: ' + marker.price+ '</p>' +
                               '<ion-button id="navigate">Navigate</ion-button>' +
                             '</div>';
 
@@ -127,8 +136,9 @@ export class MapPage {
         google.maps.event.addListenerOnce(infoWindow, 'domready', ()=> {
           document.getElementById('navigate').addEventListener('click', ()=>{
             console.log('button clicked!');
-            window.open('https://www.google.com/maps/dir/?api=1&origin=' + this.currentLoc.latitude + ',' 
-            + this.currentLoc.longitude + '&destination=' + marker.latitude + ',' + marker.longitude);
+            console.log(this.currentLoc[0].latitude);
+            window.open('https://www.google.com/maps/dir/?api=1&origin=' + this.currentLoc[0].latitude + ',' 
+            + this.currentLoc[0].longitude + '&destination=' + marker.latitude + ',' + marker.longitude);
             // window.open('https://maps.google.com/maps?saddr=Current+Location&daddr=' + marker.latitude + ',' + marker.longitude);
             // window.open('https://www.google.com/maps/dir/?api1=&destination=' + marker.latitude + ',' + marker.longitude);
           });
@@ -144,94 +154,21 @@ export class MapPage {
     }
   }
 
-  showMap(){
-    const location = new google.maps.LatLng(1.3521, 103.8198);
+  showMap(ref_lat, ref_lng){
+    const location = new google.maps.LatLng(ref_lat, ref_lng);
     const options = {
       center: location,
       zoom: 12,
       disableDefaultUI: true,
       keyboardShortcuts: false,
-      // styles: [
-      //   { elementType: "geometry", stylers: [{ color: "#1b2430" }] },
-      //   // 242f3e
-      //   { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-      //   { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-      //   {
-      //     featureType: "administrative.locality",
-      //     elementType: "labels.text.fill",
-      //     stylers: [{ color: "#d59563" }],
-      //   },
-      //   {
-      //     featureType: "poi",
-      //     elementType: "labels.text.fill",
-      //     stylers: [{ color: "#d59563" }],
-      //   },
-      //   {
-      //     featureType: "poi.park",
-      //     elementType: "geometry",
-      //     stylers: [{ color: "#263c3f" }],
-      //   },
-      //   {
-      //     featureType: "poi.park",
-      //     elementType: "labels.text.fill",
-      //     stylers: [{ color: "#6b9a76" }],
-      //   },
-      //   {
-      //     featureType: "road",
-      //     elementType: "geometry",
-      //     stylers: [{ color: "#38414e" }],
-      //   },
-      //   {
-      //     featureType: "road",
-      //     elementType: "geometry.stroke",
-      //     stylers: [{ color: "#212a37" }],
-      //   },
-      //   {
-      //     featureType: "road",
-      //     elementType: "labels.text.fill",
-      //     stylers: [{ color: "#9ca5b3" }],
-      //   },
-      //   {
-      //     featureType: "road.highway",
-      //     elementType: "geometry",
-      //     stylers: [{ color: "#746855" }],
-      //   },
-      //   {
-      //     featureType: "road.highway",
-      //     elementType: "geometry.stroke",
-      //     stylers: [{ color: "#1f2835" }],
-      //   },
-      //   {
-      //     featureType: "road.highway",
-      //     elementType: "labels.text.fill",
-      //     stylers: [{ color: "#f3d19c" }],
-      //   },
-      //   {
-      //     featureType: "transit",
-      //     elementType: "geometry",
-      //     stylers: [{ color: "#2f3948" }],
-      //   },
-      //   {
-      //     featureType: "transit.station",
-      //     elementType: "labels.text.fill",
-      //     stylers: [{ color: "#d59563" }],
-      //   },
-      //   {
-      //     featureType: "water",
-      //     elementType: "geometry",
-      //     stylers: [{ color: "#17263c" }],
-      //   },
-      //   {
-      //     featureType: "water",
-      //     elementType: "labels.text.fill",
-      //     stylers: [{ color: "#515c6d" }],
-      //   },
-      //   {
-      //     featureType: "water",
-      //     elementType: "labels.text.stroke",
-      //     stylers: [{ color: "#17263c" }]
-      //   }]
-      
+      restriction: {
+        latLngBounds:{
+          north: this.sg_lat + 0.01,
+          south: this.sg_lat - 0.01,
+          east: this.sg_lng + 0.2,
+          west: this.sg_lng - 0.2,
+        }
+      }
     }
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options)
