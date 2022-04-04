@@ -54,6 +54,13 @@ export class AuthApiService{
         return this.http.post(url, userID, {withCredentials: true}).pipe(catchError(this.errorMgmt));
       }
 
+
+    logout():Observable<any>{
+        console.log('Logout')
+        let url =  `${this.baseUri}/api/localauth/local-logout`
+        return this.http.get(url, {withCredentials: true}).pipe(catchError(this.errorMgmt));
+    }
+    
     //Signup
     errorMgmt(error: HttpErrorResponse){
         let errorMessage = 'no response';

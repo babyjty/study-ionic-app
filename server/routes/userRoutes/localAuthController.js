@@ -130,7 +130,6 @@ router.get('/auth', auth, (req, res) => {  //middleware implementation
     })
 })
 
-
 router.get('/local-logout', auth, (req, res) => {
     //find the user who want to log out
     req.session.destroy( (err) => {

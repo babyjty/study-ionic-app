@@ -50,6 +50,7 @@ export class CreateJioPage implements OnInit {
         if(dataJ.createSuccess){
           this.presentAlert('Jio Successfully Created', "Jio is successfully created. Save the date!")
           this.router.navigate(['tabs'])
+          console.log(dataJ)
         }
         else
         {

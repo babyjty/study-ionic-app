@@ -8,13 +8,11 @@ const JioSchema = Schema({
         // required: true
         //type: "String"
     },
-
+    
     jioee: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
         //type: "String"
     },
-
-    // jio_created_date: Date.now,
 
     jio_date_time: {
         type: String,

@@ -1,22 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JioApiService } from '../service/jio-api.service';
 
 @Component({
   selector: 'app-jio',
   templateUrl: 'jio.page.html',
   styleUrls: ['jio.page.scss']
 })
-export class JioPage {
+export class JioPage implements OnInit {
 
-  constructor(private route: Router) { }
+  constructor(private router: Router, private jioApiService: JioApiService) { }
 
-  nextpage() {
-    this.route.navigate(['/jio-details-accept']);
+  private jioList: any;
+  
+  ngOnInit(){
+    try{
+      this.jioApiService.getJios().subscribe((dataJ) => {
+        this.jioList = dataJ;
+        console.log(this.jioList);
+      })
+    } catch (error) {console.log(error)}
   }
   createJio(){
     this.route.navigate(['/create-jio'])
   }
 
+  viewJio(jio) {
+    this.router.navigateByUrl('/jio-details-accept', {state: {jio1: jio}});
+  }
 }
 
 // cards = [

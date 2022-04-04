@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthApiService } from './service/api.authService';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private authApiService: AuthApiService, private router: Router) {}
+  
+  logout(){
+    try{
+      this.authApiService.logout().subscribe(dataL =>{
+        if(dataL.logoutSuccess){ this.router.navigate(['login'])
+      }
+      });
+
+    } catch(error){console.log(error)}
+    
+    
+  }
 }
