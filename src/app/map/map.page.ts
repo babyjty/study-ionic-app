@@ -146,8 +146,6 @@ export class MapPage {
             console.log(this.currentLoc[0].latitude);
             window.open('https://www.google.com/maps/dir/?api=1&origin=' + this.currentLoc[0].latitude + ',' 
             + this.currentLoc[0].longitude + '&destination=' + marker.latitude + ',' + marker.longitude);
-            // window.open('https://maps.google.com/maps?saddr=Current+Location&daddr=' + marker.latitude + ',' + marker.longitude);
-            // window.open('https://www.google.com/maps/dir/?api1=&destination=' + marker.latitude + ',' + marker.longitude);
           });
 
         })
