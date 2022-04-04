@@ -8,6 +8,26 @@ const JioSchema = Schema({
         //type: "String"
     },
     jioLocation: {
+        type: String
+    },
+
+    jioAddress: {
+        type: String
+    },
+
+    openingHours: {
+        type: String
+    },
+
+    closingHours: {
+        type: String
+    },
+
+    cost: {
+        type: Number
+    },
+
+    jioLocation: {
         type: String,
         unique: false
     },

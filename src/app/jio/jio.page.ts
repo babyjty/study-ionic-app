@@ -21,6 +21,9 @@ export class JioPage implements OnInit {
       })
     } catch (error) {console.log(error)}
   }
+  createJio(){
+    this.route.navigate(['/create-jio'])
+  }
 
   viewJio(jio) {
     this.router.navigateByUrl('/jio-details-accept', {state: {jio1: jio}});
