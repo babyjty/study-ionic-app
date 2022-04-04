@@ -1,4 +1,5 @@
 <ion-header [translucent]="true">
+
   <ion-toolbar>
     <ion-title>
       Spot
@@ -7,22 +8,61 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar placeholder="Enter radius" [(ngModel)]="radius" (keydown.enter)="fetchLocations()" animated></ion-searchbar>
+      
+  <!-- <ion-searchbar placeholder="Find a place to study..." [(ngModel)]="preferredLoc" (keydown.enter)="fetchLocations()" animated></ion-searchbar> -->
+  
+  <ion-searchbar placeholder="Enter location" [(ngModel)]="preferredLoc" (keydown.enter)="fetchLocations()" id="search-bar"></ion-searchbar>
+  
+  <div class="filter-sort">
+    <ion-button expand="block" (click)="filtering()" class="fliter">FILTER</ion-button>
+    <ion-button expand="block" (click)="sorting()" class="sort">SORT</ion-button>
+  </div>
+    
 </ion-header>
-
+    
 <ion-content>
-  <ion-card *ngFor="let item of locationData" color="light">
-   <ion-card-title>
-     {{item.name}}
-   </ion-card-title>
-   <ion-card-content>
-      <h4>
-        Rating: {{item.rating}}
-      </h4>
-      <h4>
-        Address: {{item.vicinity}}
-      </h4>
-   </ion-card-content>
+
+  <ion-card *ngFor="let item of filteredLocations | orderBy: orderHeader: isDescOrder" color="light" (click)="goToDetailsPage(item.place_id,item.linearDistance,item.src,item.geometry.location.lat,item.geometry.location.lng)">
+
+    <ion-card-content color="light">
+    
+      <ion-item lines="none" color="light" class="p1">
+
+        <ion-label class="titles">
+
+          <ion-card-subtitle class="subtitle">{{item.types[0]}}</ion-card-subtitle>
+
+          <ion-card-title class="title">{{item.name}}</ion-card-title>
+
+        </ion-label>
+
+      </ion-item>
+
+      <ion-item lines="none" color="light" class="p2">
+
+        <ion-thumbnail>
+          <ion-img [src]="item.src"></ion-img>
+        </ion-thumbnail>
+        
+        <ion-label class="p-items">
+          
+          <p class="p-item"><strong>DISTANCE: </strong>{{item.linearDistance}} km</p>
+          <p class="p-item"><strong>ADDRESS: </strong>{{item.vicinity}}</p>
+          <p class="p-item"><strong>RATING: </strong>{{item.rating}}/5</p>
+
+          <!-- <p><strong>PRICE: $</strong>$$</p>
+          <p><span style="color:red; font-weight: bold">LIVE: </span>Not so busy</p> -->
+        </ion-label>
+            
+      </ion-item>
+
+      <ion-buttons>
+        <ion-button>
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    
+    </ion-card-content>
   </ion-card>
 </ion-content>
-
+ 
