@@ -13,7 +13,7 @@ export class SpotPage {
   public radius: number = 2000;
   public locationData:any;
   public filteredLocations:any;
-  public currentCoord:String = undefined;
+  public currentCoord:string = undefined;
   public preferredLoc:String = undefined;
 
   orderHeader: String = '';
@@ -22,7 +22,7 @@ export class SpotPage {
 
   constructor(public api:GooglePlacesAPIService, private geolocation:Geolocation, 
     private actionSheetController: ActionSheetController, private router: Router) {
-    
+      this.getCurrentLocation()
   }
 
   getCurrentLocation(){
@@ -405,14 +405,13 @@ export class SpotPage {
 
 
   // GO TO DETAILS PAGE
-
-
-  goToDetailsPage(place_id: string, linearDistance: number, src: string) {
+  goToDetailsPage(place_id: string, linearDistance: number, src: string, lat: string, lng: string) {
     sessionStorage.setItem("place_id", place_id);
     sessionStorage.setItem('linearDistance', String(linearDistance));
     sessionStorage.setItem('src', src);
+    sessionStorage.setItem('lat', lat);
+    sessionStorage.setItem('lng', lng);
     this.router.navigate(['spot-details', place_id]);
   }
-
   
 }
