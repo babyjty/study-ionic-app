@@ -18,10 +18,11 @@ router.post('/createjio2', (req, res) => {
     // console.log(req.session)
 
     const newJio = new Jio({
-        jio_date_time: req.body.datetime,
         jio_header: req.body.header,
         jio_description: req.body.description,
         jioerID: req.body.userID,
+        jio_datetime: req.body.datetime,
+        jio_duration: req.body.duration,
         jioLocation: "default",
         jioStatus: "pending"
     })

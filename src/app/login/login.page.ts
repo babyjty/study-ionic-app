@@ -57,9 +57,10 @@ export class LoginPage implements OnInit {
           try {let outcome = this.authApiService.verifyAccount(this.user).subscribe((dataR) => {
             console.log(dataR);
             if(dataR.result) {
-              console.log(localStorage.getItem('userID'))
               this.router.navigateByUrl('/tabs', {state: {email: this.user.email, userID: dataR.userID}})
               localStorage.setItem('userID', JSON.stringify(dataR.userID));
+              console.log(localStorage.getItem('userID'))
+              console.log(dataR.userID)
             }
             else{
               console.log(this.user);
@@ -86,8 +87,10 @@ export class LoginPage implements OnInit {
           try {let outcome = await this.authApiService.verifyAccount(this.user.email).subscribe((dataR) => {
             console.log(dataR);
             if(dataR.result) {
-              localStorage.setItem('userID', JSON.stringify(dataR.userID));
               this.router.navigateByUrl('/tabs', {state: {email: this.user.email, userID: dataR.userID}});
+              localStorage.setItem('userID', JSON.stringify(dataR.userID));
+              console.log(localStorage.getItem('userID'))
+              console.log(dataR.userID)
             }
             else{
               console.log(this.user);

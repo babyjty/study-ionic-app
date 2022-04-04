@@ -3,21 +3,21 @@ const Schema = mongoose.Schema
 
 const JioSchema = Schema({
 
-    header: {
+    jio_header: {
         type: String
     },
-    description: {
+    jio_description: {
         type: String
     },
     jioerID: {
         type: String
     },
-    datetime: {
+    jio_datetime: {
         type: String,
     },
-    duration: {
+    jio_duration: {
         type: String
-    }
+    },
 
     // location_id: {
     //     type: String,

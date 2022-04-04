@@ -30,68 +30,27 @@ router.get('/', (req, res) => res.send('stfu bitch'))
 router.post('/local-register', (req, res) => {
     //회원가입할때 필요한 정보들을 client에서 가져오면 그것들을 데이터베이스에 넣어준다
     console.log('Backend: Local Register')
-    const user = new User(req.body)
+    console.log(req.body)
+    const user1 = new User(req.body)
     //crypting password before saving to the database
     User.findOne({email: req.body.email}, async (err, user) => {
-        if (user.googleid){
+        if (user){
             return res.json({
                 success: false,
-                message: "User already has an account signed up through gmail"
-            })
-        } else if (user.facebookid){
-            return res.json({
-                success: false,
-                message: "User already has an account signed up through facebook"
+                message: "user already exists"
             })
         }
     })
-    user.save((err, doc) => {
+    user1.save((err, doc) => {
         console.log(doc)
         if (err) return res.json({ success: false, err})
         return res.status(200).json({
             success: true,
-            userID: user._id
+            userID: user1._id
         })
     })
 })
 
-
-// router.post('/local-login', (req, res) => {
-//     console.log('api reached')
-//     //first find whether requested email address exists in the database
-//     //mongodb method
-//     User.findOne({email: req.body.email}, async (err, user) => {
-//         if(!user){ //if user does not exist
-//             return res.json({
-//                 loginSuccess: false,
-//                 message: "Email address does not exist"
-//             })
-//         } 
-//         console.log('user found')
-
-//         const validated = await user.comparePassword(req.body.password)
-//         if (!validated){
-//             console.log('within if')
-//             return res.json({
-//                 loginSuccess: false,
-//                 message: "Incorrect Password"
-//             })
-//         }
-
-//         //console.log(user)
-//         req.session.user = user 
-//         req.session.save()
-//         console.log(req.session.user)
-//     })
-//     console.log(req.session)
-//     req.session.save()
-
-//     res.status(200).json({
-//         loginSuccess: true,
-//         //email: req.session.user['email']
-//         userID: user._id
-//     })
-// })
 
 router.post('/local-login', (req, res) => {
     console.log('api reached')
@@ -140,7 +99,7 @@ router.post('/verify-account', (req, res) => {
         req.session.user = user
         req.session.save()
         return res.json({
-            userID: req.session.userID,
+            userID: user._id,
             result: true
         })
     })

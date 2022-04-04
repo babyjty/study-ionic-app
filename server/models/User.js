@@ -45,11 +45,11 @@ const userSchema = mongoose.Schema({
     },
     googleid: {
         type: String,
-        default: null
+        //default: null
     },
     facebookid : {
         type: String,
-        default: null
+        //default: null
     },
     photoURL: {
         type: String,

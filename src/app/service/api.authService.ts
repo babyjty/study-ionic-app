@@ -23,27 +23,27 @@ export class AuthApiService{
         console.log("login function")
         let url = `${this.baseUri}/api/localauth/local-login`;
         //console.log("API Middle")
-        return this.http.post(url, data).pipe(catchError(this.errorMgmt))
+        return this.http.post(url, data, {withCredentials:true}).pipe(catchError(this.errorMgmt))
     }
 
     // Verify if account exists via email matching 
     verifyAccount(user): Observable<any>{
         console.log("API: Verify Account");
         let url = `${this.baseUri}/api/localauth/verify-account`;
-        return this.http.post(url, user).pipe(catchError(this.errorMgmt));
+        return this.http.post(url, user, {withCredentials:true}).pipe(catchError(this.errorMgmt));
     }
 
     // External Registration
     extRegister(data): Observable<any>{
         console.log('API: External Register')
         let url = `${this.baseUri}/api/localauth/local-register`;
-        return this.http.post(url, data).pipe(catchError(this.errorMgmt));
+        return this.http.post(url, data, {withCredentials:true}).pipe(catchError(this.errorMgmt));
     }
 
     getProfile(userID): Observable<any>{
         console.log("Profile-API: Get Profile")
         let url =  `${this.baseUri}/api/localauth/get-profile`;
-        return this.http.post(url, userID).pipe(catchError(this.errorMgmt));
+        return this.http.post(url, userID, {withCredentials:true}).pipe(catchError(this.errorMgmt));
       }
 
     //Signup
