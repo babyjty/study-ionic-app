@@ -16,22 +16,7 @@ router.use(bodyParser.urlencoded({extended: true}))
 router.use(bodyParser.json())
 router.use(cookieParser())
 
-router.get('/get-profile'), (req, res) => {
-    console.log("profile Controller: getprofile")
-    User.findOne({_id:req}, async (err, user) => {
-        if(!user){
-            return res.json({
-                result: false
-            })
-        }
-        return res.json({
-            result: true,
-            username: user.username,
-            telegram: user.telegram,
-            bio:user.bio
-        })
-    })
-}
+
 
 
 
