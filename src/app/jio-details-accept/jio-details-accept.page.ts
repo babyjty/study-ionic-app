@@ -8,10 +8,13 @@ import { Router } from '@angular/router';
 })
 export class JioDetailsAcceptPage implements OnInit {
 
-  constructor(private route: Router) { }
+  private jio;
+  constructor(private router: Router) {
+    console.log(this.jio = this.router.getCurrentNavigation().extras.state.jio);
+  }
 
   nextpage() {
-    this.route.navigate(['/jio-list']);
+    this.router.navigate(['/jio-list']);
   }
 
   ngOnInit() {

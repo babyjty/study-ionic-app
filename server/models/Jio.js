@@ -2,6 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const JioSchema = Schema({
+    jioer: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'User',
+        // required: true
+        //type: "String"
+    },
     jioLocation: {
         type: String
     },
@@ -22,10 +27,25 @@ const JioSchema = Schema({
         type: Number
     },
 
-    jioer: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User',
-        // required: true
-        //type: "String"
+    jioLocation: {
+        type: String,
+        unique: false
+    },
+
+    jioAddress: {
+        type: String
+    },
+
+    openingHours: {
+        type: String
+    },
+
+    closingHours: {
+        type: String
+    },
+
+    cost: {
+        type: Number
     },
 
     jioee: {

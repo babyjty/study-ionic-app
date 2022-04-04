@@ -22,9 +22,6 @@ router.use(cookieParser())
 
 router.get('/', (req, res) => res.send('Profile Controller'))
 
-
-
-
 const s3 = new aws.S3({
     accessKeyId: config.S3_ACCESS_KEY,
     secretAccessKey: config.S3_SECRETACCESS,
