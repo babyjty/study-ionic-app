@@ -23,7 +23,6 @@ export class MapPage {
 
   infoWindows: any = [];
   public markers: any = []
-
   private currentLoc: any = []
 
   private sg_lat = 1.3521
@@ -43,7 +42,7 @@ export class MapPage {
         longitude:resp.coords.longitude
       }];    
       this.addMarkersToMap(this.currentLoc);
-      this.map.panTo({lat: this.currentLoc[0].latitude , lng: this.currentLoc[0].longitude})
+      this.map.panTo({lat: this.currentLoc[0].latitude , lng: this.currentLoc[0].longitude});
       this.getLocationsNearUser();
      }).catch((error) => {
        console.log('Error getting location', error);
@@ -68,24 +67,12 @@ export class MapPage {
     })
 
     this.addMarkersToMap(this.markers);
-    console.log("clicked")
   }
+
 
   ionViewDidEnter(){
     this.showMap(this.sg_lat, this.sg_lng);
-    // this.getCurrentLocation();
-    // this.addMarkersToMap(this.currentLoc);
-    // this.showMap(this.currentLoc.latitude, this.currentLoc.longitude);
-    
   }
-
-
-  // addMarkerToMap(marker){
-  //   let position = new google.maps.LatLng(marker.latitude, marker.longitude);
-  //   let mapMarker = new google.maps.Marker({position: position});
-  //   mapMarker.setMap(this.map);
-  //   console.log(marker + "within add function")
-  // }
 
   addMarkersToMap(markers){
     for(let marker of markers){
@@ -110,7 +97,6 @@ export class MapPage {
                               '<ion-button id="navigate">Navigate</ion-button>' +
                             '</div>';
 
-    // let infoWindowContent = 'hey hey';                     
 
     let infoWindow = new google.maps.InfoWindow({
       content: infoWindowContent
@@ -157,32 +143,5 @@ export class MapPage {
   ionChange(event){
     console.log(event.detail.value);
   }
-
-  // initMap() {
-  //   navigator.geolocation.getCurrentPosition((location) => {
-  //     console.log(location);
-  //     map = new google.maps.Map(this.mapElement.nativeElement, {
-  //       center: {lat: location.coords.latitude, lng: location.coords.longitude},
-  //       zoom: 15
-  //     });
-  
-  //     infowindow = new google.maps.InfoWindow();
-  //     var service = new google.maps.places.PlacesService(map);
-  //     service.nearbySearch({
-  //       location: {lat: location.coords.latitude, lng: location.coords.longitude},
-  //       radius: 1000,
-  //       type: ['store']
-  //     }, (results,status) => {
-  //       if (status === google.maps.places.PlacesServiceStatus.OK) {
-  //         for (var i = 0; i < results.length; i++) {
-  //           this.createMarker(results[i]);
-  //         }
-  //       }
-  //     });
-  //   }, (error) => {
-  //     console.log(error);
-  //   }, options);
-  //   var myplace = {lat: -33.8665, lng: 151.1956};
-  // }
 
 }
