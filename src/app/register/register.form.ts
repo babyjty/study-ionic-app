@@ -17,8 +17,10 @@ export class RegisterPageForm{
             password: ['', [Validators.required, Validators.minLength(8)]],
             cpassword: ['', [Validators.required]],
             username: ['', [Validators.required]],
-            bio: ['', [Validators.required, Validators.maxLength(250)]],
-            worklevel: ['',[Validators.required]]
+            bio: ['', [Validators.required, Validators.maxLength(200)]],
+            worklevel: ['',[Validators.required]],
+            telegram: ['', [Validators.required]],
+            provider: ['LOCAL']
         });
         
         registerForm.get('cpassword').setValidators(passwordMatch(registerForm));
