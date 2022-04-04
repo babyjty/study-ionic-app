@@ -33,23 +33,27 @@ export class MapPage {
   constructor(public api:GooglePlacesAPIService, private geolocation: Geolocation) {}
   
   ngOnInit(){
+    this.getCurrentLocation();
   }
 
- getCurrentLocation() {
+  getCurrentLocation() {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.currentLoc = [{
         latitude:resp.coords.latitude,
         longitude:resp.coords.longitude
       }];    
-      this.addCurrentLocToMap(this.currentLoc);
-      this.map.panTo({lat: this.currentLoc[0].latitude , lng: this.currentLoc[0].longitude});
       
-      this.getLocationsNearUser();
-      this.map.setZoom(15);
      }).catch((error) => {
        console.log('Error getting location', error);
      });
+  }
 
+  moveCamera(){
+    this.getLocationsNearUser();
+    this.addCurrentLocToMap(this.currentLoc);
+    this.map.panTo({lat: this.currentLoc[0].latitude , lng: this.currentLoc[0].longitude});
+    
+    this.map.setZoom(15);
   }
 
   getLocationsNearUser(){
@@ -63,11 +67,25 @@ export class MapPage {
           latitude: String(locationData[key].geometry.location.lat),
           longitude: String(locationData[key].geometry.location.lng),
           rating: locationData[key].rating,
+          // src: this.fetchPhoto(locationData[key].photos[0].photo_reference, 400)
         }
+
         this.markers.push(newLocation);
       }
     })
     this.addMarkersToMap(this.markers);
+  }
+
+  fetchPhoto(photoRef:string, width:number){
+    this.api.getPlacePhoto(photoRef, width).subscribe(result => {
+      for (let key in result){
+        if (key == 'url'){
+          console.log(result[key]);
+          return result[key];
+        }
+      }
+      return null;
+    })
   }
 
   
@@ -113,6 +131,7 @@ export class MapPage {
   addInfoWindowToMarker(marker){
     let infoWindowContent = '<div id="content" style="color:black">' + 
                               '<h2 id="firstHeading" class="firstHeading">' + marker.title + '</h2>' +
+                              '<h4> Rating: ' + marker.rating + '</h4>' +
                               '<ion-button id="navigate">Navigate</ion-button>' +
                             '</div>';
 
