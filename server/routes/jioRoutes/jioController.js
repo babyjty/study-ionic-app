@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     res.send("Jio router")
 })
 
-router.post('/createjio', (req, res) => {
+router.post('/createjio2', (req, res) => {
     console.log('Backend: Within Create Jio')
     // console.log(req.session)
 
@@ -30,8 +30,8 @@ router.post('/createjio', (req, res) => {
     Jio.find({ $or: [
         { jioerID: req.body.userID },
         { jioeeID: req.body.userID }
-    ] }, async (err, doc) => {
-        if (doc) {
+    ] }, async (err, jio) => {
+        if (jio) {
             return res.json({
                 createSuccess: false,
                 message: "User already has a jio, cant create or accpet another"
@@ -39,13 +39,52 @@ router.post('/createjio', (req, res) => {
         }
     })
     console.log("hello")
-    newJio.save((err, jio) => {
-        console.log(jio)
-        if (err) return res.json({ success: false, err})
-        return res.status(200).json({
+    newJio.save((err, doc) => {
+        console.log(doc)
+        if (err) {return res.json({success: false, err})}
+        else {return res.status(200).json({
             success: true
+        })}
+    })
+
+})
+
+router.post('/createjio', (req, res) => {
+    console.log('within create jio')
+    //const newJio = req.body  //identify user
+    // front end should pass json containing all information for location schema( pls refer to location model), start time and end time, date, jio description 
+    //IN JSON FORMAT
+    console.log(req.body)
+    const newJio = new Jio({
+        datetime: req.body.datetime,
+        description: req.body.description,
+        jioerID: req.body.userID,
+        duration: req.body.duration
+    })
+    Jio.find({ $or: [
+        { jioer: req.body.userID },
+        { jioee: req.body.userID }
+    ] }, async (err, jio) => {
+        console.log(req.session.user)
+        console.log(jio)
+        if (jio.length > 0) {
+            return res.json({
+                createSuccess: false,
+                message: "User already has a jio, cant create or accpet another"
+            })
+        }
+        newJio.save((err, doc) => {
+            console.log(doc)
+            if (err) {
+                return res.json({ success: false, err})
+            } else {
+                return res.status(200).json({
+                    success: true
+                })
+            }     
         })
     })
+    
 
 })
 

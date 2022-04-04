@@ -11,12 +11,13 @@ export class CreateJioPageForm{
     }
 
     createForm():FormGroup {
+        let user_id = localStorage.getItem("userID")
         let jioForm1 = this.formBuilder.group({
             header: ['', [Validators.required]],
             datetime: ['', [Validators.required]],
             duration: ['', [Validators.required]],
             description: ['', [Validators.required]],
-            userID: [localStorage.getItem("userID")]
+            userID: [user_id]
 
             // locationID: ['', [Validators.required]],
             // userID: ['', [Validators.required]]

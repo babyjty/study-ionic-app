@@ -31,6 +31,7 @@ export class CreateJioPage implements OnInit {
     this.createForm();
     console.log('hello')
     console.log(this.jioForm)
+    console.log(localStorage.getItem("userID") + " : userID SART")
   }
 
   setToday(){
@@ -47,6 +48,7 @@ export class CreateJioPage implements OnInit {
     console.log(this.jioForm.getForm().value)
     console.log(localStorage.getItem('userID') + " u")
     try{
+      console.log("In TS: " + this.jioForm.getForm().value)
       this.jioApiService.createJio(this.jioForm.getForm().value).subscribe((dataJ) => {
         if(dataJ.createSuccess){
           this.presentAlert('Jio Successfully Created', "Jio is successfully created. Save the date!")
