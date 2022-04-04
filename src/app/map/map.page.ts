@@ -36,16 +36,15 @@ export class MapPage {
   ngOnInit(){
   }
 
-  async getCurrentLocation() {
-    await this.geolocation.getCurrentPosition().then((resp) => {
+ getCurrentLocation() {
+    this.geolocation.getCurrentPosition().then((resp) => {
       this.currentLoc = [{
         latitude:resp.coords.latitude,
         longitude:resp.coords.longitude
       }];    
       this.addMarkersToMap(this.currentLoc);
       this.map.panTo({lat: this.currentLoc[0].latitude , lng: this.currentLoc[0].longitude})
-
-      
+      this.getLocationsNearUser();
      }).catch((error) => {
        console.log('Error getting location', error);
      });
@@ -149,14 +148,6 @@ export class MapPage {
       zoom: 12,
       disableDefaultUI: true,
       keyboardShortcuts: false,
-      restriction: {
-        latLngBounds:{
-          north: this.sg_lat + 0.01,
-          south: this.sg_lat - 0.01,
-          east: this.sg_lng + 0.2,
-          west: this.sg_lng - 0.2,
-        }
-      }
     }
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options)

@@ -7,7 +7,7 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar #search showCancelButton="focus" [(ngModel)]="radius" (keydown.enter)="updateSearchResults()" animated></ion-searchbar>
+  <ion-searchbar #search showCancelButton="focus" (keydown.enter)="updateSearchResults()" animated></ion-searchbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
