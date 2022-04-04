@@ -40,6 +40,14 @@ export class AuthApiService{
         return this.http.post(url, data).pipe(catchError(this.errorMgmt));
     }
 
+    // Registration
+    register(data): Observable<any>{
+        console.log('API: External Register')
+        let url = `${this.baseUri}/api/localauth/register`;
+        return this.http.post(url, data).pipe(catchError(this.errorMgmt));
+    }
+    
+
     getProfile(userID): Observable<any>{
         console.log("Profile-API: Get Profile")
         let url =  `${this.baseUri}/api/localauth/get-profile`;

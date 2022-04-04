@@ -17,6 +17,18 @@ export class JioDetailsPage implements OnInit {
   ngOnInit() {
   }
 
+  // acceptJio(jio){
+  //   try{
+
+
+
+  //   } catch(error){console.log(error)}
+  // }
+
+  cancelJio(){
+
+  }
+
   // removeJio(jio){
   //   let index = this.jios.indexOf(jio);
 
