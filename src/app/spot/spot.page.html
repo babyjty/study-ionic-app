@@ -22,7 +22,7 @@
     
 <ion-content>
 
-  <ion-card *ngFor="let item of filteredLocations | orderBy: orderHeader: isDescOrder" color="light" (click)="goToDetailsPage(item.place_id)">
+  <ion-card *ngFor="let item of filteredLocations | orderBy: orderHeader: isDescOrder" color="light" (click)="goToDetailsPage(item.place_id,item.linearDistance,item.src)">
 
     <ion-card-content color="light">
     

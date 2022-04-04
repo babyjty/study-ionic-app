@@ -27,4 +27,8 @@ export class GooglePlacesAPIService {
   getPlaceDetails( placeID:String ){
     return this.http.get(`http://localhost:3000/api/locations/placedetails?placeid=${placeID}`);
   } 
+
+  getPlacePhoto( photoRef:String, width:number){
+    return this.http.get(`http://localhost:3000/api/locations/placephoto?photoRef=${photoRef}&width=${width}`);
+  }
 }

@@ -10,12 +10,16 @@ import { SpotPage } from '../spot/spot.page';
 export class SpotDetailsPage implements OnInit {
 
   place_id: string;
+  linearDistance: string;
+  src: string;
   spotDetails: any;
 
   constructor(public api:GooglePlacesAPIService) { }
 
   ngOnInit() {
     this.place_id = sessionStorage.getItem("place_id")
+    this.linearDistance = sessionStorage.getItem('linearDistance');
+    this.src = sessionStorage.getItem('src');
     this.fetchLocation(this.place_id);
   }
 
@@ -23,7 +27,8 @@ export class SpotDetailsPage implements OnInit {
     this.api.getPlaceDetails(place_id).subscribe(result => {
       console.log(result);
       this.spotDetails = Array.of(result);
-      this.spotDetails.src = "https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg";
+      this.spotDetails[0].result.linearDistance = this.linearDistance;
+      this.spotDetails[0].result.src = this.src;
     })
   }
 
