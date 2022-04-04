@@ -42,9 +42,12 @@ export class MapPage {
         latitude:resp.coords.latitude,
         longitude:resp.coords.longitude
       }];    
-      this.addMarkersToMap(this.currentLoc);
-      this.map.panTo({lat: this.currentLoc[0].latitude , lng: this.currentLoc[0].longitude})
+      this.addCurrentLocToMap(this.currentLoc);
+      
+      this.map.panTo({lat: this.currentLoc[0].latitude , lng: this.currentLoc[0].longitude});
+      
       this.getLocationsNearUser();
+      this.map.setZoom(15);
      }).catch((error) => {
        console.log('Error getting location', error);
      });
@@ -66,7 +69,6 @@ export class MapPage {
         this.markers.push(newLocation);
       }
     })
-
     this.addMarkersToMap(this.markers);
     console.log("clicked")
   }
@@ -97,6 +99,24 @@ export class MapPage {
         longitude: marker.longitude,
         rating: marker.rating,
         price: marker.price,
+      });
+
+      mapMarker.setMap(this.map);
+      this.addInfoWindowToMarker(mapMarker);
+    }
+  }
+
+  addCurrentLocToMap(markers){
+    for(let marker of markers){
+      let position = new google.maps.LatLng(marker.latitude, marker.longitude);
+      let mapMarker = new google.maps.Marker({
+        position: position,
+        title: marker.title,
+        latitude: marker.latitude,
+        longitude: marker.longitude,
+        rating: marker.rating,
+        price: marker.price,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
       });
 
       mapMarker.setMap(this.map);
