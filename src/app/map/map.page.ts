@@ -96,7 +96,7 @@ export class MapPage {
         latitude: marker.latitude,
         longitude: marker.longitude,
         rating: marker.rating,
-        price: marker.price
+        price: marker.price,
       });
 
       mapMarker.setMap(this.map);
