@@ -1,4 +1,3 @@
-
 const express = require('express', '4.17.1')
 const app = express()
 const cors = require('cors')
@@ -26,6 +25,7 @@ mongoose.connect(
     config.mongoURI, {})
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err))
+
 
 
 store.on('error', (err) => {
@@ -70,7 +70,6 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 module.exports = app
 
-//app.use(require('./routes/index2'))
 
 
 

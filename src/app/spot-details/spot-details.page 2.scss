@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+}
+
+ion-content {
+    margin: 0;
+
+    ion-card {
+        width: fit-content;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        ion-card-content {
+            height: fit-content;
+            margin: 0;
+            padding: 10px;
+            font-family: "Georgia";
+
+            ion-item {
+                padding: 0;
+                margin: 0;
+            }
+    
+            .p1 {
+                .titles {
+                    padding: 0;
+                    margin: 0;
+                
+                    .title {
+                        font-family: "Georgia";
+                        font-weight: bold;
+                        font-size: 25px;
+                        color: #400080;
+                        white-space: normal;
+                        margin-bottom: 10px;
+                    }
+                    
+                    .subtitle {
+                        text-transform: uppercase;
+                        font-family: "Georgia";
+                        font-size: 13px;
+                        color: #a4a4c1;
+                    }
+                }
+            }
+    
+            .p2 {
+                .p-items {
+                    padding: 0;
+                    margin: 0;
+                
+                    .p-item {
+                        margin: 4px 4px 4px 0px;
+                        font-family: "Trebuchet MS";
+                        font-size: 18px;
+                        margin-bottom: 1px;
+                        white-space: normal;
+                    }
+                }
+            }
+
+            ion-button {
+                --background: #6b45bc;
+                width: 100%;
+                margin: 10px 5px;
+                padding: 0;
+                font-family: "Trebuchet MS";
+                text-transform: uppercase;
+            
+                ion-icon {
+                    margin-left: 10px;
+                }
+            }
+
+        }
+
+        
+    }
+}
