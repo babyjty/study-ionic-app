@@ -45,16 +45,17 @@ export class CreateJioPage implements OnInit {
 
   createJio(){
     console.log(this.jioForm.getForm().value)
+    console.log(localStorage.getItem('userID') + " u")
     try{
       this.jioApiService.createJio(this.jioForm.getForm().value).subscribe((dataJ) => {
         if(dataJ.createSuccess){
           this.presentAlert('Jio Successfully Created', "Jio is successfully created. Save the date!")
-          this.router.navigate(['tabs'])
+          //this.router.navigate(['tabs'])
         }
         else
         {
           this.presentAlert('Unsuccessful Jio Creation', 'Try again later');
-          this.router.navigate(['tabs/spot'])
+          //this.router.navigate(['tabs/spot'])
         }
       }
     )} catch(error){console.log(error)}

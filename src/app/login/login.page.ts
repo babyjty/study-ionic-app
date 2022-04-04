@@ -117,7 +117,7 @@ export class LoginPage implements OnInit {
     else {
       try{
         let outcome = this.authApiService.localLogin(this.form.value).subscribe(async dataR => {
-          console.log(dataR)
+          console.log(dataR + "dataR")
           if(dataR.loginSuccess) {
             this.router.navigate(['tabs']);
             localStorage.setItem('userID', JSON.stringify(dataR.userID));

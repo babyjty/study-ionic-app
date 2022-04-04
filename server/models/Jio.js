@@ -48,7 +48,20 @@ const JioSchema = Schema({
     location_id: {
         type: String,
         // required: true
+    },
+    jio_date_time: {
+        type: String
+    },
+    jio_description: {
+        type: String
+    },
+    jio_header:{
+        type: String
+    },
+    jioerID: {
+        type: String
     }
+
 })
 
 const Jio = mongoose.model('Jio', JioSchema)

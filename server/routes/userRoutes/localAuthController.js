@@ -56,6 +56,43 @@ router.post('/local-register', (req, res) => {
 })
 
 
+// router.post('/local-login', (req, res) => {
+//     console.log('api reached')
+//     //first find whether requested email address exists in the database
+//     //mongodb method
+//     User.findOne({email: req.body.email}, async (err, user) => {
+//         if(!user){ //if user does not exist
+//             return res.json({
+//                 loginSuccess: false,
+//                 message: "Email address does not exist"
+//             })
+//         } 
+//         console.log('user found')
+
+//         const validated = await user.comparePassword(req.body.password)
+//         if (!validated){
+//             console.log('within if')
+//             return res.json({
+//                 loginSuccess: false,
+//                 message: "Incorrect Password"
+//             })
+//         }
+
+//         //console.log(user)
+//         req.session.user = user 
+//         req.session.save()
+//         console.log(req.session.user)
+//     })
+//     console.log(req.session)
+//     req.session.save()
+
+//     res.status(200).json({
+//         loginSuccess: true,
+//         //email: req.session.user['email']
+//         userID: user._id
+//     })
+// })
+
 router.post('/local-login', (req, res) => {
     console.log('api reached')
     //first find whether requested email address exists in the database
@@ -80,15 +117,14 @@ router.post('/local-login', (req, res) => {
 
         //console.log(user)
         req.session.user = user 
-        req.session.save()
-        console.log(req.session.user)
-    })
-    console.log(req.session)
-    req.session.save()
-
-    res.status(200).json({
-        loginSuccess: true,
-        //email: req.session.user['email']
+        //req.session.save()
+        console.log(req.session)
+        req.session.save(() => {
+            res.status(200).json({
+                loginSuccess: true,
+                userID: req.session.user._id
+            })
+        })
     })
 })
 
@@ -104,7 +140,7 @@ router.post('/verify-account', (req, res) => {
         req.session.user = user
         req.session.save()
         return res.json({
-            _id: req.session.user._id,
+            userID: req.session.userID,
             result: true
         })
     })
@@ -122,7 +158,8 @@ router.post('/get-profile'), (req, res) => {
             result: true,
             username: user.username,
             telegram: user.telegram,
-            bio:user.bio
+            bio:user.bio,
+            userID: user._id
         })
     })
 }

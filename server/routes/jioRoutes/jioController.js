@@ -13,26 +13,34 @@ router.get('/', (req, res) => {
     res.send("Jio router")
 })
 
-router.post('/createjio', auth, (req, res) => {
-    req.body.jioer = req.session.user._id
-    req.body.jioStatus = 'pending'
-    const newJio = req.body  //identify user
-    // front end should pass json containing all information for location schema( pls refer to location model), start time and end time, date, jio description 
-    //IN JSON FORMAT
+router.post('/createjio', (req, res) => {
+    console.log('Backend: Within Create Jio')
+    // console.log(req.session)
 
+    const newJio = new Jio({
+        jio_date_time: req.body.datetime,
+        jio_header: req.body.header,
+        jio_description: req.body.description,
+        jioerID: req.body.userID,
+        jioLocation: "default",
+        jioStatus: "pending"
+    })
+    console.log(req.body + " 1")
+    console.log(newJio + " 2")
     Jio.find({ $or: [
-        { jioer: req.session.user._id },
-        { jioee: req.session.user._id }
-    ] }, async (err, jio) => {
-        if (jio) {
+        { jioerID: req.body.userID },
+        { jioeeID: req.body.userID }
+    ] }, async (err, doc) => {
+        if (doc) {
             return res.json({
                 createSuccess: false,
                 message: "User already has a jio, cant create or accpet another"
             })
         }
     })
-    newJio.save((err, doc) => {
-        console.log(doc)
+    console.log("hello")
+    newJio.save((err, jio) => {
+        console.log(jio)
         if (err) return res.json({ success: false, err})
         return res.status(200).json({
             success: true
