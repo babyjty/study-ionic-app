@@ -128,12 +128,29 @@ router.post('/deleteprofilepic', auth, async (req, res) => {
 
 })
 
-router.get('/getprofile', (req, res) => {
+router.get('/getprofile', auth, (req, res) => {
     
+    User.findOne({ _id: req.session.user._id }, async (err, user) => {
+        if (user){
+            return res.json({
+                username: user.username,
+                worklevel: user.worklevel,
+                profilepic: user.photoURL,
+                telegram: user.telegram,
+                bio: user.bio
+            })
+        } else {
+            return res.json({
+                found: false
+            })
+        }
+    })
+
     res.status(200).json({
         _id: req.session.user._id,
         result: true,
-        username: req.session.user.username
+        username: req.session.user.username,
+
     })
 })
 

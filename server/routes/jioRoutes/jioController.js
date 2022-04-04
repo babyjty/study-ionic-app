@@ -60,16 +60,7 @@ router.post('/createjio', (req, res) => {
 
 router.post('/acceptjio', auth, (req, res) => {
     //request should contain the jio _id
-    if (req.session.user){
-        console.log(req.session.user)
-        next()
-    } else {
-        console.log(req.session)
-        res.status(400).json({
-            authSuccess: false,
-            message: "user not logged in"
-        })
-    }
+    
     Jio.find({ $or: [
         { jioer: req.session.user._id },
         { jioee: req.session.user._id }
@@ -81,7 +72,7 @@ router.post('/acceptjio', auth, (req, res) => {
             })
         }
     })
-    Jio.findOneAndUpdate({ _id: req.session.user._id }, 
+    Jio.findOneAndUpdate({ _id: req.body.jioID }, 
         { jioStatus: 'accepted' },
         { new: true }, (err, doc) => {
             if (err){
@@ -93,9 +84,15 @@ router.post('/acceptjio', auth, (req, res) => {
 
 router.post('/cancel', auth, (req, res) => {
     Jio.deleteOne({ jioee: req.session.user._id }, (err) => {
+        if (err){
+            return res.json({
+                deleteSuccess: false,
+                message: err
+            })
+        }
         return res.json({
-            deleteSuccess: false,
-            message: "Jio does not exist or error"
+            deleteSuccess: true,
+            message: "Jio deleted successfully"
         })
     })
 })
