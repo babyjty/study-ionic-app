@@ -57,6 +57,7 @@ export class LoginPage implements OnInit {
           try {let outcome = this.authApiService.verifyAccount(this.user).subscribe((dataR) => {
             console.log(dataR);
             if(dataR.result) {
+              console.log(localStorage.getItem('userID'))
               this.router.navigateByUrl('/tabs', {state: {email: this.user.email, userID: dataR.userID}})
               localStorage.setItem('userID', JSON.stringify(dataR.userID));
             }

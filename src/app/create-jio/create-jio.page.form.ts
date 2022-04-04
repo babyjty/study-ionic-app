@@ -16,7 +16,7 @@ export class CreateJioPageForm{
             datetime: ['', [Validators.required]],
             duration: ['', [Validators.required]],
             description: ['', [Validators.required]],
-            // userID: [localStorage.getItem("userID")]
+            userID: [localStorage.getItem("userID")]
 
             // locationID: ['', [Validators.required]],
             // userID: ['', [Validators.required]]
