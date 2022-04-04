@@ -79,7 +79,8 @@ router.post('/local-login', (req, res) => {
                     })
                 } else {
                     return res.json({
-                        loginSuccess: true
+                        loginSuccess: true,
+                        userID: user._id
                     })
                 }
             })
@@ -102,7 +103,7 @@ router.post('/verify-account', auth, (req, res) => {
         req.session.user = user
         req.session.save()
         return res.json({
-            userID: req.session.user._id,
+            userID: user._id,
             result: true
         })
     })
