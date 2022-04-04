@@ -129,22 +129,19 @@ router.get('/auth', auth, (req, res) => {  //middleware implementation
     })
 })
 
-
 router.get('/local-logout', auth, (req, res) => {
     //find the user who want to log out
-    User.findOneAndUpdate({
-        _id: req.user._id
-    },
-    {
-        token: ""
-    }, (err, user) => {
-        if (err) return res.json({
-            success: false,
-            err
-        })
-        return res.status(200).send({
-            success: true
-        })
+    req.session.destroy( (err) => {
+        if (err) {
+            res.status(400).json({
+                logoutSuccess: false
+            })
+        } else {
+            res.status(200).json({
+                logoutSuccess: true,
+                message: "User successfully logged out"
+            })
+        }
     })
 
     //just removing token

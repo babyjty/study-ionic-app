@@ -2,14 +2,30 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const JioSchema = Schema({
-    jioLocation: {
-        type: String,
-    },
-
     jioer: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User',
         // required: true
         //type: "String"
+    },
+    jioLocation: {
+        type: String,
+        unique: false
+    },
+
+    jioAddress: {
+        type: String
+    },
+
+    openingHours: {
+        type: String
+    },
+
+    closingHours: {
+        type: String
+    },
+
+    cost: {
+        type: Number
     },
 
     jioee: {
@@ -42,6 +58,10 @@ const JioSchema = Schema({
     location_id: {
         type: String,
         // required: true
+    },
+
+    header: {
+        type: String
     }
 })
 

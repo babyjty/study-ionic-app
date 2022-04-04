@@ -16,29 +16,7 @@ router.use(bodyParser.urlencoded({extended: true}))
 router.use(bodyParser.json())
 router.use(cookieParser())
 
-router.get('/get-profile'), (req, res) => {
-    console.log("profile Controller: getprofile")
-    User.findOne({_id:req}, async (err, user) => {
-        if(!user){
-            return res.json({
-                result: false
-            })
-        }
-        return res.json({
-            result: true,
-            username: user.username,
-            telegram: user.telegram,
-            bio:user.bio
-        })
-    })
-}
-
-
-
 router.get('/', (req, res) => res.send('Profile Controller'))
-
-
-
 
 const s3 = new aws.S3({
     accessKeyId: config.S3_ACCESS_KEY,
@@ -130,27 +108,12 @@ router.post('/deleteprofilepic', auth, async (req, res) => {
 
 router.get('/getprofile', auth, (req, res) => {
     
-    User.findOne({ _id: req.session.user._id }, async (err, user) => {
-        if (user){
-            return res.json({
-                username: user.username,
-                worklevel: user.worklevel,
-                profilepic: user.photoURL,
-                telegram: user.telegram,
-                bio: user.bio
-            })
-        } else {
-            return res.json({
-                found: false
-            })
-        }
-    })
-
-    res.status(200).json({
-        _id: req.session.user._id,
-        result: true,
+    return res.json({
         username: req.session.user.username,
-
+        worklevel: req.session.user.workLevel,
+        profilepic: req.session.user.photoURL,
+        telegram: req.session.user.telegram,
+        bio: req.session.user.bio
     })
 })
 

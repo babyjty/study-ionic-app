@@ -23,35 +23,26 @@ export class ProfilePage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.profileForm = this.formBuilder.group({
-      username:[''],
-      telegram: [''],
-      worklevel: [''],
-      bio: ['']
-    })
-
-    await this.getProfile();
-    console.log(this.profileForm.get('username'))
-    console.log(this.profile + ": profile")
-
-  }
-
-
-  async getProfile(){
+    // await this.getProfile();
+    // console.log(this.profileForm.get('username'))
+    // console.log(this.profile + ": profile")
     try{
-      // let userid = localStorage.getItem('userID')
-      // console.log(userid)
-      // let str = '{"userid":' + userid + '}'  
-      // console.log(str)
-      // const obj = JSON.parse(str)
-      // console.log(obj.userid)
-      await this.profileApiService.getProfile().subscribe(dataP => {
-        this.profile = dataP;
+      await this.profileApiService.getProfile().subscribe( async dataP => {
+        this.profile = await dataP;
         console.log(dataP)
       });
     } catch(error){
       console.log(error);
     }
+    console.log(this.profile)
   }
 
+
+  async getProfile(){
+
+  }
+
+  show(){
+    console.log(this.profile)
+  }
 }

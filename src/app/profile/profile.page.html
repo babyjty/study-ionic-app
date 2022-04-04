@@ -5,7 +5,9 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button routerLink="profile-edit">Edit</ion-button>
+      <ion-button (click)="show()" >Edit</ion-button>
+      <!-- <ion-button routerLink="profile-edit">Edit</ion-button> -->
+
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -21,7 +23,7 @@
       <div class="user-meta ion-text-center">
         <h3 class="playername">Jiam Tzi Yu</h3>
         <h5 class="country">NTU</h5>
-        <h6 class="ranking">I am a year 2 BCG student in NTU! </h6>
+        <h6 class="ranking">{{profile.username}}</h6>
       </div>
     </div>
   </div>
