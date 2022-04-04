@@ -45,7 +45,7 @@ export class RegisterPage implements OnInit {
             return;
           }
           else{
-            await this.authApiService.extRegister(this.registerForm.getForm().value).subscribe(
+            await this.authApiService.register(this.registerForm.getForm().value).subscribe(
               async dataR => {
                 console.log(dataR);
                 if(await dataR.success){

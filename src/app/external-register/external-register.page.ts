@@ -42,7 +42,7 @@ export class ExternalRegisterPage implements OnInit {
     } else {
       console.log(this.extRegisterForm.getForm().value)
       try{
-        let outcome = await this.authApiService.extRegister(this.extRegisterForm.getForm().value).subscribe(
+        await this.authApiService.register(this.extRegisterForm.getForm().value).subscribe(
           async dataR => {
             console.log(dataR);
             if(dataR.success){

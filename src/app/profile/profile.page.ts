@@ -39,20 +39,16 @@ export class ProfilePage implements OnInit {
 
   async getProfile(){
     try{
-      let userid = localStorage.getItem('userID')
-      console.log(userid)
-      let str = '{"userid":' + userid + '}'  
-      console.log(str)
-      const obj = JSON.parse(str)
-      console.log(obj.userid)
+      // let userid = localStorage.getItem('userID')
+      // console.log(userid)
+      // let str = '{"userid":' + userid + '}'  
+      // console.log(str)
+      // const obj = JSON.parse(str)
+      // console.log(obj.userid)
       await this.profileApiService.getProfile().subscribe(dataP => {
         this.profile = dataP;
-        // this.profileForm.setValue({username: dataP.username, telegram: dataP.telegram, worklevel: dataP.worklevel, bio: dataP.bio})
-        localStorage.setItem("profile", dataP)
         console.log(dataP)
       });
-
-
     } catch(error){
       console.log(error);
     }

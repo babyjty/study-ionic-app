@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
           console.log(data)
         });
         if(this.user != null){
-          try {let outcome = this.authApiService.verifyAccount(this.user).subscribe((dataR) => {
+          try {this.authApiService.verifyAccount(this.user).subscribe((dataR) => {
             console.log(dataR);
             if(dataR.result) {
               this.router.navigateByUrl('/tabs', {state: {email: this.user.email, userID: dataR.userID}})
@@ -82,7 +82,7 @@ export class LoginPage implements OnInit {
           console.log(data)
         });
         if(this.user != null){
-          try {let outcome = await this.authApiService.verifyAccount(this.user.email).subscribe((dataR) => {
+          try {await this.authApiService.verifyAccount(this.user.email).subscribe((dataR) => {
             console.log(dataR);
             if(dataR.result) {
               localStorage.setItem('userID', JSON.stringify(dataR.userID));
