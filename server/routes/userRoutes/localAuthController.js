@@ -18,10 +18,6 @@ router.use(cookieparser())
 router.use(express.json())
 //router.use(express.bodyParser())
 
-
-
-
-
 router.get('/', (req, res) => res.send('stfu bitch'))
  
 //The following function is mounted on the /register path. It is executed for any type
@@ -80,16 +76,22 @@ router.post('/local-login', (req, res) => {
 
         //console.log(user)
         req.session.user = user 
-        req.session.save()
-        console.log(req.session.user)
+        //req.session.save()
+        console.log(req.session)
+        req.session.save(() => {
+            return res.status(200).json({
+                loginSuccess: true,
+                userID: req.session.user._id
+            })
+        })
     })
-    console.log(req.session)
-    req.session.save()
+    //console.log(req.session)
+    
 
-    res.status(200).json({
-        loginSuccess: true,
-        //email: req.session.user['email']
-    })
+    // res.status(200).json({
+    //     loginSuccess: true,
+    //     //email: req.session.user['email']
+    // })
 })
 
 // Verify if account exists via email matching
@@ -98,13 +100,13 @@ router.post('/verify-account', auth, (req, res) => {
         console.log(req.body.email + "verify account");
         if(!user){
             return res.json({
-                result: false
+                verifyresult: false
             })
         }
         req.session.user = user
         req.session.save()
         return res.json({
-            _id: req.session.user._id,
+            userID: req.session.user._id,
             result: true
         })
     })

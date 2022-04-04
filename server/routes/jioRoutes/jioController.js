@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyparser = require('body-parser')
+const bodyParser = require('body-parser')
 const router = express.Router();
 const { Location } = require('../../models/Location')
 const { Jio } = require('../../models/Jio')
@@ -8,42 +8,68 @@ const { auth } = require('../../middleware/auth');
 const { time } = require('console');
 // router.use('bodyparser')
 
+router.use(bodyParser.urlencoded({extended: true}))
+router.use(bodyParser.json())
+//router.use(cookieParser())
 
 router.get('/', (req, res) => {
     res.send("Jio router")
 })
 
-router.post('/createjio', auth, (req, res) => {
+
+router.post('/createjio', (req, res) => {
     console.log('within create jio')
-    req.body.jioer = req.session.user._id
-    req.body.jioStatus = 'pending'
-    const newJio = req.body  //identify user
+    //const newJio = req.body  //identify user
     // front end should pass json containing all information for location schema( pls refer to location model), start time and end time, date, jio description 
     //IN JSON FORMAT
+    console.log(req.session)
+    const newJio = new Jio({
+        jio_date_time: req.body.datetime,
+        jio_description: req.body.description,
+        jioer: req.session.user._id,
+        jioLocation: "default",  //to be edited
+        jioStatus: "pending",
 
+    })
     Jio.find({ $or: [
         { jioer: req.session.user._id },
         { jioee: req.session.user._id }
     ] }, async (err, jio) => {
-        if (jio) {
+        console.log(req.session.user)
+        console.log(jio)
+        if (jio.length > 0) {
             return res.json({
                 createSuccess: false,
                 message: "User already has a jio, cant create or accpet another"
             })
         }
-    })
-    newJio.save((err, doc) => {
-        console.log(doc)
-        if (err) return res.json({ success: false, err})
-        return res.status(200).json({
-            success: true
+        newJio.save((err, doc) => {
+            console.log(doc)
+            if (err) {
+                return res.json({ success: false, err})
+            } else {
+                return res.status(200).json({
+                    success: true
+                })
+            }     
         })
     })
+    
 
 })
 
-router.post('/acceptjio', auth, (req, res) => {
+router.post('/acceptjio', (req, res) => {
     //request should contain the jio _id
+    if (req.session.user){
+        console.log(req.session.user)
+        next()
+    } else {
+        console.log(req.session)
+        res.status(400).json({
+            authSuccess: false,
+            message: "user not logged in"
+        })
+    }
     Jio.find({ $or: [
         { jioer: req.session.user._id },
         { jioee: req.session.user._id }

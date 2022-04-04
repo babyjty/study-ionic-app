@@ -8,11 +8,10 @@ const config = require('../../config/key')
 const { User } = require("../../models/User")
 const cookieParser = require('cookie-parser')
 const { auth } = require('../../middleware/auth')
-
-
-
-
 const bodyParser = require('body-parser')
+
+
+
 router.use(bodyParser.urlencoded({extended: true}))
 router.use(bodyParser.json())
 router.use(cookieParser())
@@ -129,7 +128,7 @@ router.post('/deleteprofilepic', auth, async (req, res) => {
 
 })
 
-router.get('/getprofile', auth, (req, res) => {
+router.get('/getprofile', (req, res) => {
     
     res.status(200).json({
         _id: req.session.user._id,
