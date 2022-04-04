@@ -10,6 +10,15 @@ const config = require('./config/key')
 const routes = require('./routes')
 const mongoose = require('mongoose')
 const json  = require('express-json')
+const bodyParser = require('body-parser')
+const MongoDBStore = require('connect-mongodb-session')(session)
+
+var store = new MongoDBStore({
+    uri: config.mongoURI,
+    collection: 'mySessions',
+    autoRemove: 'native'
+})
+
 
 
 mongoose.connect(
@@ -18,17 +27,20 @@ mongoose.connect(
     .catch(err => console.log(err))
 
 
+store.on('error', (err) => {
+    console.log(err)
+})
+
+
+
+app.use(cors());
+
 app.use(session({
     secret: 'studywithmeubitch',
     saveUninitialized: true,
     resave: false,
-    cookie: {
-        secure: false,
-        httpOnly: false,
-        maxAge: 23132213213412
-    }
+    store: store
 }))
-app.use(cors());
 app.use(express.urlencoded({
     extended: true
 }))
