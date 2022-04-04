@@ -34,15 +34,9 @@ router.post('/local-register', (req, res) => {
     const user = new User(req.body)
     //crypting password before saving to the database
     User.findOne({email: req.body.email}, async (err, user) => {
-        if (user.googleid){
+        if (user){
             return res.json({
-                success: false,
-                message: "User already has an account signed up through gmail"
-            })
-        } else if (user.facebookid){
-            return res.json({
-                success: false,
-                message: "User already has an account signed up through facebook"
+                result: false
             })
         }
     })
