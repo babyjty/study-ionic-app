@@ -69,7 +69,7 @@ export class MapPage {
     this.addMarkersToMap(this.markers);
   }
 
-
+  
   ionViewDidEnter(){
     this.showMap(this.sg_lat, this.sg_lng);
   }
