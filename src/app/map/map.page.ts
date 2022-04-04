@@ -46,9 +46,9 @@ export class MapPage {
 
   }
 
-  async getLocationsNearUser(){
+  getLocationsNearUser(){
     let loc = String(this.currentLoc[0].latitude) + '%2C' + String(this.currentLoc[0].longitude);
-    await this.api.getLocations(this.radius, loc).subscribe(result=>{
+    this.api.getLocations(this.radius, loc).subscribe(result=>{
       let locationData = result;
       let newLocation:object;
       for (let key in locationData){
