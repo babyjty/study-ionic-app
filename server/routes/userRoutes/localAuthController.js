@@ -8,6 +8,11 @@ const config = require('../../config/key')
 const { response, application } = require('express')
 const cookieparser = require('cookie-parser')
 const { auth } = require('../../middleware/auth')
+const { Jio } = require('../../models/Jio')
+const passport = require('./passport')
+const Passport = require('passport')
+
+
 //const imageController = require('./imageController')
 
 
@@ -53,9 +58,7 @@ router.post('/local-register', (req, res) => {
 
 
 router.post('/local-login', (req, res) => {
-    console.log('api reached')
-    //first find whether requested email address exists in the database
-    //mongodb method
+
     User.findOne({email: req.body.email}, async (err, user) => {
         if(!user){ //if user does not exist
             return res.json({
@@ -63,36 +66,35 @@ router.post('/local-login', (req, res) => {
                 message: "Email address does not exist"
             })
         } 
-        console.log('user found')
 
         const validated = await user.comparePassword(req.body.password)
-        if (!validated){
-            console.log('within if')
+        if (!validated) {
             return res.json({
                 loginSuccess: false,
-                message: "Incorrect Password"
+                message: "incorrect password"
+            })
+        } else {
+            console.log('validated')
+            req.session.user = user
+            console.log(req.session.user)
+            req.session.save((err) => {
+                if (err) {
+                    return res.json({
+                        loginSuccess: false,
+                        error: err
+                    })
+                } else {
+                    return res.json({
+                        loginSuccess: true
+                    })
+                }
             })
         }
-
-        //console.log(user)
-        req.session.user = user 
-        //req.session.save()
-        console.log(req.session)
-        req.session.save(() => {
-            return res.status(200).json({
-                loginSuccess: true,
-                userID: req.session.user._id
-            })
-        })
     })
-    //console.log(req.session)
-    
-
-    // res.status(200).json({
-    //     loginSuccess: true,
-    //     //email: req.session.user['email']
-    // })
 })
+
+
+
 
 // Verify if account exists via email matching
 router.post('/verify-account', auth, (req, res) => {

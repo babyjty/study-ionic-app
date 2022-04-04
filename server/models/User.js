@@ -58,6 +58,9 @@ const userSchema = mongoose.Schema({
     photoKey: {
         type: String,
         default: null
+    },
+    token: {
+        type: String
     }
     
 })

@@ -12,6 +12,7 @@ const mongoose = require('mongoose')
 const json  = require('express-json')
 const bodyParser = require('body-parser')
 const MongoDBStore = require('connect-mongodb-session')(session)
+const passport = require('passport')
 
 var store = new MongoDBStore({
     uri: config.mongoURI,
@@ -33,18 +34,26 @@ store.on('error', (err) => {
 
 
 
-app.use(cors());
+app.use(cors({origin: [
+    "http://localhost:4200"
+  ], credentials: true}));
 
 app.use(session({
     secret: 'studywithmeubitch',
     saveUninitialized: true,
     resave: false,
-    store: store
+    store: store,
+    cookie: {
+        secure: false
+    }
 }))
 app.use(express.urlencoded({
     extended: true
 }))
 app.use(json())
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 
 
@@ -54,6 +63,8 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+
 
 
 module.exports = app

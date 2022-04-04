@@ -23,7 +23,7 @@ export class AuthApiService{
         console.log("login function")
         let url = `${this.baseUri}/api/localauth/local-login`;
         //console.log("API Middle")
-        return this.http.post(url, data).pipe(catchError(this.errorMgmt))
+        return this.http.post(url, data, {withCredentials: true}).pipe(catchError(this.errorMgmt))
     }
 
     // Verify if account exists via email matching 
