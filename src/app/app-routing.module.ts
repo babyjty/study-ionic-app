@@ -15,10 +15,6 @@ const routes: Routes = [
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   },
   {
-    path: 'chat-indiv',
-    loadChildren: () => import('./chat-indiv/chat-indiv.module').then( m => m.ChatIndivPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },

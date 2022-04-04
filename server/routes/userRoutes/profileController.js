@@ -16,6 +16,10 @@ router.use(bodyParser.urlencoded({extended: true}))
 router.use(bodyParser.json())
 router.use(cookieParser())
 
+
+
+
+
 router.get('/', (req, res) => res.send('Profile Controller'))
 
 const s3 = new aws.S3({
