@@ -4,7 +4,10 @@ const cors = require('cors')
 const authRoute = require('./routes/auth')
 const session = require('express-session')
 const passportconfig = require('./routes/userRoutes/passport')
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 const port = 4200
 //const passportconfig = require('./routes/userRoutes/passport')
 =======
@@ -30,7 +33,10 @@ mongoose.connect(
     config.mongoURI, {})
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err))
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 
 // app.use(passport.initialize())
 
@@ -81,6 +87,7 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 
@@ -97,3 +104,5 @@ module.exports = app
 
 
 >>>>>>> 6fa50275b1bda67dffa1163ca8b54f2c1c1780f8
+=======
+>>>>>>> Stashed changes

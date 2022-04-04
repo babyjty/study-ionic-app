@@ -5,20 +5,27 @@ import { AngularDelegate, IonicModule, IonicRouteStrategy } from '@ionic/angular
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
 // import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+<<<<<<< Updated upstream
 =======
 
 
 import { GoogleMapsModule } from '@angular/google-maps'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 >>>>>>> 6fa50275b1bda67dffa1163ca8b54f2c1c1780f8
+=======
+>>>>>>> Stashed changes
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { AuthApiService } from './service/api.authService';
 
+<<<<<<< Updated upstream
 import { 
   GoogleLoginProvider,
   FacebookLoginProvider,
@@ -27,6 +34,8 @@ import {
  } from 'angularx-social-login';
 import { AuthModule } from './auth/auth.module';
 
+=======
+>>>>>>> Stashed changes
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -43,6 +52,7 @@ import { AuthModule } from './auth/auth.module';
 // >>>>>>> main
   bootstrap: [AppComponent],
 })
+<<<<<<< Updated upstream
 export class AppModule {}
 =======
   imports: [
@@ -83,3 +93,6 @@ export class AppModule {}
 })
 export class AppModule {}
 >>>>>>> 6fa50275b1bda67dffa1163ca8b54f2c1c1780f8
+=======
+export class AppModule {}
+>>>>>>> Stashed changes

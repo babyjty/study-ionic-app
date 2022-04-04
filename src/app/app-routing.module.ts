@@ -43,6 +43,7 @@ const routes: Routes = [
     loadChildren: () => import('./external-register/external-register.module').then( m => m.ExternalRegisterPageModule)
   },
   {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     path: 'spot-details/:place_id',
     loadChildren: () => import('./spot-details/spot-details.module').then((m) => m.SpotDetailsPageModule),
@@ -81,6 +82,11 @@ const routes: Routes = [
   // }
 
 >>>>>>> 6fa50275b1bda67dffa1163ca8b54f2c1c1780f8
+=======
+    path: 'spot-details/:place_id',
+    loadChildren: () => import('./spot-details/spot-details.module').then((m) => m.SpotDetailsPageModule),
+  },
+>>>>>>> Stashed changes
 ];
 @NgModule({
   imports: [
