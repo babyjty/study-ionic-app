@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 // import { ApiService } from './../../service/api.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { RegisterPageForm } from './register.form';
+import { AuthApiService } from '../service/api.authService';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +15,8 @@ export class RegisterPage implements OnInit {
   constructor(
     private router: Router, 
     private formBuilder: FormBuilder,
+    private authApiService: AuthApiService,
+    private alertController: AlertController
     // private ngZone: ngZone,
     // private apiService: ApiService
   ) { 
@@ -26,34 +30,52 @@ export class RegisterPage implements OnInit {
     this.createForm();
   }
 
-  register(){
+  async register(){
+    console.log('external-register')
     this.isSubmitted = true;
     if(!this.registerForm.getForm().valid) {
       console.log("Invalid registration")
     } else {
       console.log(this.registerForm.getForm().value)
+      try{
+        await this.authApiService.verifyAccount(this.registerForm.getForm().value).subscribe(async (dataA) => {
+          if (dataA.result) {
+            await this.presentAlert('Unsuccessful Registration', "Email already registered with StudyJio");
+            this.router.navigate(['login']);
+            return;
+          }
+          else{
+            await this.authApiService.register(this.registerForm.getForm().value).subscribe(
+              async dataR => {
+                console.log(dataR);
+                if(await dataR.success){
+                  localStorage.setItem('userID', JSON.stringify(dataR.userID));
+                  this.presentAlert('Registration Successful', 'Hi '+ this.registerForm.getForm().get('username').value + "! Enjoy your StudyJio experience" )
+                  this.router.navigate(['tabs'])
+                }
+                else{
+                  await this.presentAlert('Unsuccessful Registration', dataR.message)
+                  this.router.navigate(['login'])
+                }
+              }
+            )
+          } 
+          }
+        )} catch(error){console.log(error)}
     }
-    this.router.navigate(['tabs']);
   }
-
-  // register2(){
-  //   if(!this.registerForm.getForm().valid) {
-  //     console.log("Invalid registration")
-  //   } else {
-  //     if(window.confirm("Are you sure?")){
-  //       let id = this.actRoute.snapshot.paramMap.get('id');
-  //       this.apiService.register(id, )
-  //     }
-  //       this.isSubmitted = true;
-  //       console.log(this.registerForm.getForm().value)
-  //   }
-  //   this.router.navigate(['tabs']);
-  // }
 
 
   private createForm() {
     this.registerForm = new RegisterPageForm(this.formBuilder);
   }
 
-
+  async presentAlert(h, b){
+    const alert = await this.alertController.create({
+      header: h,
+      subHeader: b,
+      buttons: ['Dismiss']
+    });
+    await alert.present();
+  }
 }

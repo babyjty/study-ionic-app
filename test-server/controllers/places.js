@@ -105,11 +105,28 @@ const getPlaceDetails = (req,res) => {
       });
 }
 
+const getPlacePhoto = (req,res) => {
+  const { photoRef, width } = req.query;
+  
+  axios.get(
+    `https://maps.googleapis.com/maps/api/place/photo?&photo_reference=${photoRef}&maxwidth=${width}&key=${PLACES_KEY}`
+  )
+  .then(resp => {
+    //console.log(resp.request.res.responseUrl);
+    return res.status(200).json({ url: resp.request.res.responseUrl});
+  })
+  .catch(err => {
+    console.error(err);
+    return res.status(400).json({ success:false });
+  });
+}
+
 
 module.exports = {
     getLocations,
     getDistance,
     getPlaceSearchID,
     getPlaceCoordinates,
-    getPlaceDetails
+    getPlaceDetails,
+    getPlacePhoto
 };

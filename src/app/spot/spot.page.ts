@@ -13,7 +13,7 @@ export class SpotPage {
   public radius: number = 2000;
   public locationData:any;
   public filteredLocations:any;
-  public currentCoord:String = undefined;
+  public currentCoord:string = undefined;
   public preferredLoc:String = undefined;
 
   orderHeader: String = '';
@@ -22,7 +22,7 @@ export class SpotPage {
 
   constructor(public api:GooglePlacesAPIService, private geolocation:Geolocation, 
     private actionSheetController: ActionSheetController, private router: Router) {
-    
+      this.getCurrentLocation()
   }
 
   getCurrentLocation(){
@@ -75,18 +75,24 @@ export class SpotPage {
               this.locationData[i].linearDistance = this.getDistanceFromLatLonInKm(lat, lng, lat2, lng2);
               
               // Add picture for each location
-              this.locationData[i].src = "https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg";
-              
-              // if (!this.locationData[i].photos){
-              //   this.locationData[i].src = "https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg";
-              // }
-              // else{
-              //   let pic:String = this.locationData[i].photos[0].html_attributions[0];
-              //   let urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-              //   this.locationData[i].src = pic.match(urlRegex)[0];
-              //   //console.log(pic.match(urlRegex)[0]);
-              // }
+              if (this.locationData[i].photos){
+                this.fetchPhoto(this.locationData[i].photos[0].photo_reference, 1000, i);
+              }
+              else{
+                if (this.locationData[i].types[0] == 'library'){
+                  this.locationData[i].src = 'https://static.vecteezy.com/system/resources/previews/000/567/874/non_2x/library-building-icon-vector.jpg';
+                }
+                else{
+                  this.locationData[i].src = "https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg";
+                }
+              }
             }
+
+            // this.locationData = this.locationData.filter(location => {
+            //   if (location.rating){
+            //     return location;
+            //   }
+            // })
 
             console.log(this.locationData);
             this.filteredLocations = this.locationData;
@@ -125,6 +131,17 @@ export class SpotPage {
 
   deg2rad( deg:number ) {
     return deg * (Math.PI/180)
+  }
+
+  fetchPhoto(photoRef:string, width:number, index:number){
+    this.api.getPlacePhoto(photoRef, width).subscribe(result => {
+      for (let key in result){
+        if (key == 'url'){
+          // console.log(result[key]);
+          this.locationData[index].src = result[key];
+        }
+      }
+    })
   }
 
   // SORTING
@@ -388,14 +405,13 @@ export class SpotPage {
 
 
   // GO TO DETAILS PAGE
-
-
-  goToDetailsPage(place_id: string) {
+  goToDetailsPage(place_id: string, linearDistance: number, src: string, lat: string, lng: string) {
     sessionStorage.setItem("place_id", place_id);
+    sessionStorage.setItem('linearDistance', String(linearDistance));
+    sessionStorage.setItem('src', src);
+    sessionStorage.setItem('lat', lat);
+    sessionStorage.setItem('lng', lng);
     this.router.navigate(['spot-details', place_id]);
   }
-
   
 }
-
-

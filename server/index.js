@@ -4,13 +4,21 @@ const cors = require('cors')
 const authRoute = require('./routes/auth')
 const session = require('express-session')
 const passportconfig = require('./routes/userRoutes/passport')
-const port = 4200
-//const passportconfig = require('./routes/userRoutes/passport')
+const port = 3000
 const config = require('./config/key')
-const key = require('./config/key')
-const passport = require('passport')
 const routes = require('./routes')
 const mongoose = require('mongoose')
+const json  = require('express-json')
+const bodyParser = require('body-parser')
+const MongoDBStore = require('connect-mongodb-session')(session)
+const passport = require('passport')
+
+var store = new MongoDBStore({
+    uri: config.mongoURI,
+    collection: 'mySessions',
+    autoRemove: 'native'
+})
+
 
 
 mongoose.connect(
@@ -18,17 +26,53 @@ mongoose.connect(
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err))
 
-// app.use(passport.initialize())
 
-// app.use(session({
-//     secret: 'randomtext',
-//     saveUninitialized: false,
-//     resave: false
-// }))
 
-app.use('', routes)
+store.on('error', (err) => {
+    console.log(err)
+})
+
+
+
+app.use(cors({origin: [
+    "http://localhost:4200",
+    "http://localhost:8100"
+  ], credentials: true}));
+
+app.use(session({
+    secret: 'studywithmeubitch',
+    saveUninitialized: true,
+    resave: false,
+    store: store,
+    cookie: {
+        secure: false
+    }
+}))
+app.use(express.urlencoded({
+    extended: true
+}))
+app.use(json())
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+
+
+app.use('/api', routes)
 app.get('/', (req, res) => {
     res.send('welcome')
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+
+
+
+module.exports = app
+
+
+
+
+
+
+

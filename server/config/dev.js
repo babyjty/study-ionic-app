@@ -5,5 +5,10 @@ module.exports =  {
     ISSUER_BASE_URL : 'https://dev-10bhgf8o.us.auth0.com',
     CLIENT_ID : '9DEO5AgapsDDoIOqEummnriSIRG8Ldh',
     BASE_URL : 'http://localhost:4200',
-    SECRET : 'fdjsalkfjdeiwaifmdknsaklfdfewqafafdasfdsa'
+    SECRET : 'fdjsalkfjdeiwaifmdknsaklfdfewqafafdasfdsa',
+    S3_ACCESS_KEY : 'AKIAUZZVANYFSBHBAS4W',
+    S3_SECRETACCESS : '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',
+    S3_BUCKET_REGION : 'ap-southeast-1'
+
+
 }

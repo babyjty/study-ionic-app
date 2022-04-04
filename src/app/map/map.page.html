@@ -7,9 +7,13 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar #search showCancelButton="focus" [(ngModel)]="radius" (keydown.enter)="updateSearchResults()" animated></ion-searchbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div #map id="map"></div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="locate" (click)="getCurrentLocation()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
