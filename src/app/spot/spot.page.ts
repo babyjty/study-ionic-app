@@ -411,7 +411,9 @@ export class SpotPage {
     sessionStorage.setItem('src', src);
     sessionStorage.setItem('lat', lat);
     sessionStorage.setItem('lng', lng);
-    this.router.navigate(['spot-details', place_id]);
+    console.log(place_id)
+    this.router.navigate(['/spot-details', place_id]);
+    // this.router.navigate(['spot-details']);
   }
   
 }

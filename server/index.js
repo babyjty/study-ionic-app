@@ -1,7 +1,6 @@
 const express = require('express', '4.17.1')
 const app = express()
 const cors = require('cors')
-const authRoute = require('./routes/auth')
 const session = require('express-session')
 const passportconfig = require('./routes/userRoutes/passport')
 const port = 3000
@@ -53,11 +52,6 @@ app.use(express.urlencoded({
     extended: true
 }))
 app.use(json())
-
-app.use(passport.initialize())
-app.use(passport.session())
-
-
 
 app.use('/api', routes)
 app.get('/', (req, res) => {

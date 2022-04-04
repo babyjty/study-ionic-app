@@ -71,7 +71,7 @@ router.post('/local-login', (req, res) => {
         } else {
             console.log('validated')
             req.session.user = user
-            console.log(req.session.user)
+            // console.log(req.session.user)
             req.session.save((err) => {
                 if (err) {
                     return res.json({
