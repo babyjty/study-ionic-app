@@ -132,9 +132,10 @@ router.get('/getprofile', auth, (req, res) => {
     
     User.findOne({ _id: req.session.user._id }, async (err, user) => {
         if (user){
+            console.log(user);
             return res.json({
                 username: user.username,
-                worklevel: user.worklevel,
+                worklevel: user.workLevel,
                 profilepic: user.photoURL,
                 telegram: user.telegram,
                 bio: user.bio

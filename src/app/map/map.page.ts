@@ -5,6 +5,7 @@ import { fromEventPattern } from 'rxjs';
 import { GooglePlacesAPIService } from '../service/google-places-api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { LocationDetailsPageRoutingModule } from '../location-details/location-details-routing.module';
+import { ProfileApiService } from '../service/profile-api.service';
 
 declare var google: any;
 
@@ -27,12 +28,25 @@ export class MapPage {
 
   private sg_lat = 1.3521
   private sg_lng = 103.8198
-
+  public profile: any;
   // constructor(public api:GooglePlacesAPIService){}
 
-  constructor(public api: GooglePlacesAPIService, private geolocation: Geolocation) { }
+  constructor(public api: GooglePlacesAPIService, private geolocation: Geolocation, private profileApiService: ProfileApiService) { }
 
   ngOnInit() {
+    this.getProfile();
+    setTimeout(() => {
+      // console.log("hello " + this.profile)
+      for (let key in this.profile){
+        sessionStorage.setItem(key, this.profile[key]);
+      }
+    }, 5000)
+  }
+
+  getProfile(){
+    this.profileApiService.getProfile().subscribe(dataP => {
+      this.profile = dataP;
+    });
   }
 
   getCurrentLocation() {

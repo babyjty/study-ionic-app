@@ -14,14 +14,15 @@
   <div class="card">
     <div class="header">
       <div class="avatar">
-        <img class="circle-pic" src="https://media-exp1.licdn.com/dms/image/C5603AQFXvvI9cbUytA/profile-displayphoto-shrink_800_800/0/1614732638498?e=1652313600&v=beta&t=D1Kav3LBSZnQur1iKiHO823tB9LruhmtgZVosQmdzko" alt="">
+        <img class="circle-pic" [src]="this.profilepic" alt="">
       </div>
     </div>
     <div class="card-body">
       <div class="user-meta ion-text-center">
-        <h3 class="playername">Jiam Tzi Yu</h3>
-        <h5 class="country">NTU</h5>
-        <h6 class="ranking">I am a year 2 BCG student in NTU! </h6>
+        <h2 class="username">{{this.username}}</h2>
+        <h6 class="worklevel">{{this.worklevel}}</h6>
+        <h6 class="telegram">{{this.telegram}}</h6>
+        <h8 class="bio">{{this.bio}}</h8>
       </div>
     </div>
   </div>

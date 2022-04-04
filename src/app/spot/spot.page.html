@@ -22,7 +22,7 @@
     
 <ion-content>
 
-  <ion-card *ngFor="let item of filteredLocations | orderBy: orderHeader: isDescOrder" color="light" (click)="goToDetailsPage(item.place_id,item.linearDistance,item.src,item.geometry.location.lat,item.geometry.location.lng)">
+  <ion-card *ngFor="let item of filteredLocations | orderBy: orderHeader: isDescOrder" color="light" (click)="goToDetailsPage(item.place_id,item.linearDistance, item.src,item.geometry.location.lat,item.geometry.location.lng)">
 
     <ion-card-content color="light">
     
@@ -56,11 +56,11 @@
             
       </ion-item>
 
-      <ion-buttons>
+      <!-- <ion-buttons>
         <ion-button>
           <ion-icon slot="icon-only" name="add"></ion-icon>
         </ion-button>
-      </ion-buttons>
+      </ion-buttons> -->
     
     </ion-card-content>
   </ion-card>
