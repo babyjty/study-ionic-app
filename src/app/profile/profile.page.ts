@@ -12,30 +12,25 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http
 })
 export class ProfilePage implements OnInit {
 
-  private profileForm: FormGroup;
-  private profile: any;
 
-  constructor(
-    private profileApiService: ProfileApiService,
-    private authApiService: AuthApiService,
-    private formBuilder: FormBuilder,
-    private http: HttpClient
-  ) { }
+  private username: any;
+  private worklevel: any;
+  private bio: any;
+  private profilepic: any;
+  private telegram: any;
 
-  async ngOnInit() {
-    // await this.getProfile();
-    // console.log(this.profileForm.get('username'))
-    // console.log(this.profile + ": profile")
-    try{
-      await this.profileApiService.getProfile().subscribe( async dataP => {
-        this.profile = await dataP;
-        console.log(dataP)
-      });
-    } catch(error){
-      console.log(error);
-    }
-    console.log(this.profile)
+  constructor() { }
+
+  ngOnInit() {
+    this.username = sessionStorage.getItem('username')
+    this.worklevel = sessionStorage.getItem('worklevel');
+    this.bio = sessionStorage.getItem('bio');
+    this.profilepic = sessionStorage.getItem('profilepic');
+    this.telegram = sessionStorage.getItem('telegram');
   }
+
+
+
 
 
   async getProfile(){

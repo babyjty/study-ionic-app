@@ -58,11 +58,7 @@ const userSchema = mongoose.Schema({
     photoKey: {
         type: String,
         default: null
-    },
-    token: {
-        type: String
     }
-    
 })
 //pre is a mongoose method 
 //Means before the 'save' method is executed, something will be done (encryption)

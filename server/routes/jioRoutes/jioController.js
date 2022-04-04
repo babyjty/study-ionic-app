@@ -93,7 +93,7 @@ router.post('/cancel', auth, (req, res) => {
                 deleteSuccess: false,
                 message: err
             })
-        }
+        } 
         return res.json({
             deleteSuccess: true,
             message: "Jio deleted successfully"
