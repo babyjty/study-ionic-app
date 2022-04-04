@@ -14,12 +14,12 @@ declare var google: any;
   styleUrls: ['map.page.scss']
 })
 export class MapPage {
-  public radius:number = 2000;
-  map:any;
-  
-  @ViewChild('map', {read: ElementRef, static: false}) mapRef: ElementRef;
+  public radius: number = 2000;
+  map: any;
 
-  @ViewChild('search', {static: false}) search: IonSearchbar;
+  @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
+
+  @ViewChild('search', { static: false }) search: IonSearchbar;
 
   infoWindows: any = [];
   public markers: any = []
@@ -30,38 +30,40 @@ export class MapPage {
 
   // constructor(public api:GooglePlacesAPIService){}
 
-  constructor(public api:GooglePlacesAPIService, private geolocation: Geolocation) {}
-  
-  ngOnInit(){
-    this.getCurrentLocation();
+  constructor(public api: GooglePlacesAPIService, private geolocation: Geolocation) { }
+
+  ngOnInit() {
   }
 
   getCurrentLocation() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      this.currentLoc = [{
-        latitude:resp.coords.latitude,
-        longitude:resp.coords.longitude
-      }];    
-      
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
-  }
-
-  moveCamera(){
-    this.getLocationsNearUser();
+    console.log("clicked")
+    // this.getLocationsNearUser();
     this.addCurrentLocToMap(this.currentLoc);
-    this.map.panTo({lat: this.currentLoc[0].latitude , lng: this.currentLoc[0].longitude});
+
+    this.map.panTo({ lat: this.currentLoc[0].latitude, lng: this.currentLoc[0].longitude });
+
+    console.log("getting locations near user")
+    this.getLocationsNearUser();
+    // setTimeout(() => {
+    //   console.log("getting locations near user")
+    //   this.getLocationsNearUser();
+    // },5000); 
+
+    setTimeout(() => {
+      console.log("setting zoom")
+      this.map.setZoom(15)
+    },1000); 
     
-    this.map.setZoom(15);
+
+    
   }
 
-  getLocationsNearUser(){
+  async getLocationsNearUser() {
     let loc = String(this.currentLoc[0].latitude) + '%2C' + String(this.currentLoc[0].longitude);
-    this.api.getLocations(this.radius, loc).subscribe(result=>{
+    this.api.getLocations(this.radius, loc).subscribe(result => {
       let locationData = result;
-      let newLocation:object;
-      for (let key in locationData){
+      let newLocation: object;
+      for (let key in locationData) {
         newLocation = {
           title: locationData[key].name,
           latitude: String(locationData[key].geometry.location.lat),
@@ -73,28 +75,43 @@ export class MapPage {
         this.markers.push(newLocation);
       }
     })
-    this.addMarkersToMap(this.markers);
+    console.log("trying markers to map");
+    setTimeout(()=>{
+      this.addMarkersToMap(this.markers)
+    },1000);
+    console.log("supposed to add markers to map")
   }
 
-  fetchPhoto(photoRef:string, width:number){
-    this.api.getPlacePhoto(photoRef, width).subscribe(result => {
-      for (let key in result){
-        if (key == 'url'){
-          console.log(result[key]);
-          return result[key];
-        }
-      }
-      return null;
-    })
-  }
-
-  
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.showMap(this.sg_lat, this.sg_lng);
+
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.currentLoc = [{
+        latitude: resp.coords.latitude,
+        longitude: resp.coords.longitude
+      }];
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+    
+    // this.getCurrentLocation();
+    // this.addMarkersToMap(this.currentLoc);
+    // this.showMap(this.currentLoc.latitude, this.currentLoc.longitude);
+
   }
 
-  addMarkersToMap(markers){
-    for(let marker of markers){
+
+  // addMarkerToMap(marker){
+  //   let position = new google.maps.LatLng(marker.latitude, marker.longitude);
+  //   let mapMarker = new google.maps.Marker({position: position});
+  //   mapMarker.setMap(this.map);
+  //   console.log(marker + "within add function")
+  // }
+
+  addMarkersToMap(markers) {
+    console.log("inside addmarkerstomap function (before for loop)")
+    for (let marker of markers) {
       let position = new google.maps.LatLng(marker.latitude, marker.longitude);
       let mapMarker = new google.maps.Marker({
         position: position,
@@ -104,14 +121,14 @@ export class MapPage {
         rating: marker.rating,
         price: marker.price,
       });
-
+      console.log("inside addmarkerstomap function")
       mapMarker.setMap(this.map);
       this.addInfoWindowToMarker(mapMarker);
     }
   }
 
-  addCurrentLocToMap(markers){
-    for(let marker of markers){
+  addCurrentLocToMap(markers) {
+    for (let marker of markers) {
       let position = new google.maps.LatLng(marker.latitude, marker.longitude);
       let mapMarker = new google.maps.Marker({
         position: position,
@@ -124,7 +141,7 @@ export class MapPage {
       });
 
       mapMarker.setMap(this.map);
-      this.addInfoWindowToMarker(mapMarker);
+      // this.addInfoWindowToMarker(mapMarker);
     }
   }
 
@@ -141,29 +158,29 @@ export class MapPage {
     })
 
     marker.addListener('click', () => {
-        this.closeAllInfoWindows();
-        infoWindow.open(this.map, marker)
+      this.closeAllInfoWindows();
+      infoWindow.open(this.map, marker)
 
-        google.maps.event.addListenerOnce(infoWindow, 'domready', ()=> {
-          document.getElementById('navigate').addEventListener('click', ()=>{
-            console.log('button clicked!');
-            console.log(this.currentLoc[0].latitude);
-            window.open('https://www.google.com/maps/dir/?api=1&origin=' + this.currentLoc[0].latitude + ',' 
+      google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+        document.getElementById('navigate').addEventListener('click', () => {
+          console.log('button clicked!');
+          console.log(this.currentLoc[0].latitude);
+          window.open('https://www.google.com/maps/dir/?api=1&origin=' + this.currentLoc[0].latitude + ','
             + this.currentLoc[0].longitude + '&destination=' + marker.latitude + ',' + marker.longitude);
-          });
+        });
 
-        })
+      })
     });
     this.infoWindows.push(infoWindow);
   }
 
-  closeAllInfoWindows(){
-    for(let window of this.infoWindows){
+  closeAllInfoWindows() {
+    for (let window of this.infoWindows) {
       window.close();
     }
   }
 
-  showMap(ref_lat, ref_lng){
+  showMap(ref_lat, ref_lng) {
     const location = new google.maps.LatLng(ref_lat, ref_lng);
     const options = {
       center: location,
@@ -173,10 +190,10 @@ export class MapPage {
     }
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options)
-    this.addMarkersToMap(this.markers);
+    // this.addMarkersToMap(this.markers);
   }
 
-  ionChange(event){
+  ionChange(event) {
     console.log(event.detail.value);
   }
 
