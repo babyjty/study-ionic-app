@@ -1,15 +1,16 @@
+
+   
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'
 import { AngularDelegate, IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-
-import { GoogleMapsModule } from '@angular/google-maps'
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { HttpClientModule } from '@angular/common/http';
+import { GoogleMapsModule } from '@angular/google-maps';
+// import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { AuthApiService } from './service/api.authService';
 
@@ -20,7 +21,6 @@ import {
   SocialAuthServiceConfig
  } from 'angularx-social-login';
 import { AuthModule } from './auth/auth.module';
-
 
 @NgModule({
   declarations: [AppComponent],

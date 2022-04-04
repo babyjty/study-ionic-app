@@ -1,4 +1,3 @@
-
 const express = require('express', '4.17.1')
 const app = express()
 const cors = require('cors')
@@ -28,6 +27,7 @@ mongoose.connect(
     .catch(err => console.log(err))
 
 
+
 store.on('error', (err) => {
     console.log(err)
 })
@@ -36,7 +36,8 @@ store.on('error', (err) => {
 
 app.use(cors({origin: [
     "http://localhost:4200",
-    "http://localhost:8100"
+    "http://localhost:8100",
+    "http://localhost:8101"
   ], credentials: true}));
 
 app.use(session({
@@ -70,7 +71,6 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 module.exports = app
 
-//app.use(require('./routes/index2'))
 
 
 
