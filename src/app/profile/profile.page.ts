@@ -12,6 +12,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http
 })
 export class ProfilePage implements OnInit {
 
+
   private username: any;
   private worklevel: any;
   private bio: any;
@@ -30,4 +31,13 @@ export class ProfilePage implements OnInit {
 
 
 
+
+
+  async getProfile(){
+
+  }
+
+  show(){
+    console.log(this.profile)
+  }
 }

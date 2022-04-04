@@ -27,6 +27,8 @@ router.post('/createjio', (req, res) => {
         jio_date_time: req.body.datetime,
         jio_description: req.body.description,
         jioer: req.session.user._id,
+        header: req.body.header,
+        jio_duration: req.body.duration,
         jioLocation: "default",  //to be edited
         jioStatus: "pending",
 
@@ -44,7 +46,9 @@ router.post('/createjio', (req, res) => {
             })
         }
         newJio.save((err, doc) => {
+            console.log('doc is')
             console.log(doc)
+            console.log(err)
             if (err) {
                 return res.json({ success: false, err})
             } else {
@@ -89,7 +93,7 @@ router.post('/cancel', auth, (req, res) => {
                 deleteSuccess: false,
                 message: err
             })
-        }
+        } 
         return res.json({
             deleteSuccess: true,
             message: "Jio deleted successfully"
@@ -113,7 +117,7 @@ router.get('/getjios', auth, (req, res) => {
     Jio.find({ $and: [
         { jioer: {$ne: req.session.user._id} },
         { jioee: {$ne: req.session.user._id} }
-    ]}, (err) => {
+    ]}, (err, jio) => {
         if (err) {
             return res.json({
                 findSuccess: false,
