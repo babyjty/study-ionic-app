@@ -49,7 +49,7 @@ export class MapPage {
       this.addMarkersToMap(this.currentLoc);
       this.map.panTo({lat: this.currentLoc[0].latitude , lng: this.currentLoc[0].longitude})
 
-      
+
      }).catch((error) => {
        console.log('Error getting location', error);
      });
@@ -109,7 +109,7 @@ export class MapPage {
         latitude: marker.latitude,
         longitude: marker.longitude,
         rating: marker.rating,
-        price: marker.price
+        price: marker.price,
       });
 
       mapMarker.setMap(this.map);
@@ -161,14 +161,6 @@ export class MapPage {
       zoom: 12,
       disableDefaultUI: true,
       keyboardShortcuts: false,
-      restriction: {
-        latLngBounds:{
-          north: this.sg_lat + 0.01,
-          south: this.sg_lat - 0.01,
-          east: this.sg_lng + 0.2,
-          west: this.sg_lng - 0.2,
-        }
-      }
     }
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options)
