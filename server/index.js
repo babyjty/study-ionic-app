@@ -36,7 +36,8 @@ store.on('error', (err) => {
 
 app.use(cors({origin: [
     "http://localhost:4200",
-    "http://localhost:8100"
+    "http://localhost:8100",
+    "http://localhost:8101"
   ], credentials: true}));
 
 app.use(session({
