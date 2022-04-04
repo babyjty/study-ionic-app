@@ -10,7 +10,7 @@ export class JioDetailsAcceptPage implements OnInit {
 
   private jio;
   constructor(private router: Router) {
-    console.log(this.jio = this.router.getCurrentNavigation().extras.state.jio);
+    // console.log(this.jio = this.router.getCurrentNavigation().extras.state.jio);
   }
 
   nextpage() {
@@ -19,6 +19,11 @@ export class JioDetailsAcceptPage implements OnInit {
 
   ngOnInit() {
   }
+
+  
+  private bio = sessionStorage.getItem("bio")
+  private pic = sessionStorage.getItem("pic")
+  private username = sessionStorage.getItem('username')
 
 }
 
