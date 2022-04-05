@@ -29,15 +29,4 @@ export class ProfilePage implements OnInit {
     this.telegram = sessionStorage.getItem('telegram');
   }
 
-
-
-
-
-  async getProfile(){
-
-  }
-
-  show(){
-    console.log(this.profile)
-  }
 }

@@ -18,20 +18,15 @@ var store = new MongoDBStore({
     autoRemove: 'native'
 })
 
-
-
 mongoose.connect(
     config.mongoURI, {})
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err))
 
 
-
 store.on('error', (err) => {
     console.log(err)
 })
-
-
 
 app.use(cors({origin: [
     "http://localhost:4200",
@@ -48,20 +43,20 @@ app.use(session({
         secure: false
     }
 }))
+
 app.use(express.urlencoded({
     extended: true
 }))
+
 app.use(json())
 
 app.use('/api', routes)
+
 app.get('/', (req, res) => {
     res.send('welcome')
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
-
-
 
 module.exports = app
 

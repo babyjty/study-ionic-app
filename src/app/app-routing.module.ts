@@ -69,6 +69,10 @@ const routes: Routes = [
   {
     path: 'create-jio',
     loadChildren: () => import('./create-jio/create-jio.module').then( m => m.CreateJioPageModule)
+  },
+  {
+    path: 'spot-details/:place_id',
+    loadChildren: () => import('./spot-details/spot-details.module').then( m => m.SpotDetailsPageModule)
   }
 
 
