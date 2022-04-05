@@ -35,8 +35,8 @@ export class JioApiService {
 
   getJios(): Observable<any>{
     console.log("Within API: GetJios");
-    let url = `${this.baseUri}/api/jio/get-jio`;
-    return this.http.get(url).pipe(catchError(this.errorMgmt))
+    let url = `${this.baseUri}/api/jio/getjios`;
+    return this.http.get(url, {withCredentials:true}).pipe(catchError(this.errorMgmt))
   }
 
   errorMgmt(error: HttpErrorResponse){

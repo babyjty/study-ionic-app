@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ProfileApiService } from './service/profile-api.service';
+import { Router } from '@angular/router';
+import { AuthApiService } from './service/api.authService';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,17 @@ import { ProfileApiService } from './service/profile-api.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  constructor(private authApiService: AuthApiService, private router: Router) {}
+  
+  logout(){
+    try{
+      this.authApiService.logout().subscribe(dataL =>{
+        if(dataL.logoutSuccess){ this.router.navigate(['login'])
+      }
+      });
 
-  constructor() {}
-
+    } catch(error){console.log(error)}
+    
+    
+  }
 }

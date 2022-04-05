@@ -7,7 +7,6 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar></ion-searchbar>
 </ion-header>
 
 <!-- <ion-refresher on-refresh="doRefresh()"></ion-refresher>
@@ -20,13 +19,8 @@
 </ion-list> -->
 
 <ion-content [fullscreen]="true">
-  <ion-button fill="outline" size="small">
-    Filters
-  </ion-button>
-  <ion-button fill="outline" size="small">
-    Sort
-  </ion-button>
 
+<!-- 
 <ion-card class = 'jio' (click)="nextpage()" color = 'medium'>
   <ion-grid>
    <ion-row>
@@ -45,30 +39,42 @@
     <p><strong>Price: $</strong>$$</p>
     <p><strong>Work Level: </strong></p>
     <p><span style="color:red; font-weight: bold">Live: </span>Not so busy</p>
+    <ion-fab vertical = "bottom" horizontal = "end" slot = "fixed">
+      <ion-fab-button color = "success" (click) = "createJio()" >
+        <ion-icon name = "add"></ion-icon>
+      </ion-fab-button>
+  
+  <ion-fab vertical = "bottom" horizontal = "end" slot = "fixed">
+      <ion-fab-button color = "success" (click) = "createJio()" >
+        <ion-icon name = "add"></ion-icon>
+      </ion-fab-button>
   </ion-card-content>
   </ion-grid>
-</ion-card>
+</ion-card> -->
 
 
 
-    <!-- <ion-card class = 'jio' color = 'medium' *ngFor = 'let card of cards'>
+    <ion-card class = 'jio' (click)="viewJio(card)" color = 'medium' *ngFor = 'let card of jioList'>
       <ion-grid>
        <ion-row>
-        <ion-col>
+        <!-- <ion-col>
           <img src="{{card.picture}}">
-        </ion-col>
+        </ion-col> -->
       <ion-col> 
-      <ion-card-content>
-        <p>{{card.message}}</p>
-      </ion-card-content>
+      <ion-card-title>
+        <h2>{{card.header}}</h2>
+      </ion-card-title>
       </ion-col>
        </ion-row>
        <ion-card-content>
-        <p1>{{card.location}} {{card.distance}} {{card.cost}} {{card.crowdesness}}</p1>
+        <p1>Location: {{card.jioLocation}}</p1>
+        <p1>Date: {{card.jio_date_time}} </p1>
+        <p1>Duration: {{card.jio_duration}}</p1>
+        <p1>Description: {{card.jio_description}}</p1>
       </ion-card-content>
       </ion-grid>
-    </ion-card> -->
-	
+    </ion-card>
+	</ion-content>
 	
 	
 	

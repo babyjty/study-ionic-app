@@ -70,10 +70,7 @@ const routes: Routes = [
     path: 'create-jio',
     loadChildren: () => import('./create-jio/create-jio.module').then( m => m.CreateJioPageModule)
   }
-  // {
-  //   path: 'jio-create',
-  //   loadChildren: () => import('./jio-create/jio-create.module').then( m => m.JioCreatePageModule)
-  // }
+
 
 ];
 @NgModule({

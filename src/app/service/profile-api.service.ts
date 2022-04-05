@@ -29,7 +29,9 @@ export class ProfileApiService {
     console.log("Profile-API: Get Profile")
     let url =  `${this.baseUri}/api/profile/getprofile`;
     console.log(url)
+
     return this.http.get(url, {withCredentials: true}).pipe(catchError(this.errorMgmt));
+
 
   }
 
