@@ -1,4 +1,5 @@
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
+import { format, parseISO } from "date-fns";
 
 export class CreateJioPageForm{
 
@@ -16,13 +17,21 @@ export class CreateJioPageForm{
             datetime: ['', [Validators.required]],
             duration: ['', [Validators.required]],
             description: ['', [Validators.required]],
-            // userID: [localStorage.getItem("userID")]
+            datetimestring: [''],
 
-            // locationID: ['', [Validators.required]],
-            // userID: ['', [Validators.required]]
+            // jioLocation: [''],
+            // jioAddress: [''],
+            // jioPrice: [''],
+            // jioRating: [''],
+
+            // jioerUsername: [sessionStorage.getItem('username')],
+            // jioerTelegram: [sessionStorage.getItem('telegram')],
+            // jioerBio: [sessionStorage.getItem('profilepic')],
+            // jioerPic: [sessionStorage.getItem('profilepic')],
+            // jioerWorklevel: [sessionStorage.getItem('worklevel')]
         });
         jioForm1.get('duration').setValidators(checkNumber(jioForm1))
-        //jioForm1.get('datetime').setValidators(checkDate(jioForm1))
+        // jioForm1.get('datetime').setValidators(checkDate(jioForm1))
         return jioForm1;
     }
 
@@ -40,14 +49,24 @@ function checkNumber(createJioForm: FormGroup): ValidatorFn{
 }
 
 
-function checkDate(createJioForm: FormGroup): ValidatorFn{
-    const propDateTime = createJioForm.get('datetime');
-    const date = new Date().toISOString;
+function checkDate2(createJioForm: FormGroup): ValidatorFn{
+    let propDateTime = createJioForm.get('datetime');
+    let date = new Date().toISOString;
     console.log(checkDate)
     console.log(date)
     console.log(date<=propDateTime.value)
     const validator = () => {
         return date <= propDateTime.value? null:{backward: true}
+    }
+    return validator;
+}
+
+function checkDate(createForm): ValidatorFn{
+    const propdate = new Date(createForm.get('datetime')).getDate();
+    const date = new Date().getDate();
+
+    const validator = () => {
+        return propdate < date? null:{backward: true}
     }
     return validator;
 }

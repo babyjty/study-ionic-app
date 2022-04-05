@@ -35,8 +35,8 @@
             {{formattedString}}
           </ion-text>
         </ion-item>
-        <ion-datetime *ngIf = "showCal" #datetime formControlName = 'datetime' [value] = "dateValue" size = "cover" (ionChange)="dateChanged(datetime.value)" showDefaultButtons = "true" (ionCancel)="showCal = false" ></ion-datetime>
-        <app-error-message [field]= "jioForm.getForm().get('datetime')" error = "required" message = "Date is required"></app-error-message>
+        <ion-datetime *ngIf = "showCal" #datetime formControlName = 'datetime' [value] = "dateValue" size = "cover" (ionChange)="dateChanged(datetime.value)" showDefaultButtons = "true" (ionCancel)="showCal = false"></ion-datetime>
+        <app-error-message [field]= "jioForm.getForm().get('datetime')" error = "required" message = "Date and time required"></app-error-message>
         
         <ion-item>
           <ion-label>Duration (Hours)</ion-label>
@@ -46,7 +46,7 @@
 
         <ion-item>
           <ion-label>Jio Description</ion-label>
-          <ion-input type = "text" placeholder="Input Message" formControlName="description"></ion-input>
+          <ion-textarea type = "text" formControlName="description" placeholder="Input Description"></ion-textarea>
         </ion-item>
         <app-error-message [field]= "jioForm.getForm().get('description')" error = "negative" message = "Invalid duration"></app-error-message>
       </ion-card-content>

@@ -13,14 +13,14 @@
   <ion-card color = 'medium'>
   
     <ion-card-content> 
-      <p>{{username}}</p>
+      <h1>{{this.username}}</h1>
       <br>
-      <p>{{bio}}</p> 
+      <h3>{{this.bio}}</h3> 
       
     </ion-card-content>
   
     <ion-avatar>
-      <img src = {{pic}}>
+      <img [src] = "this.pic">
       <!-- {{jios.photo}} -->
     </ion-avatar>
   
