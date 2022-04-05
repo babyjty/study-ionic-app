@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'profile-edit',
-    loadChildren: () => import('../profile-edit/profile-edit.module').then( m => m.ProfileEditPageModule)
+    loadChildren: () => import('../profile-edit/profile-edit.module').then(m => m.ProfileEditPageModule)
   }
 
 ];
@@ -19,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ProfilePageRoutingModule {}
+export class ProfilePageRoutingModule { }
