@@ -1,6 +1,4 @@
-
-   
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { AngularDelegate, IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -60,5 +58,8 @@ import { AuthModule } from './auth/auth.module';
     }
   ],
   bootstrap: [AppComponent],
+})
+@Injectable({
+  providedIn: 'root'
 })
 export class AppModule {}
