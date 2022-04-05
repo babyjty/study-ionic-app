@@ -5,6 +5,10 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { RegisterPageForm } from './register.form';
 import { AuthApiService } from '../service/api.authService';
 import { AlertController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import {Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { ProfilePhotoOptionComponentComponent } from '../profile-photo-option-component/profile-photo-option-component.component';
+// const { Camera } = Plugins;
 
 @Component({
   selector: 'app-register',
@@ -16,13 +20,43 @@ export class RegisterPage implements OnInit {
     private router: Router, 
     private formBuilder: FormBuilder,
     private authApiService: AuthApiService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private modalController: ModalController,
     // private ngZone: ngZone,
     // private apiService: ApiService
-  ) { 
+  ) {}
     // this.mainForm();
-  }
+
+  photo = "https://i.pravatar.cc/150";
   // submit = false;
+
+  async openOptionSelection() {
+    const modal = await this.modalController.create({
+      component: ProfilePhotoOptionComponentComponent,
+      // cssClass: ‘transparent-modal’
+    });
+
+    modal.onDidDismiss()
+    .then(res => {
+      console.log(res);
+      if (res.role !== 'backdrop') {
+        this.takePicture(res.data);
+      }
+    });
+    return await modal.present();
+  }
+
+  async takePicture(type) {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Uri,
+      source: CameraSource[type]
+    });
+    this.photo = image.webPath;
+    console.log("photo " + this.photo);
+  }
+
 
   registerForm: RegisterPageForm;
   isSubmitted = false;

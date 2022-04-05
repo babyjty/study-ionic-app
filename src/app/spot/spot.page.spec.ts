@@ -12,6 +12,10 @@ describe('SpotPage', () => {
   let fixture: ComponentFixture<SpotPage>;
   let router: Router;
   let place_id: string;
+  let linearDistance: number;
+  let src: string;
+  let lat: string;
+  let lng: string;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -33,7 +37,7 @@ describe('SpotPage', () => {
   it("should go to spot details when click spot card", () => {
     spyOn(router, 'navigate');
 
-    component.goToDetailsPage(place_id);
+    component.goToDetailsPage(place_id, linearDistance, src, lat, lng);
 
     expect(router.navigate).toHaveBeenCalledWith(['spot-details']);
   })
