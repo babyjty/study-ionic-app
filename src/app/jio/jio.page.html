@@ -68,12 +68,21 @@
        </ion-row>
        <ion-card-content>
         <p1>Location: {{card.jioLocation}}</p1>
+        <br>
         <p1>Date: {{card.jio_date_time}} </p1>
+        <br>
         <p1>Duration: {{card.jio_duration}}</p1>
+        <br>
         <p1>Description: {{card.jio_description}}</p1>
       </ion-card-content>
       </ion-grid>
     </ion-card>
+
+    <ion-fab vertical = "bottom" horizontal = "end" slot = "fixed">
+      <ion-fab-button color = "success" (click) = "createJio()" >
+        <ion-icon name = "add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 	</ion-content>
 	
 	
