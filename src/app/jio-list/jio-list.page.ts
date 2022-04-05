@@ -20,6 +20,16 @@ export class JioListPage implements OnInit {
 
   private jio;
 
+  public myJios = [
+    {
+      title: "test title",
+      description: "test description",
+      location: "test location",
+      datetime: "test date time",
+      duration: "test duration"
+    }
+  ]
+
   ngOnInit() {
     this.jioApiService.getMyJio().subscribe(dataMJ => {
       this.jio = dataMJ;
