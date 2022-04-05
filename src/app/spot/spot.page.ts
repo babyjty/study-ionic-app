@@ -59,6 +59,12 @@ export class SpotPage {
 
           this.api.getLocations(this.radius, coord).subscribe(result=>{
             this.locationData = result;
+            this.locationData = this.locationData.filter(location => {
+              if (location.rating){
+                return location;
+              }
+            })
+            
             let destination:String;
             
             // Get the distances for all the locations retrieved from Google Places
@@ -88,11 +94,7 @@ export class SpotPage {
               }
             }
 
-            // this.locationData = this.locationData.filter(location => {
-            //   if (location.rating){
-            //     return location;
-            //   }
-            // })
+            
 
             console.log(this.locationData);
             this.filteredLocations = this.locationData;
