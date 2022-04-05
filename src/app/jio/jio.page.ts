@@ -22,7 +22,7 @@ export class JioPage implements OnInit {
     } catch (error) {console.log(error)}
   }
   createJio(){
-    this.router.navigate(['/create-jio'])
+    this.route.navigate(['/create-jio'])
   }
 
   viewJio(jio) {
