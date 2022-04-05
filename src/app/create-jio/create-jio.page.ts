@@ -25,7 +25,7 @@ export class CreateJioPage implements OnInit {
   jioForm: CreateJioPageForm;
   
   showCal = false;
-  dateValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
+  dateValue = format(new Date(), 'yyyy-MM-dd');
   formattedString = '';
   
   ngOnInit() {
@@ -35,7 +35,7 @@ export class CreateJioPage implements OnInit {
   }
 
   setToday(){
-    this.formattedString = format(parseISO(format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z'), 'MMM d, yyyy, HH:mm')
+    this.formattedString = format(parseISO(format(new Date(), 'yyyy-MM-dd')), 'MMM d, yyyy, HH:mm')
   }
 
   dateChanged(value){
