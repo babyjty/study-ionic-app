@@ -1,15 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Register
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+   </ion-toolbar>
+</ion-header>
+
 
 <ion-content>
 
-  <ion-fab vertical = "top" horizontal = "start">
+  <!-- <ion-fab vertical = "top" horizontal = "start">
     <ion-fab-button color = "clear" routerLink = '/login'>
       <ion-icon name = "arrow-back-outline"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
   <form [formGroup]="registerForm.getForm()">
-    <div class = "login-logo">
+
+    <!-- <div class = "login-logo">
       <img src = "assets/img/StudyJioLogo.png">
+    </div> -->
+
+    <div class="container">
+      <div class="outer" [ngStyle]="{'background-image': 'url(' + photo + ')'}">
+          <div class="inner" (click)="openOptionSelection()">
+             <ion-icon name="camera" class="camera-icon"></ion-icon>
+          </div>
+       </div>
     </div>
+
     <ion-card color = "clear">
       <ion-card-header>
         <ion-card-title>Details</ion-card-title>

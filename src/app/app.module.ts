@@ -13,6 +13,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { AuthApiService } from './service/api.authService';
+import { File } from '@ionic-native/file/ngx';
+// import { StatusBar } from '@ionic-native/status-bar/ngx';
+// import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { 
   GoogleLoginProvider,
@@ -35,6 +38,9 @@ import { AuthModule } from './auth/auth.module';
     AuthModule
   ],
   providers: [
+    // StatusBar,
+    // SplashScreen,
+    File,
     Geolocation, 
     NativeGeocoder, 
     AuthApiService,
