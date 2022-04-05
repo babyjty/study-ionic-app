@@ -30,3 +30,4 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+server/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node
