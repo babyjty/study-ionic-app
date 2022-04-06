@@ -10,17 +10,17 @@ import { JioApiService } from '../service/jio-api.service';
 })
 export class JioDetailsAcceptPage implements OnInit {
 
-  private jio;
+  private jio: any;
   constructor(
     private router: Router,
     private alertController: AlertController,
     private jioApiService: JioApiService,
   ) {}
 
-  
-  
   ngOnInit() {
     this.jio = this.router.getCurrentNavigation().extras.state.jio;
+    console.log("this jio")
+    console.log(this.jio)
   }
 
   acceptJio(){
@@ -33,7 +33,7 @@ export class JioDetailsAcceptPage implements OnInit {
         }
         else{
           console.log('Within Accept Jio: Accept Failed');
-          this.presentAlert('Unsuccessfull Acceptance', 'Please try again.')
+          this.presentAlert('Unsuccessful Acceptance', 'Please try again.')
           this.router.navigate(['/jio-list']);
         }
       })

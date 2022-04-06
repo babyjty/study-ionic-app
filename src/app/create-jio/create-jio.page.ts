@@ -35,7 +35,6 @@ export class CreateJioPage implements OnInit {
   
   ngOnInit() {
     this.createForm();
-
     this.location = this.router.getCurrentNavigation().extras.state.location
     this.googleid = this.router.getCurrentNavigation().extras.state.googleid
     console.log(this.location)
