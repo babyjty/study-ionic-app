@@ -23,6 +23,7 @@ export class CreateJioPageForm{
             jioAddress: [''],
             jioRating: [''],
             jioImage: [''],
+            googleid: [''],
             
             jioerUsername: [sessionStorage.getItem('username')],
             jioerTelegram: [sessionStorage.getItem('telegram')],
