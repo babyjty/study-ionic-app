@@ -18,45 +18,54 @@ export class JioListPage implements OnInit {
     private alertController: AlertController
   ) { }
 
-  private jio;
+  private jios: any ;
 
-  public myJios = [
-    {
-      title: "test title",
-      description: "test description",
-      location: "test location",
-      datetime: "test date time",
-      duration: "test duration"
-    }
-  ]
+
+  // public myJios = [
+  //   {
+  //     title: "test title",
+  //     description: "test description",
+  //     location: "test location",
+  //     datetime: "test date time",
+  //     duration: "test duration",
+  //     status: "Pending"
+  //   }
+  // ]
 
   ngOnInit() {
     this.jioApiService.getMyJio().subscribe(dataMJ => {
-      this.jio = dataMJ;
+      try{
+        console.log("MY JIOS");
+        this.jios = dataMJ;
+        console.log(dataMJ)
+        console.log("x:" + this.jios)
+      } catch(error) {console.log(error)}
     })
   }
 
-  deleteJio(jio){
-    this.jioApiService.deleteJio(jio).subscribe(dataC => {
-      if(dataC.result){
-        console.log('Jio Cancelled');
-        this.presentAlert('Jio Cancelled', 'Sad to see you go :(')
-      }
-      else{
-        console.log('Jio Cancel Unsuccesful');
-        this.presentAlert('Jio Cancel Unsuccessful', 'Please try again')
-      }
-    })
-  }
 
-  async presentAlert(h, b){
-    const alert = await this.alertController.create({
-      header: h,
-      subHeader: b,
-      buttons: ['Dismiss']
-    });
-    await alert.present();
-  }
+}
+  // deleteJio(jio){
+  //   this.jioApiService.deleteJio(jio).subscribe(dataC => {
+  //     if(dataC.result){
+  //       console.log('Jio Cancelled');
+  //       this.presentAlert('Jio Cancelled', 'Sad to see you go :(')
+  //     }
+  //     else{
+  //       console.log('Jio Cancel Unsuccesful');
+  //       this.presentAlert('Jio Cancel Unsuccessful', 'Please try again')
+  //     }
+  //   })
+  // }
+
+  // async presentAlert(h, b){
+  //   const alert = await this.alertController.create({
+  //     header: h,
+  //     subHeader: b,
+  //     buttons: ['Dismiss']
+  //   });
+  //   await alert.present();
+  // }
 
 
   // orderHeader: String = '';
@@ -84,7 +93,7 @@ export class JioListPage implements OnInit {
 
   // }
 
-}
+
 
 
 // jioList = [
