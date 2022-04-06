@@ -30,7 +30,10 @@ router.post('/createjio', (req, res) => {
     })
 
     const newJio = new Jio({
-        jio_date_time: req.body.datetime,
+        jio_date_time: {
+            formatted: req.body.datetimestring,
+            ISO: req.body.datetime    
+        },
         jio_description: req.body.description,
         jioer: req.session.user._id,
         header: req.body.header,
