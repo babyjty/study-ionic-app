@@ -29,11 +29,9 @@ export class CreateJioPage implements OnInit {
   private showCal = false;
   private dateValue = format(new Date(), 'yyyy-MM-dd');
   private formattedString = '';
-  private location: any;
   private googleid: any;
 
   private locationImage: string;
-  private googleid;
   
   ngOnInit() {
     this.createForm();
