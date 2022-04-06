@@ -79,6 +79,7 @@ ion-content {
 
     ion-card {
         width: auto;
+        height: fit-content;
 
         ion-card-content {
             margin: 0;
@@ -99,61 +100,98 @@ ion-content {
             }
             
             ion-item {
-                padding: 0;
+                padding: 5px;
                 margin: 0;
             }
             
             .p1 {
+                padding: 0;
+                margin-bottom: 10px;
 
                 .titles {
-                    padding: 0px 100px 0px 0px;
+                    padding: 0;
                     margin: 0;
                 
                     .title {
-                        font-family: "Georgia";
+                        font-family: "Trebuchet MS";
+                        font-weight: bold;
+                        font-size: 30px;
+                        color: black;
+                        white-space: normal;
+                        margin: 10px 0 0 0;
+                    }
+
+                    .datetime {
+                        font-family: "Trebuchet MS";
                         font-weight: bold;
                         font-size: 25px;
-                        color: #400080;
-                        margin-bottom: 10px;
+                        color: #6b45bc;
+                        white-space: normal;
                     }
                     
-                    .subtitle {
-                        text-transform: uppercase;
-                        font-family: "Georgia";
-                        font-size: 10px;
-                        color: #a4a4c1;
-                        padding-right: 40px;
+                }
+
+                .duration {
+                    --background: #6b45bc;
+                    width: fit-content;
+                    height: 27px;
+                    margin: 2px;
+                    padding: 6px;
+                    font-family: "Trebuchet MS";
+                    font-size: 12px;
+                    text-align: left;
+                    text-transform: uppercase;
+                
+                    ion-icon {
+                        margin-right: 2px;
+                        size: 12px;
                     }
-    
-                    
+        
                 }
 
             }
 
             
             .p2 {
+                padding: 0;
+                margin-bottom: 10px;
+                
                 .p-items {
                     padding: 0;
                     margin: 0;
                 
+                    .subtitle {
+                        text-transform: uppercase;
+                        font-family: "Georgia";
+                        font-size: 20px;
+                        color: black;
+                    }
+
                     .p-item {
                         margin: 4px 4px 4px 0px;
                         font-family: "Trebuchet MS";
                         font-size: 15px;
+                        color: black;
+                        white-space: normal;
                         margin-bottom: 1px;
                     }
+
                 }
             }
 
             
-            ion-buttons {
-                position: absolute;
-                bottom: 0rem;
-                right: 0rem;
-                ion-button {
-                    height: 30px;
-                    width: 30px;
-                    color: #6b45bc;
+
+            
+            ion-button {
+                --background: #6b45bc;
+                width: 100%;
+                margin: 20px 5px;
+                padding: 0;
+                font-family: "Trebuchet MS";
+                text-transform: uppercase;
+            
+                ion-icon {
+                    margin-left: 10px;
                 }
             }
         }
