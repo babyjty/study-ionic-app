@@ -18,7 +18,7 @@ export class JioListPage implements OnInit {
     private alertController: AlertController
   ) { }
 
-  private jios: any ;
+  private jios: any = [];
 
 
   // public myJios = [
