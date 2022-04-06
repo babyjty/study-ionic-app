@@ -6,6 +6,7 @@ const { Jio } = require('../../models/Jio')
 const { User } = require('../../models/User')
 const { auth } = require('../../middleware/auth');
 const { time } = require('console');
+const mergeJSON = require('merge-json')
 // router.use('bodyparser')
 
 router.use(bodyParser.urlencoded({extended: true}))
@@ -196,29 +197,56 @@ router.post('/createjio', (req, res) => {
 //     })
 // })
 
-router.post('/acceptjio', auth, (req, res) => {
+router.post('/acceptjio', auth,  (req, res) => {
     //request should contain the jio _id
     
     Jio.find({ $or: [
         { jioer: req.session.user._id },
         { jioee: req.session.user._id }
-    ] }, async (err, jio) => {
+    ] }, (err, jio) => {
         if (jio.length > 0 ) {
             return res.json({
-                createSuccess: false,
+                outcome: false,
                 message: "User already has a jio, cant create or accpet another"
             })
         }
-    })
-    Jio.findOneAndUpdate({ _id: req.body.jioID }, 
-        { jioStatus: 'accepted' },
-        { new: true }, (err, doc) => {
-            if (err){
-                console.log('Error in updating jio status')
+        Jio.findOneAndUpdate({
+            _id: req.body._id
+        },
+        {
+            jioStatus: 'accepted',
+            jioee: req.session.user._id
+        }, (err, jio) => {
+            if (err) {
+                return res.json({
+                    outcome: false,
+                    err
+                })
+            } else {
+                console.log(jio)
+                return res.json({
+                    outcome: true
+                })
             }
-            console.log(doc)
         })
+    })
+    
+    // updatedjio.save({ 
+    //     _id: req.body.jioID, 
+    //     jioStatus: 'accepted',
+    //     jioee: req.session.user._id
+    // }, (err, doc) => {
+    //         if (err){
+    //             console.log('Error in updating jio status')
+    //         } else {
+    //             return res.json({
+    //                 outcome: true
+    //             })
+    //         }
+    //     })
 })
+
+
 
 router.post('/delete', auth, (req, res) => {
     Jio.deleteOne({ jioer: req.session.user._id }, (err) => {
@@ -228,6 +256,7 @@ router.post('/delete', auth, (req, res) => {
                 message: err
             })
         } 
+        console.log("back delete")
         return res.json({
             deleteSuccess: true,
             message: "Jio deleted successfully"
@@ -290,21 +319,52 @@ router.get('/getmyjio', auth, (req, res) => {
                 message: "No jio in the database"
             })
         } else if (jio.jioer == req.session.user._id){
+            jio.jioer = req.session.user
             jio.findSuccess = true
             jio.isJioer = true
             jio.isJioee = false
-            jio.jioer = req.session.user
+            console.log(jio)
             return res.json(jio)
         } else {
+            jio.jioer = req.session.user
             jio.findSuccess = true
             jio.isJioer = false
             jio.isJioee = true
-            jio.jioee = req.session.user
+            console.log(jio.isJioee)
             return res.json(jio)
         }
-    })
+    }).populate('jioee').populate('jioer').populate('location')
 })
 
+router.post('/isjioer', auth, (req, res) => {
+    if (req.body.jioer._id == req.session.user._id){
+        return res.json({
+            isjioer: true
+        })
+    } else {
+        return res.json({
+            isjioer: false
+        })
+    }
+})
+
+router.post('/withdrawjio', auth, (req, res) => {
+    Jio.findOneAndUpdate({ jioee: req.session.user._id},
+                        { jioStatus: "pending",
+                          jioee: null }, (err, jio) => {
+                              if (err) {
+                                  return res.json({
+                                      withdrawSuccess: false,
+                                      err
+                                  })
+                              } else {
+                                  return res.json({
+                                      withdrawSuccess: true,
+                                      message: "User successfully withdrawn from the jio"
+                                  })
+                              }
+                          } )
+})
 
 
 module.exports = router;

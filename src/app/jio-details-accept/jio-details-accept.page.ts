@@ -25,7 +25,7 @@ export class JioDetailsAcceptPage implements OnInit {
 
   acceptJio(){
     try{
-      this.jioApiService.acceptJio().subscribe(dataA => {
+      this.jioApiService.acceptJio(this.jio).subscribe(dataA => {
         if(dataA.outcome){
           console.log('Within Accept Jio: Accept Success');
           this.presentAlert('Jio Accepted', 'Save the date');

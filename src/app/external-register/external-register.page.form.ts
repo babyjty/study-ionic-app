@@ -25,7 +25,8 @@ export class ExternalRegisterPageForm{
             bio: ['', [Validators.required, Validators.maxLength(200)]],
             workLevel: ['', [Validators.required]],
             telegram: ['', [Validators.required]],
-            providerID: [provID]
+            providerID: [provID],
+            photoURL: ['https://lh3.googleusercontent.com/PxYZd_6SRthIuCC1OvPnpNFTA5zGvyv7woU2o_g-5xrtwwhT5H6KFe4ZZYZMXjrOAyZ_1xLkOzILkw5T2HybxxliuF2l-cDqbckEFg=w600']
         });
         console.log(this.extRegisterForm.value)
         return this.extRegisterForm;
