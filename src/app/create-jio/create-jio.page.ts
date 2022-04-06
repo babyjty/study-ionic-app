@@ -6,6 +6,7 @@ import { JioApiService } from '../service/jio-api.service';
 import { AlertController } from '@ionic/angular';
 import { formatPercent } from '@angular/common';
 import { format, parseISO } from 'date-fns';
+import { fromEventPattern } from 'rxjs';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class CreateJioPage implements OnInit {
   jioForm: CreateJioPageForm;
   
   showCal = false;
-  dateValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
+  dateValue = format(new Date(), 'yyyy-MM-dd');
   formattedString = '';
   
   ngOnInit() {
@@ -34,13 +35,18 @@ export class CreateJioPage implements OnInit {
   }
 
   setToday(){
-    this.formattedString = format(parseISO(format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z'), 'MMM d, yyyy, HH:mm')
+    this.formattedString = format(parseISO(format(new Date(), 'yyyy-MM-dd')), 'MMM d, yyyy, HH:mm')
   }
 
   dateChanged(value){
     console.log(value);
     this.formattedString = format(parseISO(value), 'MMM d, yyyy, HH:mm')
     this.showCal = false;
+    this.jioForm.getForm().get('datetimestring').setValue(this.formattedString, {onlyself: true})
+  }
+
+  formatDate(value){
+    return format(parseISO(value), 'MMM d, yyyy, HH:mm');
   }
 
   createJio(){
@@ -59,7 +65,6 @@ export class CreateJioPage implements OnInit {
         }
       }
     )} catch(error){console.log(error)}
-    
   }
 
   private createForm() {
@@ -77,8 +82,6 @@ export class CreateJioPage implements OnInit {
     });
     await alert.present();
   }
-
-
 
 
 }
