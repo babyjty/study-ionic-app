@@ -44,6 +44,8 @@ app.use(session({
     }
 }))
 
+app.use(express.static('../dist'))
+
 app.use(express.urlencoded({
     extended: true
 }))
