@@ -8,14 +8,15 @@ const JioSchema = Schema({
         // required: true
         //type: "String"
     },
-    
+
     jioee: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
         //type: "String"
     },
 
     jio_date_time: {
-        type: String,
+        formatted: String,
+        ISO: String
     },
 
     jio_duration: {
@@ -39,8 +40,9 @@ const JioSchema = Schema({
     },
 
     jioLocation: {
-        jioAddress: String,
-        cost: Number
+        name: String,
+        address: String,
+        image: String       
     }
 })
 
