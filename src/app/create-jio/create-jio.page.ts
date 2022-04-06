@@ -16,7 +16,6 @@ import { fromEventPattern } from 'rxjs';
 })
 export class CreateJioPage implements OnInit {
 
-  private location: any;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -26,18 +25,21 @@ export class CreateJioPage implements OnInit {
 
   jioForm: CreateJioPageForm;
   
+  private location: any;
   private showCal = false;
   private dateValue = format(new Date(), 'yyyy-MM-dd');
   private formattedString = '';
+  private googleid: any;
 
   private locationImage: string;
   
   ngOnInit() {
     this.createForm();
-    console.log(this.jioForm)
 
     this.location = this.router.getCurrentNavigation().extras.state.location
-    if(this.location.src === null){this.locationImage = 'assets/img/StudyJioLogo.png'}
+    this.googleid = this.router.getCurrentNavigation().extras.state.googleid
+    console.log(this.location)
+    if(this.location.result.src === null){this.locationImage = 'assets/img/StudyJioLogo.png'}
     else{this.locationImage = this.location.result.src}
 
 
@@ -45,6 +47,7 @@ export class CreateJioPage implements OnInit {
     this.jioForm.getForm().get('jioAddress').setValue(this.location.result.formatted_address, {onlyself: true})
     this.jioForm.getForm().get('jioRating').setValue(this.location.result.rating, {onlyself: true})
     this.jioForm.getForm().get('jioImage').setValue(this.locationImage, {onlyself: true})
+    this.jioForm.getForm().get('googleid').setValue(this.googleid, {onlyself: true})
   }
 
   setToday(){
@@ -77,6 +80,7 @@ export class CreateJioPage implements OnInit {
         {
           this.presentAlert('Unsuccessful Jio Creation', 'Try again later');
           this.router.navigate(['tabs/spot'])
+          console.log(dataJ)
         }
       }
     )} catch(error){console.log(error)}

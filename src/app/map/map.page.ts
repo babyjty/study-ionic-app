@@ -34,67 +34,53 @@ export class MapPage {
   constructor(public api: GooglePlacesAPIService, private geolocation: Geolocation, private profileApiService: ProfileApiService) { }
 
   ngOnInit() {
-    this.getProfile();
+    console.log("in map page!")
+    this.profileApiService.getProfile().subscribe(dataP => {
+      this.profile = dataP;
+    });
+
     setTimeout(() => {
       // console.log("hello " + this.profile)
       for (let key in this.profile){
         sessionStorage.setItem(key, this.profile[key]);
       }
-    }, 5000)
+      console.log("retrieved profile " + this.profile);
+    }, 1000)
+    
   }
 
-  getProfile(){
-    this.profileApiService.getProfile().subscribe(dataP => {
-      this.profile = dataP;
-    });
-  }
-
-  getCurrentLocation() {
-    console.log("clicked")
-    // this.getLocationsNearUser();
+  panCamera() {
     this.addCurrentLocToMap(this.currentLoc);
 
+    setTimeout(()=>{
+      this.addMarkersToMap(this.markers)
+    },1000);
+
     this.map.panTo({ lat: this.currentLoc[0].latitude, lng: this.currentLoc[0].longitude });
-
-    console.log("getting locations near user")
-    this.getLocationsNearUser();
-    // setTimeout(() => {
-    //   console.log("getting locations near user")
-    //   this.getLocationsNearUser();
-    // },5000); 
-
     setTimeout(() => {
-      console.log("setting zoom")
       this.map.setZoom(15)
     },1000); 
-    
-
-    
   }
 
-  async getLocationsNearUser() {
+  getLocationsNearUser() {
     let loc = String(this.currentLoc[0].latitude) + '%2C' + String(this.currentLoc[0].longitude);
     this.api.getLocations(this.radius, loc).subscribe(result => {
       let locationData = result;
       let newLocation: object;
       for (let key in locationData) {
-        newLocation = {
+        if (locationData[key].rating && locationData[key].photos){
+          newLocation = {
           title: locationData[key].name,
           latitude: String(locationData[key].geometry.location.lat),
           longitude: String(locationData[key].geometry.location.lng),
           rating: locationData[key].rating,
-          // src: this.fetchPhoto(locationData[key].photos[0].photo_reference, 400)
+          }
+          this.markers.push(newLocation);
         }
-
-        this.markers.push(newLocation);
       }
     })
-    console.log("trying markers to map");
-    setTimeout(()=>{
-      this.addMarkersToMap(this.markers)
-    },1000);
-    console.log("supposed to add markers to map")
   }
+
 
   ionViewDidEnter() {
     this.showMap(this.sg_lat, this.sg_lng);
@@ -104,27 +90,14 @@ export class MapPage {
         latitude: resp.coords.latitude,
         longitude: resp.coords.longitude
       }];
+      this.getLocationsNearUser();
     }).catch((error) => {
       console.log('Error getting location', error);
     });
 
-    
-    // this.getCurrentLocation();
-    // this.addMarkersToMap(this.currentLoc);
-    // this.showMap(this.currentLoc.latitude, this.currentLoc.longitude);
-
   }
 
-
-  // addMarkerToMap(marker){
-  //   let position = new google.maps.LatLng(marker.latitude, marker.longitude);
-  //   let mapMarker = new google.maps.Marker({position: position});
-  //   mapMarker.setMap(this.map);
-  //   console.log(marker + "within add function")
-  // }
-
   addMarkersToMap(markers) {
-    console.log("inside addmarkerstomap function (before for loop)")
     for (let marker of markers) {
       let position = new google.maps.LatLng(marker.latitude, marker.longitude);
       let mapMarker = new google.maps.Marker({
@@ -133,10 +106,9 @@ export class MapPage {
         latitude: marker.latitude,
         longitude: marker.longitude,
         rating: marker.rating,
-        price: marker.price,
       });
-      console.log("inside addmarkerstomap function")
       mapMarker.setMap(this.map);
+      //console.log(mapMarker);
       this.addInfoWindowToMarker(mapMarker);
     }
   }
@@ -150,7 +122,6 @@ export class MapPage {
         latitude: marker.latitude,
         longitude: marker.longitude,
         rating: marker.rating,
-        price: marker.price,
         icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
       });
 

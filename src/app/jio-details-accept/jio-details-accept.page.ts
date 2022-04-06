@@ -15,25 +15,12 @@ export class JioDetailsAcceptPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private jioApiService: JioApiService,
-  ) {
-    // console.log(this.jio = this.router.getCurrentNavigation().extras.state.jio);
-    // console.log(this.jio = this.router.getCurrentNavigation().extras.state.datetime);
+  ) {}
 
-  }
-
-  private bio: string;
-  private pic: string;
-  private username: string;
-  private telegram: string;
-  private worklevel: string;
   
   
   ngOnInit() {
-    this.bio = sessionStorage.getItem("bio");
-    this.pic = sessionStorage.getItem("profilepic");
-    this.username = sessionStorage.getItem('username');
-    this.worklevel = sessionStorage.getItem('worklevel');
-    this.telegram = sessionStorage.getItem('telegram');
+    this.jio = this.router.getCurrentNavigation().extras.state.jio;
   }
 
   acceptJio(){

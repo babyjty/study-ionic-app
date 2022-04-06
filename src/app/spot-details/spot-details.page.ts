@@ -46,11 +46,13 @@ export class SpotDetailsPage implements OnInit {
   }
 
   fetchLocation(place_id:string){
+    let today = new Date().getDay()
     this.api.getPlaceDetails(place_id).subscribe(result => {
       console.log(result);
       this.spotDetails = Array.of(result);
       this.spotDetails[0].result.linearDistance = this.linearDistance;
       this.spotDetails[0].result.src = this.src;
+      this.spotDetails[0].result.open = this.spotDetails[0].result.opening_hours.weekday_text[(today + 6) % 7];
     })
   }
 
@@ -62,8 +64,8 @@ export class SpotDetailsPage implements OnInit {
 
   
   createJio(){
-    console.log(this.spotDetails)
-    this.router.navigateByUrl('/create-jio', {state: {location: this.spotDetails[0]}})
+    console.log(this.spotDetails[0])
+    this.router.navigateByUrl('/create-jio', {state: {location: this.spotDetails[0], googleid: this.place_id}})
     // this.router.navigateByUrl('/create-jio', {state: {address: this.spotDetails.result.formatted_address, name: this.spotDetails.result.name, rating: this.spotDetails.result.rating}})
   }
 

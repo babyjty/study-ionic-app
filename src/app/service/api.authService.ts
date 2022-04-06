@@ -44,7 +44,7 @@ export class AuthApiService{
     register(data): Observable<any>{
         console.log('API: External Register')
         let url = `${this.baseUri}/api/localauth/register`;
-        return this.http.post(url, data).pipe(catchError(this.errorMgmt));
+        return this.http.post(url, data, {withCredentials:true}).pipe(catchError(this.errorMgmt));
     }
     
 

@@ -14,6 +14,10 @@ const JioSchema = Schema({
         //type: "String"
     },
 
+    location: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'Location'
+    },
+
     jio_date_time: {
         formatted: String,
         ISO: String
@@ -39,11 +43,6 @@ const JioSchema = Schema({
         type: String
     },
 
-    jioLocation: {
-        name: String,
-        address: String,
-        image: String       
-    }
 })
 
 const Jio = mongoose.model('Jio', JioSchema)

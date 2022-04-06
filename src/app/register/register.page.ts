@@ -27,35 +27,36 @@ export class RegisterPage implements OnInit {
   ) {}
     // this.mainForm();
 
-  photo = "https://i.pravatar.cc/150";
+  photo = "https://lh3.googleusercontent.com/PxYZd_6SRthIuCC1OvPnpNFTA5zGvyv7woU2o_g-5xrtwwhT5H6KFe4ZZYZMXjrOAyZ_1xLkOzILkw5T2HybxxliuF2l-cDqbckEFg=w600";
+
   // submit = false;
+
+
+  // async openOptionSelection() {
+  //   const modal = await this.modalController.create({
+  //     component: ProfilePhotoOptionComponentComponent,
+  //     //  cssClass: ‘transparent-modal’
+  //   });
 
   async openOptionSelection() {
     const modal = await this.modalController.create({
       component: ProfilePhotoOptionComponentComponent,
       // cssClass: ‘transparent-modal’
-    });
+    })
 
     modal.onDidDismiss()
     .then(res => {
-      console.log(res);
-      if (res.role !== 'backdrop') {
-        this.takePicture(res.data);
-      }
+        this.usePicture(sessionStorage.getItem("dp_url"));
     });
     return await modal.present();
   }
 
-  async takePicture(type) {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Uri,
-      source: CameraSource[type]
-    });
-    this.photo = image.webPath;
-    console.log("photo " + this.photo);
+  async usePicture(url: any) {
+    console.log("url: " + url);
+    this.photo = url;
   }
+
+
 
 
   registerForm: RegisterPageForm;
@@ -66,6 +67,7 @@ export class RegisterPage implements OnInit {
 
   async register(){
     console.log('external-register')
+    this.registerForm.getForm().get('photoURL').setValue(this.photo, {onlyself: true})
     this.isSubmitted = true;
     if(!this.registerForm.getForm().valid) {
       console.log("Invalid registration")
