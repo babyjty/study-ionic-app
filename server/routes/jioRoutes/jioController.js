@@ -19,48 +19,177 @@ router.get('/', (req, res) => {
 
 router.post('/createjio', (req, res) => {
     console.log('within create jio')
-    //const newJio = req.body  //identify user
-    // front end should pass json containing all information for location schema( pls refer to location model), start time and end time, date, jio description 
-    //IN JSON FORMAT
-    console.log(req.session)
+
+    const loc = new Location({
+        name: req.body.jioLocation,
+        address: req.body.jioAddress,
+        rating: req.body.jioRating,
+        image: req.body.jioImage,
+        googleid: req.body.googleid
+    })
+
     const newJio = new Jio({
         jio_date_time: req.body.datetime,
         jio_description: req.body.description,
         jioer: req.session.user._id,
         header: req.body.header,
         jio_duration: req.body.duration,
-        jioLocation: "default",  //to be edited
         jioStatus: "pending",
-
+        location: "null" 
     })
-    Jio.find({ $or: [
-        { jioer: req.session.user._id },
-        { jioee: req.session.user._id }
-    ] }, async (err, jio) => {
-        console.log(req.session.user)
-        console.log(jio)
-        if (jio.length > 0) {
+
+    Location.findOne({ googleid: loc.googleid }, async (err, location) => {
+        if (err) {
             return res.json({
-                createSuccess: false,
-                message: "User already has a jio, cant create or accpet another"
+                locationfindsuccess: false,
+                err
             })
         }
-        newJio.save((err, doc) => {
-            console.log('doc is')
-            console.log(doc)
-            console.log(err)
-            if (err) {
-                return res.json({ success: false, err})
-            } else {
-                return res.status(200).json({
-                    createSuccess: true
+        console.log('no error')
+        if (location) {
+            console.log('location exists in the db')
+            newJio.location = location._id
+        } else {
+            console.log('location does not exist')
+            await loc.save( async (err, returnloc) => {
+                if (err) {
+                    console.log(err)
+                    return res.json({
+                        createSuccess: false,
+                        message: err
+                    })
+                } 
+                console.log(returnloc._id)
+                newJio.location = returnloc._id
+                console.log('valid new jio')
+                console.log(newJio)
+            })
+        }
+  
+        setTimeout(() => {
+            Jio.find({ $or: [
+                { jioer: req.session.user._id },
+                { jioee: req.session.user._id }
+            ] }, async (err, jio) => {
+                console.log(jio)
+                if (jio.length > 0) {
+                    return res.json({
+                        createSuccess: false,
+                        message: "User already has a jio, cant create or accpet another"
+                    })
+                }
+                await newJio.save((err, doc) => {
+                    if (err) {
+                        console.log(err)
+                        return res.json({ success: false, err})
+                    } else {
+                        return res.status(200).json({
+                            createSuccess: true
+                        })
+                    }     
                 })
-            }     
-        })
+            })
+        }, 1000);
     })
-    
-
 })
+
+
+// router.post('/createjio', (req, res) => {
+//     console.log('within create jio')
+
+//     const loc = new Location({
+//         name: req.body.jioLocation,
+//         address: req.body.jioAddress,
+//         rating: req.body.jioRating,
+//         image: req.body.jioImage,
+//         googleid: req.body.googleid
+//     })
+
+//     const newJio = new Jio({
+//         jio_date_time: req.body.datetime,
+//         jio_description: req.body.description,
+//         jioer: req.session.user._id,
+//         header: req.body.header,
+//         jio_duration: req.body.duration,
+//         jioStatus: "pending",
+//         location: "null" 
+//     })
+
+//     Location.findOne({ googleid: loc.googleid }, async (err, location) => {
+//         if (err) {
+//             return res.json({
+//                 locationfindsuccess: false,
+//                 err
+//             })
+//         }
+//         console.log('no error')
+//         if (location) {
+//             console.log('location exists in the db')
+//             newJio.location = location._id
+//             Jio.find({ $or: [
+//                 { jioer: req.session.user._id },
+//                 { jioee: req.session.user._id }
+//             ] }, async (err, jio) => {
+//                 console.log(jio)
+//                 if (jio.length > 0) {
+//                     return res.json({
+//                         createSuccess: false,
+//                         message: "User already has a jio, cant create or accpet another"
+//                     })
+//                 }
+//                 await newJio.save((err, doc) => {
+//                     if (err) {
+//                         console.log(err)
+//                         return res.json({ success: false, err})
+//                     } else {
+//                         return res.status(200).json({
+//                             createSuccess: true
+//                         })
+//                     }     
+//                 })
+//             })
+//         } else {
+//             console.log('location does not exist')
+//             await loc.save( async (err, returnloc) => {
+//                 if (err) {
+//                     console.log(err)
+//                     return res.json({
+//                         createSuccess: false,
+//                         message: err
+//                     })
+//                 } 
+//                 console.log(returnloc._id)
+//                 newJio.location = returnloc._id
+//                 console.log('valid new jio')
+//                 console.log(newJio)
+//                 Jio.find({ $or: [
+//                     { jioer: req.session.user._id },
+//                     { jioee: req.session.user._id }
+//                 ] }, async (err, jio) => {
+//                     console.log(jio)
+//                     if (jio.length > 0) {
+//                         return res.json({
+//                             createSuccess: false,
+//                             message: "User already has a jio, cant create or accpet another"
+//                         })
+//                     }
+//                     await newJio.save((err, doc) => {
+//                         if (err) {
+//                             console.log(err)
+//                             return res.json({ success: false, err})
+//                         } else {
+//                             return res.status(200).json({
+//                                 createSuccess: true
+//                             })
+//                         }     
+//                     })
+//                 })
+//             })
+//         }
+  
+        
+//     })
+// })
 
 router.post('/acceptjio', auth, (req, res) => {
     //request should contain the jio _id
@@ -113,22 +242,57 @@ router.post('/cancel', auth, (req, res) => {
 
 
 
-router.get('/getjios', auth, (req, res) => {
+router.get('/getjios', auth, async (req, res) => {
     Jio.find({ $and: [
         { jioer: {$ne: req.session.user._id} },
         { jioee: {$ne: req.session.user._id} }
-    ]}, (err, jio) => {
+    ]}, async (err, jio) => {
         if (err) {
             return res.json({
                 findSuccess: false,
                 message: "No jio in the database"
             })
         } else {
+            jio.jioer = User.findById( jio.jioer, (err) => {
+                console.log(err)
+            })
+            jio.jioee = User.findById( jio.jioee, (err) => {
+                console.log(err)
+            })
             return res.json(jio)
         }
     })
 })
 
+router.get('/getmyjio', auth, (req, res) => {
+    Jio.find({ $or: [
+        { jioer: req.session.user._id },
+        { jioee: req.session.user._id }
+    ]}, (err, jio) => {
+        if (err) {
+            return res.json({
+                findSuccess: false,
+                message: err
+            })
+        }
+        if (jio.length < 1) {
+            return res.json({
+                findSuccess: false,
+                message: "No jio in the database"
+            })
+        } else if (jio.jioer == req.session.user._id){
+            jio.findSuccess = true
+            jio.isJioer = true
+            jio.isJioee = false
+            return res.json(jio)
+        } else {
+            jio.findSuccess = true
+            jio.isJioer = false
+            jio.isJioee = true
+            return res.json(jio)
+        }
+    })
+})
 
 
 
