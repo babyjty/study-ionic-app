@@ -253,7 +253,10 @@ router.get('/getjios', auth, async (req, res) => {
                 message: "No jio in the database"
             })
         } else {
-            jio.jioer = await User.findById({ _id: jioer._id }, (err) => {
+            jio.jioer = User.findById( jio.jioer, (err) => {
+                console.log(err)
+            })
+            jio.jioee = User.findById( jio.jioee, (err) => {
                 console.log(err)
             })
             return res.json(jio)
