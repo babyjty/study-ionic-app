@@ -54,12 +54,9 @@
 
 
 
-    <ion-card class = 'jio' (click)="viewJio(card)" color = 'medium' *ngFor = 'let card of jioList'>
+    <!-- <ion-card class = 'jio' (click)="viewJio(card)" color = 'medium' *ngFor = 'let card of jioList'>
       <ion-grid>
        <ion-row>
-        <!-- <ion-col>
-          <img src="{{card.picture}}">
-        </ion-col> -->
       <ion-col> 
       <ion-card-title>
         <h2>{{card.header}}</h2>
@@ -76,7 +73,47 @@
         <p1>Description: {{card.jio_description}}</p1>
       </ion-card-content>
       </ion-grid>
+    </ion-card> -->
+
+    <ion-card *ngFor = 'let card of jioList' color = 'light' (click) = 'viewJio(card)'>
+      <ion-card-content color = 'light'>
+        <ion-item lines = 'none' color = 'light' class = 'p1'>
+          <ion-label class = 'titles'>
+            <ion-card-title class = 'title'>
+              {{card.header}}
+            </ion-card-title>
+            <ion-card-subtitle class = 'subtitle'>
+              {{card.jio_description}}
+            </ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+        <ion-item lines = 'none' color = 'light' class = 'p2'>
+          <ion-label class = 'p-items'>
+            <p class = 'p-item'>
+              <strong>
+                LOCATION: 
+              </strong>
+              {{card.jioLocation}}
+            </p>
+            <p class = 'p-item'>
+              <strong>
+                DATE & TIME: 
+              </strong>
+              {{card.jio_date_time}}
+            </p>
+            <p class = 'p-item'> 
+              <strong>
+                DURATION:
+              </strong>
+              {{card.jio_duration}}
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
     </ion-card>
+
+
+    
 
     <ion-fab vertical = "bottom" horizontal = "end" slot = "fixed">
       <ion-fab-button color = "success" (click) = "createJio()" >
