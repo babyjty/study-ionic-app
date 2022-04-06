@@ -71,4 +71,90 @@ p {
 }
 
 
+ion-content {
+    margin: 0;
 
+    ion-card {
+        width: auto;
+
+        ion-card-content {
+            height: 150px;
+            margin: 0;
+            padding: 10px;
+            font-family: "Georgia";
+
+            ion-thumbnail {
+                margin: 0px 30px 0px 0px;
+            
+                ion-img {
+                    width: 70px;
+                    height: 100%;
+                    object-fit: cover;
+                    padding: 0px;
+                    margin: 0px;
+                }
+                
+            }
+            
+            ion-item {
+                padding: 0;
+                margin: 0;
+            }
+            
+            .p1 {
+
+                .titles {
+                    padding: 0px 100px 0px 0px;
+                    margin: 0;
+                
+                    .title {
+                        font-family: "Georgia";
+                        font-weight: bold;
+                        font-size: 25px;
+                        color: #400080;
+                        margin-bottom: 10px;
+                    }
+                    
+                    .subtitle {
+                        text-transform: uppercase;
+                        font-family: "Georgia";
+                        font-size: 10px;
+                        color: #a4a4c1;
+                        padding-right: 40px;
+                    }
+    
+                    
+                }
+
+            }
+
+            
+            .p2 {
+                .p-items {
+                    padding: 0;
+                    margin: 0;
+                
+                    .p-item {
+                        margin: 4px 4px 4px 0px;
+                        font-family: "Trebuchet MS";
+                        font-size: 15px;
+                        margin-bottom: 1px;
+                    }
+                }
+            }
+
+            
+            ion-buttons {
+                position: absolute;
+                bottom: 0rem;
+                right: 0rem;
+                ion-button {
+                    height: 30px;
+                    width: 30px;
+                    color: #6b45bc;
+                }
+            }
+        }
+    }
+
+}
