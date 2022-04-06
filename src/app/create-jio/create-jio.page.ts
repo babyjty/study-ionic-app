@@ -63,8 +63,6 @@ export class CreateJioPage implements OnInit {
   }
 
   createJio(){
-
-
     console.log(this.jioForm.getForm().value)
     try{
       this.jioApiService.createJio(this.jioForm.getForm().value).subscribe((dataJ) => {
