@@ -245,7 +245,8 @@ router.post('/cancel', auth, (req, res) => {
 router.get('/getjios', auth, async (req, res) => {
     Jio.find({ $and: [
         { jioer: {$ne: req.session.user._id} },
-        { jioee: {$ne: req.session.user._id} }
+        { jioee: {$ne: req.session.user._id} },
+        { jioStatus: 'pending' }
     ]}, async (err, jio) => {
         if (err) {
             return res.json({
@@ -254,6 +255,9 @@ router.get('/getjios', auth, async (req, res) => {
             })
         } else {
             jio.jioer = User.findById( jio.jioer, (err) => {
+                console.log(err)
+            })
+            jio.location = Location.findById( jio.location, (err) => {
                 console.log(err)
             })
             return res.json(jio)
