@@ -2,26 +2,23 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const LocationSchema = Schema({
-    name: String,
-    location: {
-        type: {
-            type: String,
-            enum: ['Point'],
-        },
-        coordinates: {
-            type: [Number],
-            default: [0,0],
-            required: true
-        }    
+     
+    name: {
+        String
     },
-    address : {
-        type: String,
-        maxLength: 100
+
+    address: {
+        type: String
     },
-    ratings: {
-        upvote: [Number],
-        downvote: [Number],
+
+    image: {
+        type: String
     },
+    
+    rating: {
+        type: Number
+    },
+
     googleid: {
         type: String,
         required: true,

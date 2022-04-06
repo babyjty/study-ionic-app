@@ -29,6 +29,8 @@ export class CreateJioPage implements OnInit {
   private showCal = false;
   private dateValue = format(new Date(), 'yyyy-MM-dd');
   private formattedString = '';
+  private location: any;
+  private googleid: any;
 
   private locationImage: string;
   private googleid;
@@ -47,6 +49,7 @@ export class CreateJioPage implements OnInit {
     this.jioForm.getForm().get('jioAddress').setValue(this.location.result.formatted_address, {onlyself: true})
     this.jioForm.getForm().get('jioRating').setValue(this.location.result.rating, {onlyself: true})
     this.jioForm.getForm().get('jioImage').setValue(this.locationImage, {onlyself: true})
+    this.jioForm.getForm().get('googleid').setValue(this.googleid, {onlyself: true})
   }
 
   setToday(){
