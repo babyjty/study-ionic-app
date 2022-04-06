@@ -46,11 +46,13 @@ export class SpotDetailsPage implements OnInit {
   }
 
   fetchLocation(place_id:string){
+    let today = new Date().getDay()
     this.api.getPlaceDetails(place_id).subscribe(result => {
       console.log(result);
       this.spotDetails = Array.of(result);
       this.spotDetails[0].result.linearDistance = this.linearDistance;
       this.spotDetails[0].result.src = this.src;
+      this.spotDetails[0].result.open = this.spotDetails[0].result.opening_hours.weekday_text[(today + 6) % 7];
     })
   }
 

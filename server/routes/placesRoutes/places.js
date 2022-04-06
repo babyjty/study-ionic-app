@@ -93,7 +93,7 @@ const getPlaceCoordinates = (req,res) => {
 
 const getPlaceDetails = (req,res) => {
     const { placeid } = req.query;
-    const FIELD = 'name,formatted_address,type,rating,geometry,photos,website';
+    const FIELD = 'name,formatted_address,type,rating,geometry,photos,website,opening_hours';
 
     axios
       .get(
