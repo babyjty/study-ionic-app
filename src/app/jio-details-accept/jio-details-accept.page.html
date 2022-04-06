@@ -19,6 +19,21 @@
       <img src = "assets/img/StudyJioLogo.png"/>
     </div>
 
+    <ion-item>
+      <ion-thumbnail>
+        <img src = "assets/img/StudyJioLogo.png"/>
+      </ion-thumbnail>
+      <ion-card-content><br><br></ion-card-content>
+
+      
+      <ion-label>
+        <p class = "p-item"><strong>Username: </strong>Username</p>
+        <p class = "p-item"><strong>Telegram: </strong>Telegram</p>
+        <p class = "p-item"><strong>Worklevel: </strong>Worklevel</p>
+        <p class = "p-item">Bio</p>
+      </ion-label>
+    </ion-item>
+
     <ion-card-content>
       <ion-label class = "titles">
         <br>
@@ -36,26 +51,37 @@
     </ion-card-content>
 
     <ion-card-content> 
-      <ion-label class = "titles">
-        <ion-card-title class = "title">Jioer Details</ion-card-title>
-      </ion-label>
-      <ion-label class = "p-items">
-        <!-- <p class = "p-item"><strong>Username: </strong>{{this.jio.jioer.username}}</p>
-        <p class = "p-item"><strong>Telegram: </strong>{{this.jio.jioer.telegram}}</p>
-        <p class = "p-item"><strong>Worklevel: </strong>{{this.jio.jioer.worklevel}}</p>
-        <p class = "p-item">{{this.jio.jioer.bio}} -->
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label class = "titles">
+              <ion-card-title class = "title">Jioer Details</ion-card-title>
+            </ion-label>
+            <ion-label class = "p-items">
+              <!-- <p class = "p-item"><strong>Username: </strong>{{this.jio.jioer.username}}</p>
+              <p class = "p-item"><strong>Telegram: </strong>{{this.jio.jioer.telegram}}</p>
+              <p class = "p-item"><strong>Worklevel: </strong>{{this.jio.jioer.worklevel}}</p>
+              <p class = "p-item">{{this.jio.jioer.bio}} -->
+      
+              <p class = "p-item"><strong>Username: </strong>Username</p>
+              <p class = "p-item"><strong>Telegram: </strong>Telegram</p>
+              <p class = "p-item"><strong>Worklevel: </strong>Worklevel</p>
+              <p class = "p-item">Bio</p>
+            </ion-label>
+          </ion-col>
+          <ion-col>
+            <div>
+              <!-- <img src = "assets/img/StudyJioLogo.png"/> -->
+            </div>
+          </ion-col>
+        </ion-row>
+       
+      </ion-grid>
 
-        <p class = "p-item"><strong>Username: </strong>Username</p>
-        <p class = "p-item"><strong>Telegram: </strong>Telegram</p>
-        <p class = "p-item"><strong>Worklevel: </strong>Worklevel</p>
-        <p class = "p-item">Bio</p>
-      </ion-label>
+
+
     </ion-card-content>
-  
-    <ion-avatar>
-      <img [src] = "this.pic">
-      <!-- {{jios.photo}} -->
-    </ion-avatar>
+
   
 
     <ion-card-content>
