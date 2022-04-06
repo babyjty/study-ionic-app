@@ -301,7 +301,7 @@ router.get('/getmyjio', auth, (req, res) => {
             jio.jioee = req.session.user
             return res.json(jio)
         }
-    })
+    }).populate('location')
 })
 
 

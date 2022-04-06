@@ -40,7 +40,7 @@ export class JioApiService {
 
   getMyJio(): Observable<any>{
     console.log('Within API: GetMyJio')
-    let url = `${this.baseUri}/api/jio/getmyjios`
+    let url = `${this.baseUri}/api/jio/getmyjio`
     return this.http.get(url, {withCredentials: true}).pipe(catchError(this.errorMgmt))
   }
 
