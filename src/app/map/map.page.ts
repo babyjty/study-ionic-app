@@ -104,7 +104,6 @@ export class MapPage {
         latitude: marker.latitude,
         longitude: marker.longitude,
         rating: marker.rating,
-        src: marker.src,
       });
       mapMarker.setMap(this.map);
       //console.log(mapMarker);
