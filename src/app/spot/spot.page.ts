@@ -253,12 +253,6 @@ export class SpotPage {
           this.filteringRating();
         }
       }, {
-        text: 'Price',
-        data: 10,
-        handler: () => {
-          this.filteringPrice();
-        }
-      }, {
         text: 'Cancel',
         icon: 'close',
         role: 'cancel',
@@ -351,43 +345,6 @@ export class SpotPage {
               return item;
             }
           })
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    await actionSheet.present();
-
-    const { role, data } = await actionSheet.onDidDismiss();
-    // console.log('onDidDismiss resolved with role and data', role, data);
-
-  }
-
-  async filteringPrice() {
-
-    const actionSheet = await this.actionSheetController.create({
-      header: 'FILTER BY PRICE',
-      buttons: [{
-        text: '$',
-        data: 10,
-        handler: () => {
-          
-        }
-      }, {
-        text: '$$',
-        data: 'Data value',
-        handler: () => {
-          
-        }
-      }, {
-        text: '$$$',
-        handler: () => {
-          
         }
       }, {
         text: 'Cancel',
