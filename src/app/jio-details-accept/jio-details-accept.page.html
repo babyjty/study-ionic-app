@@ -11,89 +11,53 @@
 
 <ion-content class = 'description'>
   <ion-card>
-    <!-- <div>
-      <img [src] = "this.jio.image"/>
-    </div> -->
-
     <div>
-      <img src = "assets/img/StudyJioLogo.png"/>
+      <img [src] = "this.jio.location.image"/>
     </div>
 
     <ion-item>
       <ion-thumbnail>
-        <img src = "assets/img/StudyJioLogo.png"/>
+        <img [src] = "this.jio.jioer.photoURL"/>
       </ion-thumbnail>
       <ion-card-content><br><br></ion-card-content>
 
       
       <ion-label>
-        <p class = "p-item"><strong>Username: </strong>Username</p>
-        <p class = "p-item"><strong>Telegram: </strong>Telegram</p>
-        <p class = "p-item"><strong>Worklevel: </strong>Worklevel</p>
-        <p class = "p-item">Bio</p>
+        <p class = "p-item"><strong>Username: </strong>{{this.jio.jioer.username}}</p>
+        <p class = "p-item"><strong>Telegram: </strong>{{this.jio.jioer.telegram}}</p>
+        <p class = "p-item"><strong>Worklevel: </strong>{{this.jio.jioer.workLevel}}</p>
+        <p class = "p-item"><strong>Bio: <br></strong>{{this.jio.jioer.bio}}</p>
       </ion-label>
     </ion-item>
 
     <ion-card-content>
       <ion-label class = "titles">
         <br>
-        <ion-card-title class = "title">JIO HEADER</ion-card-title>
+        <ion-card-title class = "title">{{this.jio.header}}</ion-card-title>
       </ion-label>
       <ion-label class = "p-items">
         <!-- <p class = "p-item"><strong>Date & Time: </strong>{{this.jio.datetimestring}}</p>
         <p class = "p-item"><strong>Duration: </strong>{{this.jio.duration}}</p>
         <p class = "p-item">Description</p> -->
 
-        <p class = "p-item"><strong>Date & Time: </strong>Datetime String</p>
-        <p class = "p-item"><strong>Duration: </strong>Duration</p>
-        <p class = "p-item">Description</p>
+        <p class = "p-item"><strong>Date & Time: </strong>{{this.jio.jio_date_time.formatted}}</p>
+        <p class = "p-item"><strong>Duration: </strong>{{this.jio.jio_duration}}</p>
+        <p class = "p-item">{{this.jio.jio_description}}</p>
       </ion-label>
     </ion-card-content>
 
-    <ion-card-content> 
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-label class = "titles">
-              <ion-card-title class = "title">Jioer Details</ion-card-title>
-            </ion-label>
-            <ion-label class = "p-items">
-              <!-- <p class = "p-item"><strong>Username: </strong>{{this.jio.jioer.username}}</p>
-              <p class = "p-item"><strong>Telegram: </strong>{{this.jio.jioer.telegram}}</p>
-              <p class = "p-item"><strong>Worklevel: </strong>{{this.jio.jioer.worklevel}}</p>
-              <p class = "p-item">{{this.jio.jioer.bio}} -->
-      
-              <p class = "p-item"><strong>Username: </strong>Username</p>
-              <p class = "p-item"><strong>Telegram: </strong>Telegram</p>
-              <p class = "p-item"><strong>Worklevel: </strong>Worklevel</p>
-              <p class = "p-item">Bio</p>
-            </ion-label>
-          </ion-col>
-          <ion-col>
-            <div>
-              <!-- <img src = "assets/img/StudyJioLogo.png"/> -->
-            </div>
-          </ion-col>
-        </ion-row>
-       
-      </ion-grid>
-
-
-
-    </ion-card-content>
-
-  
-
     <ion-card-content>
       <ion-label class = "titles">
-        <ion-card-title class = "title">LOCATION NAME</ion-card-title>
+        <ion-card-title class = "title">{{this.jio.location.name}}</ion-card-title>
         <!-- <ion-card-title class = "title">{{this.jio.location.name}}</ion-card-title> -->
       </ion-label>
       <ion-label class = "p-items">
         <!-- <p class = "p-item"><strong>Address: </strong>{{this.jio.location.address}}}</p>
         <p class = "p-item"><strong>Rating: </strong>{{this.jio.location.rating}}</p> -->
-        <p class = "p-item"><strong>Address: </strong>Address</p>
-        <p class = "p-item"><strong>Rating: </strong>Rating</p>
+        <p class = "p-item"><strong>Address: </strong>{{this.jio.location.address}}</p>
+        <p class = "p-item"><strong>Rating: </strong>{{this.jio.location.rating}}</p>
+        <!-- <p class = "p-item"><strong>Opening Hours: </strong>{{this.jio.location.openingHours}}</p> -->
+
       </ion-label>
 
     </ion-card-content>   

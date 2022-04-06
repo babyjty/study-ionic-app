@@ -2,9 +2,15 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const LocationSchema = Schema({
+
+    googleid: {
+        type: String,
+        required: true,
+        unique: true
+    },
      
     name: {
-        String
+        type: String
     },
 
     address: {
@@ -17,12 +23,6 @@ const LocationSchema = Schema({
     
     rating: {
         type: Number
-    },
-
-    googleid: {
-        type: String,
-        required: true,
-        unique: true
     },
 
     openingHours: {

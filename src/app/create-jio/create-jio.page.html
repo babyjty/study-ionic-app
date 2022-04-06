@@ -76,7 +76,7 @@
           <app-error-message [field]= "jioForm.getForm().get('description')" error = "negative" message = "Invalid duration"></app-error-message>
         </div>
 
-        <ion-button (click)="createJio()" [disabled] = "!jioForm.getForm().valid" expand="block">Create Jio 
+        <ion-button (click)="createJio()">Create Jio 
           <ion-icon name="add"></ion-icon>
         </ion-button>
 

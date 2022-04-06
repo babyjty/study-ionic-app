@@ -41,11 +41,12 @@ export class CreateJioPage implements OnInit {
     if(this.location.result.src === null){this.locationImage = 'assets/img/StudyJioLogo.png'}
     else{this.locationImage = this.location.result.src}
 
-
+    console.log(this.location.result.name + " LOCATION NAME")
     this.jioForm.getForm().get('jioLocation').setValue(this.location.result.name, {onlyself: true})
     this.jioForm.getForm().get('jioAddress').setValue(this.location.result.formatted_address, {onlyself: true})
     this.jioForm.getForm().get('jioRating').setValue(this.location.result.rating, {onlyself: true})
     this.jioForm.getForm().get('jioImage').setValue(this.locationImage, {onlyself: true})
+    // this.jioForm.getForm().get('openingHours').setValue(this.location.result.open, {onlyself: true})
     this.jioForm.getForm().get('googleid').setValue(this.googleid, {onlyself: true})
   }
 
