@@ -321,12 +321,14 @@ router.get('/getmyjio', auth, (req, res) => {
             jio.isJioer = true
             jio.isJioee = false
             jio.jioer = req.session.user
+            console.log(jio)
             return res.json(jio)
         } else {
             jio.findSuccess = true
             jio.isJioer = false
             jio.isJioee = true
             jio.jioee = req.session.user
+            console.log(jio)
             return res.json(jio)
         }
     }).populate('jioee').populate('jioer')
