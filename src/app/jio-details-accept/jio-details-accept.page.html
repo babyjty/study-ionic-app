@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       View Jio
@@ -11,9 +11,9 @@
 
 <ion-content class = 'description'>
   <ion-card>
-    <!-- <div>
+    <div>
       <img [src] = "this.jio.image"/>
-    </div> -->
+    </div> 
 
     <div>
       <img src = "assets/img/StudyJioLogo.png"/>
@@ -40,9 +40,9 @@
         <ion-card-title class = "title">JIO HEADER</ion-card-title>
       </ion-label>
       <ion-label class = "p-items">
-        <!-- <p class = "p-item"><strong>Date & Time: </strong>{{this.jio.datetimestring}}</p>
+        <p class = "p-item"><strong>Date & Time: </strong>{{this.jio.datetimestring}}</p>
         <p class = "p-item"><strong>Duration: </strong>{{this.jio.duration}}</p>
-        <p class = "p-item">Description</p> -->
+        <p class = "p-item">Description</p> 
 
         <p class = "p-item"><strong>Date & Time: </strong>Datetime String</p>
         <p class = "p-item"><strong>Duration: </strong>Duration</p>
@@ -58,10 +58,10 @@
               <ion-card-title class = "title">Jioer Details</ion-card-title>
             </ion-label>
             <ion-label class = "p-items">
-              <!-- <p class = "p-item"><strong>Username: </strong>{{this.jio.jioer.username}}</p>
+              <p class = "p-item"><strong>Username: </strong>{{this.jio.jioer.username}}</p>
               <p class = "p-item"><strong>Telegram: </strong>{{this.jio.jioer.telegram}}</p>
               <p class = "p-item"><strong>Worklevel: </strong>{{this.jio.jioer.worklevel}}</p>
-              <p class = "p-item">{{this.jio.jioer.bio}} -->
+              <p class = "p-item">{{this.jio.jioer.bio}} 
       
               <p class = "p-item"><strong>Username: </strong>Username</p>
               <p class = "p-item"><strong>Telegram: </strong>Telegram</p>
@@ -71,7 +71,7 @@
           </ion-col>
           <ion-col>
             <div>
-              <!-- <img src = "assets/img/StudyJioLogo.png"/> -->
+              <img src = "assets/img/StudyJioLogo.png"/> 
             </div>
           </ion-col>
         </ion-row>
@@ -87,17 +87,104 @@
     <ion-card-content>
       <ion-label class = "titles">
         <ion-card-title class = "title">LOCATION NAME</ion-card-title>
-        <!-- <ion-card-title class = "title">{{this.jio.location.name}}</ion-card-title> -->
+        <ion-card-title class = "title">{{this.jio.location.name}}</ion-card-title> 
       </ion-label>
       <ion-label class = "p-items">
-        <!-- <p class = "p-item"><strong>Address: </strong>{{this.jio.location.address}}}</p>
-        <p class = "p-item"><strong>Rating: </strong>{{this.jio.location.rating}}</p> -->
+        <p class = "p-item"><strong>Address: </strong>{{this.jio.location.address}}}</p>
+        <p class = "p-item"><strong>Rating: </strong>{{this.jio.location.rating}}</p> 
         <p class = "p-item"><strong>Address: </strong>Address</p>
         <p class = "p-item"><strong>Rating: </strong>Rating</p>
       </ion-label>
 
       <ion-button color = 'secondary' (click)="acceptJio(jio)" (click)="nextpage()">
         <b>Accept</b>
+      </ion-button>
+
+    </ion-card-content>      
+  </ion-card>
+</ion-content> -->
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      View Jio
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class = 'description'>
+  <ion-card color="light">
+
+    <img src = "assets/img/StudyJioLogo.png"/>
+
+    <ion-card-content color="light">
+
+      <ion-item lines="none" color="light" class="p1">
+        <ion-label class = "titles">
+          
+          <ion-card-title class = "title">Datetime String</ion-card-title>
+          
+          <div class="badges">
+            <ion-badge class = "duration">
+              <ion-icon name="timer-outline"></ion-icon>
+              1h
+            </ion-badge>
+            <ion-badge class = "type">
+              <ion-icon name="location-outline"></ion-icon>
+              Cafe
+            </ion-badge>
+          </div>
+
+        </ion-label>
+
+      </ion-item>
+
+      <ion-item lines="none" color="light" class="p2">
+        <ion-label class="p-items">
+          <ion-card-subtitle class="subtitle">ABOUT</ion-card-subtitle>
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none" color="light" class="p2">
+        <ion-label class="p-items">
+          <p class = "p-item">Description here</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none" color="light" class="p2">
+        <ion-label class = "p-items">
+          <p class = "p-item"><strong>ADDRESS: </strong>Address</p>
+          <p class = "p-item"><strong>RATING: </strong>Rating</p>
+        </ion-label>
+      </ion-item>
+
+      
+      <ion-item lines="none" color="light" class="p2">
+        <ion-label class="p-items">
+          <ion-card-subtitle class="subtitle">CREATED BY</ion-card-subtitle>
+        </ion-label>
+      </ion-item>
+  
+      <ion-item lines="none" color="light" class="p2">
+          
+        <ion-thumbnail>
+          <img src = "assets/img/StudyJioLogo.png"/>
+        </ion-thumbnail>
+    
+        <ion-label class="p-items">
+          <p class = "p-item"><strong>USERNAME: </strong>Username</p>
+          <p class = "p-item"><strong>TELEGRAM: </strong>Telegram</p>
+          <p class = "p-item"><strong>WORK LEVEL: </strong>Worklevel</p>
+        </ion-label>
+         
+      </ion-item>
+      
+
+      <ion-button expand="block" (click)="acceptJio(jio)" (click)="nextpage()">ACCEPT
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
       </ion-button>
 
     </ion-card-content>      
