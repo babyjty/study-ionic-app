@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -8,15 +9,19 @@ import { ModalController } from '@ionic/angular';
 })
 export class ProfilePhotoOptionComponentComponent implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private router:Router) { }
+
+  
 
   ngOnInit() {}
 
   closeModal() {
     this.modalController.dismiss(null, 'backdrop');
   }
-  startCapture(type) {
-    this.modalController.dismiss(type, 'select');
+  selectPhoto(url) {
+    // sendURLtobackend;
+    console.log("sending URL to the back: ", url) 
+    sessionStorage.setItem("dp_url", url);
   }
 
 }
