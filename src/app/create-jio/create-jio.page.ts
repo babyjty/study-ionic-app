@@ -16,7 +16,7 @@ import { fromEventPattern } from 'rxjs';
 })
 export class CreateJioPage implements OnInit {
 
-  private location: any;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -29,6 +29,8 @@ export class CreateJioPage implements OnInit {
   private showCal = false;
   private dateValue = format(new Date(), 'yyyy-MM-dd');
   private formattedString = '';
+  private location: any;
+  private googleid: any;
 
   private locationImage: string;
   
@@ -37,6 +39,7 @@ export class CreateJioPage implements OnInit {
     console.log(this.jioForm)
 
     this.location = this.router.getCurrentNavigation().extras.state.location
+    this.googleid = this.router.getCurrentNavigation().extras.state.googleid
     if(this.location.src === null){this.locationImage = 'assets/img/StudyJioLogo.png'}
     else{this.locationImage = this.location.result.src}
 
@@ -45,6 +48,7 @@ export class CreateJioPage implements OnInit {
     this.jioForm.getForm().get('jioAddress').setValue(this.location.result.formatted_address, {onlyself: true})
     this.jioForm.getForm().get('jioRating').setValue(this.location.result.rating, {onlyself: true})
     this.jioForm.getForm().get('jioImage').setValue(this.locationImage, {onlyself: true})
+    this.jioForm.getForm().get('googleid').setValue(this.googleid, {onlyself: true})
   }
 
   setToday(){

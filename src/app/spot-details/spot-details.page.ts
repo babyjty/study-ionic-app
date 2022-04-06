@@ -65,7 +65,7 @@ export class SpotDetailsPage implements OnInit {
   
   createJio(){
     console.log(this.spotDetails)
-    this.router.navigateByUrl('/create-jio', {state: {location: this.spotDetails[0]}})
+    this.router.navigateByUrl('/create-jio', {state: {location: this.spotDetails[0], googleid: this.place_id}})
     // this.router.navigateByUrl('/create-jio', {state: {address: this.spotDetails.result.formatted_address, name: this.spotDetails.result.name, rating: this.spotDetails.result.rating}})
   }
 
