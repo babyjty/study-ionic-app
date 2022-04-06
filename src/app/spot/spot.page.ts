@@ -197,44 +197,10 @@ export class SpotPage {
   }
 
 
-  // SEARCH BAR
-
-
-  search() {
-
-    const searchbar = document.getElementById("search-bar");
-    // const items = Array.from(document.querySelector('ion-list').children);
-    const items = this.locationData;
-
-    searchbar.addEventListener('ionInput', handleInput);
-
-    function handleInput(event) {
-      const query = event.target.value.toLowerCase();
-      requestAnimationFrame(() => {
-        items.forEach((item) => {
-          const shouldShow = item.textContent.toLowerCase().indexOf(query) > -1;
-          item.style.display = shouldShow ? 'block' : 'none';
-        });
-      });
-    }
-
-  }
-
 
 
 
   // FILTERING
-
-
-  // filter(array: string, func: any) {
-  //   let array2 = [];
-  //   for ( var counter = 0; counter < array.length; counter++) {       
-  //     if (func(array[counter], counter, array )) {
-  //       array2.push(array[counter]);
-  //     }
-  //   }
-  //   return array2;
-  // }
 
   async filtering() {
 
@@ -251,12 +217,6 @@ export class SpotPage {
         handler: () => {
           // this.filter('rating',function(value: number) {return value >3});
           this.filteringRating();
-        }
-      }, {
-        text: 'Price',
-        data: 10,
-        handler: () => {
-          this.filteringPrice();
         }
       }, {
         text: 'Cancel',
@@ -351,43 +311,6 @@ export class SpotPage {
               return item;
             }
           })
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    await actionSheet.present();
-
-    const { role, data } = await actionSheet.onDidDismiss();
-    // console.log('onDidDismiss resolved with role and data', role, data);
-
-  }
-
-  async filteringPrice() {
-
-    const actionSheet = await this.actionSheetController.create({
-      header: 'FILTER BY PRICE',
-      buttons: [{
-        text: '$',
-        data: 10,
-        handler: () => {
-          
-        }
-      }, {
-        text: '$$',
-        data: 'Data value',
-        handler: () => {
-          
-        }
-      }, {
-        text: '$$$',
-        handler: () => {
-          
         }
       }, {
         text: 'Cancel',

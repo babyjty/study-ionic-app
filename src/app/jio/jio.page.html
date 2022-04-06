@@ -7,6 +7,12 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
+
+  <div class="filter-sort">
+    <ion-button expand="block" (click)="filtering()" class="fliter">FILTER</ion-button>
+    <ion-button expand="block" (click)="sorting()" class="sort">SORT</ion-button>
+  </div>
+  
 </ion-header>
 
 <!-- <ion-refresher on-refresh="doRefresh()"></ion-refresher>
