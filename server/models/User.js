@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema({
     }, 
     workLevel: {
         type: String,
-        enum: ['Secondary School', 'Junior College', 
+        enum: ['Secondary School', 'Junior College', "ITE",
                 'Polytechnic', 'University'],
         // required: true
         // edited secondary school to secondary, removed working

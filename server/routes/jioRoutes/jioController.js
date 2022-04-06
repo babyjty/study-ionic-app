@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 router.post('/createjio', (req, res) => {
     console.log('within create jio')
-
+    console.log(req.body)
     const loc = new Location({
         name: req.body.jioLocation,
         address: req.body.jioAddress,
@@ -28,9 +28,13 @@ router.post('/createjio', (req, res) => {
         googleid: req.body.googleid,
         openingHours: req.body.openingHours
     })
+    console.log(loc)
 
     const newJio = new Jio({
-        jio_date_time: req.body.datetime,
+        jio_date_time: {
+            formatted: req.body.datetimestring,
+            ISO: req.body.datetime
+        },
         jio_description: req.body.description,
         jioer: req.session.user._id,
         header: req.body.header,
