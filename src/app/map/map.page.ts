@@ -34,6 +34,7 @@ export class MapPage {
   constructor(public api: GooglePlacesAPIService, private geolocation: Geolocation, private profileApiService: ProfileApiService) { }
 
   ngOnInit() {
+    console.log("in map page!")
     this.profileApiService.getProfile().subscribe(dataP => {
       this.profile = dataP;
     });
@@ -43,7 +44,9 @@ export class MapPage {
       for (let key in this.profile){
         sessionStorage.setItem(key, this.profile[key]);
       }
-    }, 5000)
+      console.log("retrieved profile " + this.profile);
+    }, 1000)
+    
   }
 
   panCamera() {
