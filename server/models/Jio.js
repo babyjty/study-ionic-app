@@ -8,14 +8,19 @@ const JioSchema = Schema({
         // required: true
         //type: "String"
     },
-    
+
     jioee: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
         //type: "String"
     },
 
+    location: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'Location'
+    },
+
     jio_date_time: {
-        type: String,
+        formatted: String,
+        ISO: String
     },
 
     jio_duration: {
@@ -38,10 +43,6 @@ const JioSchema = Schema({
         type: String
     },
 
-    jioLocation: {
-        jioAddress: String,
-        cost: Number
-    }
 })
 
 const Jio = mongoose.model('Jio', JioSchema)

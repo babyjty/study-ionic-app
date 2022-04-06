@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MapPage } from './map.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { MapPageRoutingModule } from './map-routing-module';
+import { MapPageRoutingModule } from './map-routing.module';
 
 @NgModule({
   imports: [
