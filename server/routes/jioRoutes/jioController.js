@@ -129,6 +129,35 @@ router.get('/getjios', auth, (req, res) => {
     })
 })
 
+router.get('/getmyjio', auth, (req, res) => {
+    Jio.find({ $or: [
+        { jioer: req.session.user._id },
+        { jioee: req.session.user._id }
+    ]}, (err, jio) => {
+        if (err) {
+            return res.json({
+                findSuccess: false,
+                message: err
+            })
+        }
+        if (jio.length < 1) {
+            return res.json({
+                findSuccess: false,
+                message: "No jio in the database"
+            })
+        } else if (jio.jioer == req.session.user._id){
+            jio.findSuccess = true
+            jio.isJioer = true
+            jio.isJioee = false
+            return res.json(jio)
+        } else {
+            jio.findSuccess = true
+            jio.isJioer = false
+            jio.isJioee = true
+            return res.json(jio)
+        }
+    })
+})
 
 
 
