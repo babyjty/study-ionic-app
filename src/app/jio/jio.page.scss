@@ -86,6 +86,21 @@ body {
     margin: 0;
 }
 
+.filter-sort {
+    display: flex;
+    margin-top: 10px;
+    padding: 0px 0px 5px 0px;
+
+    ion-button {
+        --background: #6b45bc;
+        width: 200px;
+        margin: 0px 5px;
+        padding: 0;
+        font-family: "Trebuchet MS";
+        text-transform: uppercase;
+    }
+}
+
 ion-content {
     margin: 0;
 

@@ -114,7 +114,7 @@ export class JioPage implements OnInit {
         data: 10,
         handler: () => {
           this.filteredLocations = this.jioList.filter(item=>{
-            if (item.rating >= 4.0){
+            if (item.location.rating >= 4.0){
               return item;
             }
           })
@@ -124,7 +124,7 @@ export class JioPage implements OnInit {
         data: 'Data value',
         handler: () => {
           this.filteredLocations = this.jioList.filter(item=>{
-            if (item.rating >= 3.0){
+            if (item.location.rating >= 3.0){
               return item;
             }
           })
@@ -133,7 +133,7 @@ export class JioPage implements OnInit {
         text: 'ALL',
         handler: () => {
           this.filteredLocations = this.jioList.filter(item=>{
-            if (item.rating >= 0.0){
+            if (item.location.rating >= 0.0){
               return item;
             }
           })
