@@ -23,12 +23,8 @@ export class CreateJioPageForm{
             jioAddress: [''],
             jioRating: [''],
             jioImage: [''],
-            
-            jioerUsername: [sessionStorage.getItem('username')],
-            jioerTelegram: [sessionStorage.getItem('telegram')],
-            jioerBio: [sessionStorage.getItem('profilepic')],
-            jioerPic: [sessionStorage.getItem('profilepic')],
-            jioerWorklevel: [sessionStorage.getItem('worklevel')]
+            openingHours: [''],
+            googleid: ['']
         });
         jioForm1.get('duration').setValidators(checkNumber(jioForm1))
         // jioForm1.get('datetime').setValidators(checkDate(jioForm1))

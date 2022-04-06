@@ -43,10 +43,22 @@ router.post('/register', (req, res) => {
     user.save((err, doc) => {
         console.log(doc)
         if (err) return res.json({ success: false, err})
-        return res.status(200).json({
-            success: true,
-            userID: user._id
-        })
+        else {
+            req.session.user = doc
+            req.session.save((err) => {
+                if (err) {
+                    return res.json({
+                        success: false,
+                        error: err
+                    })
+                } else {
+                    return res.json({
+                        success: true,
+                        userID: user._id
+                    })
+                }
+            })
+        }
     })
 })
 

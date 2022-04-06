@@ -18,8 +18,9 @@ export class RegisterPageForm{
             cpassword: ['', [Validators.required]],
             username: ['', [Validators.required]],
             bio: ['', [Validators.required, Validators.maxLength(200)]],
-            worklevel: ['',[Validators.required]],
+            workLevel: ['',[Validators.required]],
             telegram: ['', [Validators.required]],
+            photoURL: [''],
             provider: ['LOCAL']
         });
         

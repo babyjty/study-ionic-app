@@ -12,17 +12,33 @@
     <!-- <div class = "login-logo">
       <img *ngIf src = "assets/img/StudyJioLogo.png">
     </div> -->
-    <ion-card color = "clear">
+    <ion-card color = "light">
       <div>
         <img [src] = "this.locationImage"/>
       </div>
-      <ion-card-header>
-        <ion-card-title>{{this.location.result.name}}</ion-card-title>
-      </ion-card-header>
+      
       <ion-card-content>
-        <p class = "p-item"><strong>ADDRESS: </strong>{{this.location.result.formatted_address}}</p>
-        <p class = "p-item"><strong>RATING: </strong>{{this.location.result.rating}}</p>
-      </ion-card-content>
+
+        <ion-item lines="none" color="light" class="p1">
+          <ion-label class="titles">
+            <ion-card-subtitle class="subtitle">{{this.location.result.types[0]}}</ion-card-subtitle>
+            <ion-card-title class="title">{{this.location.result.name}}</ion-card-title>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none" color="light" class="p2">
+        
+        
+          <ion-label class="p-items">
+            
+            <p class="p-item"><strong>ADDRESS: </strong>{{this.location.result.formatted_address}}</p>
+            <p class="p-item"><strong>RATING: </strong>{{this.location.result.rating}}/5</p>
+            <p class="p-item"><strong>OPENING HOURS: </strong>{{this.location.result.open}}</p>
+  
+          </ion-label>
+              
+        </ion-item>
+  
 
     <!-- <ion-card color = "clear" class = "ion-card2"> -->
       <!-- <ion-card-header> -->
@@ -30,37 +46,43 @@
         <ion-card-title>Create Jio</ion-card-title>
       </ion-header> -->
       <!-- </ion-card-header> -->
+        <div class="p2">
+      
+          <ion-item lines="none" color="light" class="p-items">
+            <ion-label class="p-item">Jio Header </ion-label>
+            <ion-input type = "text" placeholder="Input Jio Header" slot = "end" formControlName="header"></ion-input>
+          </ion-item>
+          <app-error-message [field]= "jioForm.getForm().get('header')" error = "required" message = "Jio header is required"></app-error-message>
 
-      <ion-card-content>
-        <ion-item>
-          <ion-label>Jio Header</ion-label>
-          <ion-input type = "text" placeholder="Input Jio Header" formControlName="header"></ion-input>
-        </ion-item>
-        <app-error-message [field]= "jioForm.getForm().get('header')" error = "required" message = "Jio header is required"></app-error-message>
+          <ion-item (click) = "showCal = !showCal" lines="none" color="light" class="p-items">
+            <ion-label class="p-item">Date </ion-label>
+            <ion-text slot = "end">
+              {{formattedString}}
+            </ion-text>
+          </ion-item>
+          <ion-datetime *ngIf = "showCal" #datetime formControlName = 'datetime' [value] = "dateValue" (ionChange)="dateChanged(datetime.value)" showDefaultButtons = "true" (ionCancel)="showCal = false"></ion-datetime>
+          <app-error-message [field]= "jioForm.getForm().get('datetime')" error = "required" message = "Date and time required"></app-error-message>
+          
+          <ion-item lines="none" color="light" class="p-items">
+            <ion-label class="p-item">Duration (Hours) </ion-label>
+            <ion-input type="number" formControlName ="duration" placeholder="Input Duration" slot = "end"></ion-input>
+          </ion-item>
+          <app-error-message [field]= "jioForm.getForm().get('duration')" error = "notMatch" message = "Passwords do not match"></app-error-message>
 
-        <ion-item (click) = "showCal = !showCal">
-          <ion-label>Date</ion-label>
-          <ion-text slot = "end">
-            {{formattedString}}
-          </ion-text>
-        </ion-item>
-        <ion-datetime *ngIf = "showCal" #datetime formControlName = 'datetime' [value] = "dateValue" size = "cover" (ionChange)="dateChanged(datetime.value)" showDefaultButtons = "true" (ionCancel)="showCal = false"></ion-datetime>
-        <app-error-message [field]= "jioForm.getForm().get('datetime')" error = "required" message = "Date and time required"></app-error-message>
-        
-        <ion-item>
-          <ion-label>Duration (Hours)</ion-label>
-          <ion-input type="number" formControlName ="duration" position = "end"></ion-input>
-        </ion-item>
-        <app-error-message [field]= "jioForm.getForm().get('duration')" error = "notMatch" message = "Passwords do not match"></app-error-message>
+          <ion-item lines="none" color="light" class="p-items">
+            <ion-label class="p-item">Jio Description </ion-label>
+            <ion-textarea type = "text" formControlName="description" placeholder="Input Description" slot = "end"></ion-textarea>
+          </ion-item>
+          <app-error-message [field]= "jioForm.getForm().get('description')" error = "negative" message = "Invalid duration"></app-error-message>
+        </div>
 
-        <ion-item>
-          <ion-label>Jio Description</ion-label>
-          <ion-textarea type = "text" formControlName="description" placeholder="Input Description"></ion-textarea>
-        </ion-item>
-        <app-error-message [field]= "jioForm.getForm().get('description')" error = "negative" message = "Invalid duration"></app-error-message>
+        <ion-button (click)="createJio()">Create Jio 
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+
       </ion-card-content>
     </ion-card>
 
-    <ion-button size = full (click)="createJio()" [disabled] = "!jioForm.getForm().valid" >Create Jio</ion-button>
+    
   </form>
 </ion-content>

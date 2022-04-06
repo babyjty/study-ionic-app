@@ -10,35 +10,22 @@ import { JioApiService } from '../service/jio-api.service';
 })
 export class JioDetailsAcceptPage implements OnInit {
 
-  private jio;
+  private jio: any;
   constructor(
     private router: Router,
     private alertController: AlertController,
     private jioApiService: JioApiService,
-  ) {
-    // console.log(this.jio = this.router.getCurrentNavigation().extras.state.jio);
-    // console.log(this.jio = this.router.getCurrentNavigation().extras.state.datetime);
+  ) {}
 
-  }
-
-  private bio: string;
-  private pic: string;
-  private username: string;
-  private telegram: string;
-  private worklevel: string;
-  
-  
   ngOnInit() {
-    this.bio = sessionStorage.getItem("bio");
-    this.pic = sessionStorage.getItem("profilepic");
-    this.username = sessionStorage.getItem('username');
-    this.worklevel = sessionStorage.getItem('worklevel');
-    this.telegram = sessionStorage.getItem('telegram');
+    this.jio = this.router.getCurrentNavigation().extras.state.jio;
+    console.log("this jio")
+    console.log(this.jio)
   }
 
   acceptJio(){
     try{
-      this.jioApiService.acceptJio().subscribe(dataA => {
+      this.jioApiService.acceptJio(this.jio).subscribe(dataA => {
         if(dataA.outcome){
           console.log('Within Accept Jio: Accept Success');
           this.presentAlert('Jio Accepted', 'Save the date');
@@ -46,7 +33,7 @@ export class JioDetailsAcceptPage implements OnInit {
         }
         else{
           console.log('Within Accept Jio: Accept Failed');
-          this.presentAlert('Unsuccessfull Acceptance', 'Please try again.')
+          this.presentAlert('Unsuccessful Acceptance', 'Please try again.')
           this.router.navigate(['/jio-list']);
         }
       })

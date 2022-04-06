@@ -11,6 +11,7 @@ export class AppComponent {
   constructor(private authApiService: AuthApiService, private router: Router) {}
   
   logout(){
+    sessionStorage.clear();
     try{
       this.authApiService.logout().subscribe(dataL =>{
         if(dataL.logoutSuccess){ this.router.navigate(['login'])
@@ -18,7 +19,5 @@ export class AppComponent {
       });
 
     } catch(error){console.log(error)}
-    
-    
   }
 }

@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engine": {
+    "node": "17.6.0",
+    "npm": "8.5.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
@@ -12,6 +16,7 @@
   "dependencies": {
     "angularx-social-login": "^4.0.1",
     "aws-sdk": "^2.1096.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
     "connect-mongodb-session": "^3.1.1",
     "cookie-parser": "^1.4.6",
@@ -33,6 +38,7 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-google-oidc": "^0.1.0",
     "passport-local": "^1.0.0",
+    "pm2": "^5.2.0",
     "uuid": "^8.3.2"
   }
 }
