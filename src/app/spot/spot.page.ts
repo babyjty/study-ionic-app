@@ -35,6 +35,7 @@ export class SpotPage {
   }
 
   fetchLocations(){
+    console.log(this.preferredLoc)
     this.api.getPlaceSearch(this.preferredLoc).subscribe(resultID =>{
         let placeID:String = String(resultID);
         if (!placeID){
@@ -94,8 +95,7 @@ export class SpotPage {
               }
             }
 
-            
-
+          
             console.log(this.locationData);
             this.filteredLocations = this.locationData;
           })

@@ -33,6 +33,7 @@
             
             <p class="p-item"><strong>ADDRESS: </strong>{{this.location.result.formatted_address}}</p>
             <p class="p-item"><strong>RATING: </strong>{{this.location.result.rating}}/5</p>
+            <p class="p-item"><strong>OPENING HOURS: </strong>{{this.location.result.open}}</p>
   
           </ion-label>
               
@@ -75,7 +76,7 @@
           <app-error-message [field]= "jioForm.getForm().get('description')" error = "negative" message = "Invalid duration"></app-error-message>
         </div>
 
-        <ion-button (click)="createJio()" [disabled] = "!jioForm.getForm().valid" expand="block">Create Jio 
+        <ion-button (click)="createJio()">Create Jio 
           <ion-icon name="add"></ion-icon>
         </ion-button>
 

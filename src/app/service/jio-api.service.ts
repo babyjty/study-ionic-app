@@ -21,7 +21,7 @@ export class JioApiService {
 
   acceptJio(): Observable<any>{
     console.log("Within API: AcceptJio");
-    let url = `${this.baseUri}/api/jio/accept-jio`;
+    let url = `${this.baseUri}/api/jio/acceptjio`;
     return this.http.post(url, {withCredentials: true}).pipe(catchError(this.errorMgmt));
   }
 
