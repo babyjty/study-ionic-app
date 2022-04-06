@@ -196,29 +196,56 @@ router.post('/createjio', (req, res) => {
 //     })
 // })
 
-router.post('/acceptjio', auth, (req, res) => {
+router.post('/acceptjio', auth,  (req, res) => {
     //request should contain the jio _id
     
     Jio.find({ $or: [
         { jioer: req.session.user._id },
         { jioee: req.session.user._id }
-    ] }, async (err, jio) => {
+    ] }, (err, jio) => {
         if (jio.length > 0 ) {
             return res.json({
-                createSuccess: false,
+                outcome: false,
                 message: "User already has a jio, cant create or accpet another"
             })
         }
-    })
-    Jio.findOneAndUpdate({ _id: req.body.jioID }, 
-        { jioStatus: 'accepted' },
-        { new: true }, (err, doc) => {
-            if (err){
-                console.log('Error in updating jio status')
+        Jio.findOneAndUpdate({
+            _id: req.body._id
+        },
+        {
+            jioStatus: 'accepted',
+            jioee: req.session.user._id
+        }, (err, jio) => {
+            if (err) {
+                return res.json({
+                    outcome: false,
+                    err
+                })
+            } else {
+                console.log(jio)
+                return res.json({
+                    outcome: true
+                })
             }
-            console.log(doc)
         })
+    })
+    
+    // updatedjio.save({ 
+    //     _id: req.body.jioID, 
+    //     jioStatus: 'accepted',
+    //     jioee: req.session.user._id
+    // }, (err, doc) => {
+    //         if (err){
+    //             console.log('Error in updating jio status')
+    //         } else {
+    //             return res.json({
+    //                 outcome: true
+    //             })
+    //         }
+    //     })
 })
+
+
 
 router.post('/delete', auth, (req, res) => {
     Jio.deleteOne({ jioer: req.session.user._id }, (err) => {
