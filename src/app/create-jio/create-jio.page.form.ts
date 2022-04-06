@@ -19,16 +19,16 @@ export class CreateJioPageForm{
             description: ['', [Validators.required]],
             datetimestring: [''],
 
-            // jioLocation: [''],
-            // jioAddress: [''],
-            // jioPrice: [''],
-            // jioRating: [''],
-
-            // jioerUsername: [sessionStorage.getItem('username')],
-            // jioerTelegram: [sessionStorage.getItem('telegram')],
-            // jioerBio: [sessionStorage.getItem('profilepic')],
-            // jioerPic: [sessionStorage.getItem('profilepic')],
-            // jioerWorklevel: [sessionStorage.getItem('worklevel')]
+            jioLocation: [''],
+            jioAddress: [''],
+            jioRating: [''],
+            jioImage: [''],
+            
+            jioerUsername: [sessionStorage.getItem('username')],
+            jioerTelegram: [sessionStorage.getItem('telegram')],
+            jioerBio: [sessionStorage.getItem('profilepic')],
+            jioerPic: [sessionStorage.getItem('profilepic')],
+            jioerWorklevel: [sessionStorage.getItem('worklevel')]
         });
         jioForm1.get('duration').setValidators(checkNumber(jioForm1))
         // jioForm1.get('datetime').setValidators(checkDate(jioForm1))

@@ -15,23 +15,36 @@ import { fromEventPattern } from 'rxjs';
   styleUrls: ['./create-jio.page.scss'],
 })
 export class CreateJioPage implements OnInit {
+
+  private location: any;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private jioApiService: JioApiService,
     private alertController: AlertController
-  ) { }
+  ) {}
 
   jioForm: CreateJioPageForm;
   
-  showCal = false;
-  dateValue = format(new Date(), 'yyyy-MM-dd');
-  formattedString = '';
+  private showCal = false;
+  private dateValue = format(new Date(), 'yyyy-MM-dd');
+  private formattedString = '';
+
+  private locationImage: string;
   
   ngOnInit() {
     this.createForm();
-    console.log('hello')
     console.log(this.jioForm)
+
+    this.location = this.router.getCurrentNavigation().extras.state.location
+    if(this.location.src === null){this.locationImage = 'assets/img/StudyJioLogo.png'}
+    else{this.locationImage = this.location.result.src}
+
+
+    this.jioForm.getForm().get('jioLocation').setValue(this.location.result.name, {onlyself: true})
+    this.jioForm.getForm().get('jioAddress').setValue(this.location.result.formatted_address, {onlyself: true})
+    this.jioForm.getForm().get('jioRating').setValue(this.location.result.rating, {onlyself: true})
+    this.jioForm.getForm().get('jioImage').setValue(this.locationImage, {onlyself: true})
   }
 
   setToday(){
@@ -50,6 +63,8 @@ export class CreateJioPage implements OnInit {
   }
 
   createJio(){
+
+
     console.log(this.jioForm.getForm().value)
     try{
       this.jioApiService.createJio(this.jioForm.getForm().value).subscribe((dataJ) => {
