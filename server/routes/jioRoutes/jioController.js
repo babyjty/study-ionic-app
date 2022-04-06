@@ -211,7 +211,10 @@ router.post('/acceptjio', auth, (req, res) => {
         }
     })
     Jio.findOneAndUpdate({ _id: req.body.jioID }, 
-        { jioStatus: 'accepted' },
+        { 
+            jioStatus: 'accepted',
+            jioee: req.session.user._id
+        },
         { new: true }, (err, doc) => {
             if (err){
                 console.log('Error in updating jio status')
