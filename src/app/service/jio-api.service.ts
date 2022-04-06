@@ -28,8 +28,14 @@ export class JioApiService {
   deleteJio(jioDetails): Observable<any>{
     console.log("Within API: DeleteJio");
     console.log(jioDetails);
-    let url = `${this.baseUri}/api/jio/delete-Jio`;
-    return this.http.post(url, jioDetails).pipe(catchError(this.errorMgmt))
+    let url = `${this.baseUri}/api/jio/delete`;
+    return this.http.post(url, jioDetails, {withCredentials: true}).pipe(catchError(this.errorMgmt))
+  }
+
+  withdrawJio(jioDetails): Observable <any> {
+    console.log("Within API: Withdraw Jio");
+    let url = `${this.baseUri}/api/jio/withdrawjio`;
+    return this.http.post(url, jioDetails, {withCredentials: true}).pipe(catchError(this.errorMgmt))
   }
 
   getJios(): Observable<any>{
@@ -40,8 +46,14 @@ export class JioApiService {
 
   getMyJio(): Observable<any>{
     console.log('Within API: GetMyJio')
-    let url = `${this.baseUri}/api/jio/getmyjios`
+    let url = `${this.baseUri}/api/jio/getmyjio`
     return this.http.get(url, {withCredentials: true}).pipe(catchError(this.errorMgmt))
+  }
+
+  isJioer(jioData): Observable<any>{
+    console.log('Within API: IsJioer');
+    let url = `${this.baseUri}/api/jio/isjioer`
+    return this.http.post(url, jioData, {withCredentials: true}).pipe(catchError(this.errorMgmt))
   }
 
   errorMgmt(error: HttpErrorResponse){
