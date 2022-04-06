@@ -25,7 +25,8 @@ router.post('/createjio', (req, res) => {
         address: req.body.jioAddress,
         rating: req.body.jioRating,
         image: req.body.jioImage,
-        googleid: req.body.googleid
+        googleid: req.body.googleid,
+        openingHours: req.body.openingHours
     })
 
     const newJio = new Jio({
@@ -35,7 +36,7 @@ router.post('/createjio', (req, res) => {
         header: req.body.header,
         jio_duration: req.body.duration,
         jioStatus: "pending",
-        location: "null" 
+        location: "null",
     })
 
     Location.findOne({ googleid: loc.googleid }, async (err, location) => {
@@ -254,15 +255,18 @@ router.get('/getjios', auth, async (req, res) => {
                 message: "No jio in the database"
             })
         } else {
-            jio.jioer = User.findById( jio.jioer, (err) => {
-                console.log(err)
-            })
-            jio.location = Location.findById( jio.location, (err) => {
-                console.log(err)
-            })
+            // User.findOne( {_id: jio.jioer}, (err, user) => {
+            //     console.log(user)
+            //     console.log(err)
+            //     jio.jioer = user
+            // })
+            // Location.findById( { _id: jio.location}, (err, location) => {
+            //     jio.location = location
+            // })
+            console.log(jio)
             return res.json(jio)
         }
-    })
+    }).populate('jioer').populate('location')
 })
 
 router.get('/getmyjio', auth, (req, res) => {
