@@ -219,8 +219,8 @@ router.post('/acceptjio', auth, (req, res) => {
         })
 })
 
-router.post('/cancel', auth, (req, res) => {
-    Jio.deleteOne({ jioee: req.session.user._id }, (err) => {
+router.post('/delete', auth, (req, res) => {
+    Jio.deleteOne({ jioer: req.session.user._id }, (err) => {
         if (err){
             return res.json({
                 deleteSuccess: false,
