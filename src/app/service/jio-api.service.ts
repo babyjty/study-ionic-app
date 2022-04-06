@@ -19,11 +19,10 @@ export class JioApiService {
     return this.http.post(url, jioDetails, {withCredentials:true}).pipe(catchError(this.errorMgmt));
   }
 
-  acceptJio(jionuserDetails): Observable<any>{
+  acceptJio(): Observable<any>{
     console.log("Within API: AcceptJio");
-    console.log(jionuserDetails);
     let url = `${this.baseUri}/api/jio/accept-jio`;
-    return this.http.post(url, jionuserDetails).pipe(catchError(this.errorMgmt));
+    return this.http.post(url, {withCredentials: true}).pipe(catchError(this.errorMgmt));
   }
 
   deleteJio(jioDetails): Observable<any>{
@@ -37,6 +36,12 @@ export class JioApiService {
     console.log("Within API: GetJios");
     let url = `${this.baseUri}/api/jio/getjios`;
     return this.http.get(url, {withCredentials:true}).pipe(catchError(this.errorMgmt))
+  }
+
+  getMyJio(): Observable<any>{
+    console.log('Within API: GetMyJio')
+    let url = `${this.baseUri}/api/jio/getmyjios`
+    return this.http.get(url, {withCredentials: true}).pipe(catchError(this.errorMgmt))
   }
 
   errorMgmt(error: HttpErrorResponse){

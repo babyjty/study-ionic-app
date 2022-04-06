@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Jio
+      View Jio
     </ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -10,76 +10,70 @@
 </ion-header>
 
 <ion-content class = 'description'>
-  <ion-card color = 'medium'>
-  
+  <ion-card>
+    <!-- <div>
+      <img [src] = "this.jio.image"/>
+    </div> -->
+
+    <div>
+      <img src = "assets/img/StudyJioLogo.png"/>
+    </div>
+
+    <ion-card-content>
+      <ion-label class = "titles">
+        <br>
+        <ion-card-title class = "title">JIO HEADER</ion-card-title>
+      </ion-label>
+      <ion-label class = "p-items">
+        <!-- <p class = "p-item"><strong>Date & Time: </strong>{{this.jio.datetimestring}}</p>
+        <p class = "p-item"><strong>Duration: </strong>{{this.jio.duration}}</p>
+        <p class = "p-item">Description</p> -->
+
+        <p class = "p-item"><strong>Date & Time: </strong>Datetime String</p>
+        <p class = "p-item"><strong>Duration: </strong>Duration</p>
+        <p class = "p-item">Description</p>
+      </ion-label>
+    </ion-card-content>
+
     <ion-card-content> 
-      <p>Hi, my name is Tzi Yu! and I am studying in NTU business and computing, would love to make new friends </p> 
-      <!-- {{jios.description}} -->
+      <ion-label class = "titles">
+        <ion-card-title class = "title">Jioer Details</ion-card-title>
+      </ion-label>
+      <ion-label class = "p-items">
+        <!-- <p class = "p-item"><strong>Username: </strong>{{this.jio.jioer.username}}</p>
+        <p class = "p-item"><strong>Telegram: </strong>{{this.jio.jioer.telegram}}</p>
+        <p class = "p-item"><strong>Worklevel: </strong>{{this.jio.jioer.worklevel}}</p>
+        <p class = "p-item">{{this.jio.jioer.bio}} -->
+
+        <p class = "p-item"><strong>Username: </strong>Username</p>
+        <p class = "p-item"><strong>Telegram: </strong>Telegram</p>
+        <p class = "p-item"><strong>Worklevel: </strong>Worklevel</p>
+        <p class = "p-item">Bio</p>
+      </ion-label>
     </ion-card-content>
   
     <ion-avatar>
-      <img src="https://static.vecteezy.com/system/resources/thumbnails/000/599/173/small/coffee.jpg">
+      <img [src] = "this.pic">
       <!-- {{jios.photo}} -->
     </ion-avatar>
   
-  </ion-card>
 
-  <ion-card class = 'location' color = 'medium'>
-    <ion-card-header>
-      <p>
-        Starbucks
-        <!-- {{jios.name}} -->
-      </p>
-    </ion-card-header>
-    <ion-card-content> 
-      <p1>
-      Address: 76 Nanyang Drive 01-06 NTU North Spine, 637331
-      <!-- {{jios.address}} -->
-      <br>
-      Hours : Open - Closes 10PM
-      <!-- {{jios.closing}} -->
-      <br>
-      Phone : 6910 1245 
-      <!-- {{jios.contact}} -->
-      <br>
-      </p1>
-      <ion-text color = 'danger'>
-        Live:
-      </ion-text>
-      <ion-text>
-        <p3>
-          A little busy
-          <!-- {{jios.crowdesness}} -->
-        </p3>
-      </ion-text>
-      <br>
-      <br>
-      <p2>
-      Start Time: 
-      </p2>
-      16:00
-      <!-- {{jios.opening}} -->
-      <br>
-      <br>
-      <p4>
-        End Time:
-      </p4>
-      18:00
-      <!-- {{jios.closing}} -->
-      <br>
-      <br>
-      <p5>
-      Description:
-      </p5>
-      Wouldn't mind some dinner!
-      <!-- {{jios.message}} -->
-      <br>
-      <br>
+    <ion-card-content>
+      <ion-label class = "titles">
+        <ion-card-title class = "title">LOCATION NAME</ion-card-title>
+        <!-- <ion-card-title class = "title">{{this.jio.location.name}}</ion-card-title> -->
+      </ion-label>
+      <ion-label class = "p-items">
+        <!-- <p class = "p-item"><strong>Address: </strong>{{this.jio.location.address}}}</p>
+        <p class = "p-item"><strong>Rating: </strong>{{this.jio.location.rating}}</p> -->
+        <p class = "p-item"><strong>Address: </strong>Address</p>
+        <p class = "p-item"><strong>Rating: </strong>Rating</p>
+      </ion-label>
+
       <ion-button color = 'secondary' (click)="acceptJio(jio)" (click)="nextpage()">
         <b>Accept</b>
       </ion-button>
 
-    </ion-card-content>
-</ion-card>
-  
+    </ion-card-content>      
+  </ion-card>
 </ion-content>

@@ -1,26 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Jio</ion-title>
+    <ion-buttons slot = "start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <ion-fab vertical = "top" horizontal = "start">
-    <ion-fab-button color = "clear" routerLink = '/tabs'>
-      <ion-icon name = "arrow-back-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
   <form [formGroup]="jioForm.getForm()">
-    <div class = "login-logo">
-      <img src = "assets/img/StudyJioLogo.png">
-    </div>
+    <!-- <div class = "login-logo">
+      <img *ngIf src = "assets/img/StudyJioLogo.png">
+    </div> -->
     <ion-card color = "clear">
+      <div>
+        <img [src] = "this.locationImage"/>
+      </div>
       <ion-card-header>
-        <ion-card-title>Location Details</ion-card-title>
+        <ion-card-title>{{this.location.result.name}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p>Contents of Location Data</p>
+        <p class = "p-item"><strong>ADDRESS: </strong>{{this.location.result.formatted_address}}</p>
+        <p class = "p-item"><strong>RATING: </strong>{{this.location.result.rating}}</p>
       </ion-card-content>
-    </ion-card>
 
-    <ion-card color = "clear">
-      <ion-card-header>
+    <!-- <ion-card color = "clear" class = "ion-card2"> -->
+      <!-- <ion-card-header> -->
+      <!-- <ion-header>
         <ion-card-title>Create Jio</ion-card-title>
-      </ion-card-header>
+      </ion-header> -->
+      <!-- </ion-card-header> -->
 
       <ion-card-content>
         <ion-item>
@@ -35,8 +44,8 @@
             {{formattedString}}
           </ion-text>
         </ion-item>
-        <ion-datetime *ngIf = "showCal" #datetime formControlName = 'datetime' [value] = "dateValue" size = "cover" (ionChange)="dateChanged(datetime.value)" showDefaultButtons = "true" (ionCancel)="showCal = false" ></ion-datetime>
-        <app-error-message [field]= "jioForm.getForm().get('datetime')" error = "required" message = "Date is required"></app-error-message>
+        <ion-datetime *ngIf = "showCal" #datetime formControlName = 'datetime' [value] = "dateValue" size = "cover" (ionChange)="dateChanged(datetime.value)" showDefaultButtons = "true" (ionCancel)="showCal = false"></ion-datetime>
+        <app-error-message [field]= "jioForm.getForm().get('datetime')" error = "required" message = "Date and time required"></app-error-message>
         
         <ion-item>
           <ion-label>Duration (Hours)</ion-label>
@@ -46,7 +55,7 @@
 
         <ion-item>
           <ion-label>Jio Description</ion-label>
-          <ion-input type = "text" placeholder="Input Message" formControlName="description"></ion-input>
+          <ion-textarea type = "text" formControlName="description" placeholder="Input Description"></ion-textarea>
         </ion-item>
         <app-error-message [field]= "jioForm.getForm().get('description')" error = "negative" message = "Invalid duration"></app-error-message>
       </ion-card-content>

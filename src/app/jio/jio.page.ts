@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { format, parseISO } from 'date-fns';
 import { JioApiService } from '../service/jio-api.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class JioPage implements OnInit {
   constructor(private router: Router, private jioApiService: JioApiService) { }
 
   private jioList: any;
+  private datetime: string; 
   
   ngOnInit(){
     try{
@@ -25,8 +27,8 @@ export class JioPage implements OnInit {
     this.router.navigate(['/create-jio'])
   }
 
-  viewJio(jio) {
-    this.router.navigateByUrl('/jio-details-accept', {state: {jio1: jio}});
+  viewJio(jio1) {
+    this.router.navigateByUrl('/jio-details-accept', {state: {jio: jio1}});
   }
 }
 
