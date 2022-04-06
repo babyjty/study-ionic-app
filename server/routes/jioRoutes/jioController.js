@@ -256,9 +256,6 @@ router.get('/getjios', auth, async (req, res) => {
             jio.jioer = User.findById( jio.jioer, (err) => {
                 console.log(err)
             })
-            jio.jioee = User.findById( jio.jioee, (err) => {
-                console.log(err)
-            })
             return res.json(jio)
         }
     })
@@ -268,7 +265,7 @@ router.get('/getmyjio', auth, (req, res) => {
     Jio.find({ $or: [
         { jioer: req.session.user._id },
         { jioee: req.session.user._id }
-    ]}, (err, jio) => {
+    ]}, async (err, jio) => {
         if (err) {
             return res.json({
                 findSuccess: false,
@@ -284,11 +281,13 @@ router.get('/getmyjio', auth, (req, res) => {
             jio.findSuccess = true
             jio.isJioer = true
             jio.isJioee = false
+            jio.jioer = req.session.user
             return res.json(jio)
         } else {
             jio.findSuccess = true
             jio.isJioer = false
             jio.isJioee = true
+            jio.jioee = req.session.user
             return res.json(jio)
         }
     })
