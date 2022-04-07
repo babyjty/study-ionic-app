@@ -81,6 +81,20 @@ export class MapPage {
     })
   }
 
+  ionViewWillEnter(){
+    // this.profileApiService.getProfile().subscribe(dataP => {
+    //   this.profile = dataP;
+    // });
+
+    // setTimeout(() => {
+    //   // console.log("hello " + this.profile)
+    //   for (let key in this.profile){
+    //     sessionStorage.setItem(key, this.profile[key]);
+    //   }
+    //   console.log("retrieved profile " + this.profile);
+    // }, 1000)
+    
+  }
 
   ionViewDidEnter() {
     this.showMap(this.sg_lat, this.sg_lng);
