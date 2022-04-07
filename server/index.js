@@ -11,6 +11,7 @@ const json  = require('express-json')
 const bodyParser = require('body-parser')
 const MongoDBStore = require('connect-mongodb-session')(session)
 const passport = require('passport')
+const path = require('path')
 
 var store = new MongoDBStore({
     uri: config.mongoURI,
@@ -48,7 +49,11 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-app.use(express.static('../dist'))
+app.use(express.static(path.resolve(__dirname, '../dist')))
+app.get('*', (req, res) => {
+    var indexFile = path.resolve(__dirname, '../dist/index.html')
+    res.sendFile(indexFile)
+})
 
 app.use(json())
 
