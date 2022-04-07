@@ -48,7 +48,11 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-app.use(express.static('../dist'))
+app.use(express.static(path.resolve(__dirname, '../dist')))
+app.get('*', (req, res) => {
+    var indexFile = path.resolve(__dirname, '../dist/index.html')
+    res.sendFile(indexFile)
+})
 
 app.use(json())
 
