@@ -9,7 +9,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node ./server/index.js",
+    "postinstall": "ng build --prod",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
