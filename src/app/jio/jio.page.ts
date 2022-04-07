@@ -16,12 +16,7 @@ export class JioPage implements OnInit {
   private datetime: string; 
   
   ngOnInit(){
-    try{
-      this.jioApiService.getJios().subscribe((dataJ) => {
-        this.jioList = dataJ;
-        console.log(this.jioList);
-      })
-    } catch (error) {console.log(error)}
+    
   }
   createJio(){
     this.router.navigate(['/create-jio'])
@@ -30,7 +25,17 @@ export class JioPage implements OnInit {
   viewJio(jio1) {
     this.router.navigateByUrl('/jio-details-accept', {state: {jio: jio1}});
   }
+
+  ionViewWillEnter(){
+    try{
+      this.jioApiService.getJios().subscribe((dataJ) => {
+        this.jioList = dataJ;
+        console.log(this.jioList);
+      })
+    } catch (error) {console.log(error)}
+  }
 }
+
 
 // cards = [
   //   {

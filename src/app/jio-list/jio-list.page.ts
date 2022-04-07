@@ -18,8 +18,9 @@ export class JioListPage implements OnInit {
     private alertController: AlertController
   ) { }
 
-  private jios: any ;
-
+  private jios: any;
+  private length = 0;
+  private isJioer: boolean;
 
   // public myJios = [
   //   {
@@ -36,12 +37,80 @@ export class JioListPage implements OnInit {
     this.jioApiService.getMyJio().subscribe(dataMJ => {
       try{
         console.log("MY JIOS");
-        this.jios = dataMJ;
+        if (dataMJ.findSuccess === undefined){
+          this.jios = dataMJ;
+        }
+        else{
+          this.jios = [];
+        }
+        // this.length = dataMJ.length();
+        // console.log(dataMJ.length());
         console.log(dataMJ)
         console.log("x:" + this.jios)
+
+        if (this.jios.length > 0){
+          this.jioApiService.isJioer(this.jios[0]).subscribe(dataIJ => {
+            try{
+              console.log("ISJior");
+              this.isJioer = dataIJ.isjioer;
+            } catch(error) {console.log(error)}
+            
+          })
+        }
+
       } catch(error) {console.log(error)}
     })
+
+    
   }
+
+
+  withdrawJio(jioDetails){
+    this.jioApiService.withdrawJio(jioDetails).subscribe(dataWJ =>{
+      try{
+        if(dataWJ.withdrawSuccess){
+          this.presentAlert("Jio Withdrawal Success", "Sad to see you go.");
+          this.router.navigate(['/tabs/map']);
+
+        }
+        else{
+          this.presentAlert("Jio Withdrawal Failed", "Try again later.")
+          this.router.navigate(['/tabs/map']);
+        }
+      } catch (error) {console.log(error)}
+    })
+  }
+
+  cancelJio(jioDetails){
+    this.jioApiService.deleteJio(jioDetails).subscribe( dataCJ => {
+      console.log(dataCJ)
+      try{
+        if(dataCJ.deleteSuccess){
+          this.presentAlert("Jio Cancel Success", "Sad to see you go.");
+          this.router.navigate(['/tabs/map']);
+          console.log(dataCJ);
+        }
+        else{
+          this.presentAlert("Jio Cancel Failed", "Try again later.")
+          this.router.navigate(['/tabs/map']);
+        }} catch(error) {console.log(error)}
+        
+
+    })
+    
+  }
+
+  async presentAlert(h, b){
+    const alert = await this.alertController.create({
+      header: h,
+      subHeader: b,
+      buttons: ['Dismiss']
+    });
+    await alert.present();
+  }
+
+
+
 
 
 }
