@@ -8,6 +8,7 @@ export class LoginPageForm{
         this.formBuilder = formBuilder;
     }
 
+    // Create form to specify the login fields and fields required 
     createForm():FormGroup {
         return this.formBuilder.group({
             // This function receives objects that will inform the properties of the form that we want to create & also how each property will be validated 

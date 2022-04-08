@@ -17,12 +17,15 @@ export class JioDetailsAcceptPage implements OnInit {
     private jioApiService: JioApiService,
   ) {}
 
+  // To get the state of the router when the router navigation first reaches the jio-details-accept page.
+  // jio state includes the details of the individual jio selected on the jio page 
   ngOnInit() {
     this.jio = this.router.getCurrentNavigation().extras.state.jio;
     console.log("this jio")
     console.log(this.jio)
   }
 
+  // acceptJio to enable users without existing "Jio" to indicate their participation in the "Jio"
   acceptJio(){
     try{
       this.jioApiService.acceptJio(this.jio).subscribe(dataA => {
@@ -40,6 +43,9 @@ export class JioDetailsAcceptPage implements OnInit {
     } catch(error){console.log(error)}
   }
 
+  // Presents alert whenever a confirmation or warning has to be informed to user.
+  // h: Header of alert
+  // b: Body of alert
   async presentAlert(h, b){
     const alert = await this.alertController.create({
       header: h,
@@ -48,20 +54,4 @@ export class JioDetailsAcceptPage implements OnInit {
     });
     await alert.present();
   }
-
-
 }
-
- // jios = [
-  //   {
-  //     message: 'Message 1';,
- //      name: 'Name 1';,
-  //     address: 'Address 1';,
-  //     contact: 'Contact 1';,
-  //     closing: 'Closing 1';,
-  //     opening: 'Opening 1';
-  //     crowedness: 'Crowedness 1';
-  //     description: 'Description 1';,
-  //     photo: 'Photo 1';,
-  //   }
-  // ]

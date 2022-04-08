@@ -16,16 +16,14 @@ export class JioPage implements OnInit {
   private datetime: string; 
   
   ngOnInit(){
-    
-  }
-  createJio(){
-    this.router.navigate(['/create-jio'])
   }
 
+  // For users to view more in depth jio details 
   viewJio(jio1) {
     this.router.navigateByUrl('/jio-details-accept', {state: {jio: jio1}});
   }
 
+  // To load content from database whenever the user enters the page
   ionViewWillEnter(){
     try{
       this.jioApiService.getJios().subscribe((dataJ) => {
@@ -35,17 +33,3 @@ export class JioPage implements OnInit {
     } catch (error) {console.log(error)}
   }
 }
-
-
-// cards = [
-  //   {
-  //     location: 'Location 1';,
-  //     distance: 'Distance 1';,
-  //     cost: 'Cost 1';,
-  //     crowedness: 'Crowdedness 1';,
-  //     message: 'Message 1';
-  //     picture: 'Picture 1';
-      
-
-  //   }
-  // ]

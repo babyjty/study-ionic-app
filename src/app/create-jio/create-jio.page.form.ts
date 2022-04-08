@@ -11,6 +11,7 @@ export class CreateJioPageForm{
         this.createJioForm = this.createForm();
     }
 
+    // Creates form and specifies the fields and conditions for each field for the form submission to be successful.
     createForm():FormGroup {
         let jioForm1 = this.formBuilder.group({
             header: ['', [Validators.required]],
@@ -27,42 +28,20 @@ export class CreateJioPageForm{
             googleid: ['']
         });
         jioForm1.get('duration').setValidators(checkNumber(jioForm1))
-        // jioForm1.get('datetime').setValidators(checkDate(jioForm1))
         return jioForm1;
     }
 
+    // getForm to obtain form contents since createJio forms are set to private
     getForm():FormGroup {
         return this.createJioForm;
     }
 }
 
+// Checks if input duration is >= 1 hrs and input duration <= 10 hrs
 function checkNumber(createJioForm: FormGroup): ValidatorFn{
     const duration = createJioForm.get('duration');
     const validator = () =>{
-        return duration.value >= 1 ? null:{negative: true}
-    }
-    return validator;
-}
-
-
-function checkDate2(createJioForm: FormGroup): ValidatorFn{
-    let propDateTime = createJioForm.get('datetime');
-    let date = new Date().toISOString;
-    console.log(checkDate)
-    console.log(date)
-    console.log(date<=propDateTime.value)
-    const validator = () => {
-        return date <= propDateTime.value? null:{backward: true}
-    }
-    return validator;
-}
-
-function checkDate(createForm): ValidatorFn{
-    const propdate = new Date(createForm.get('datetime')).getDate();
-    const date = new Date().getDate();
-
-    const validator = () => {
-        return propdate < date? null:{backward: true}
+        return (duration.value >= 1 && duration.value <= 10)? null:{negative: true}
     }
     return validator;
 }

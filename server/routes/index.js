@@ -11,7 +11,7 @@ mainRouter.use('/profile', require('./userRoutes/profileController'))
 mainRouter.use('/locations', require('./placesRoutes/places'))
 
 mainRouter.get('/test', (req, res) => {
-    res.send('Test dumb')
+    res.send('Test')
 })
 
 module.exports = mainRouter;

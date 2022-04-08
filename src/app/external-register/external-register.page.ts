@@ -30,10 +30,12 @@ export class ExternalRegisterPage implements OnInit {
     console.log(this.providerID = this.router.getCurrentNavigation().extras.state.providerID);
   }
 
+  // Creates new form upon page initialization
   ngOnInit() {
     this.createForm();
   }
 
+  // extRegister for first time user registration using Google/Facebook to input additional required details for profile.
   async extRegister(){
     console.log('external-register')
     this.isSubmitted = true;
@@ -61,11 +63,15 @@ export class ExternalRegisterPage implements OnInit {
     this.router.navigate(['tabs']);
   }
 
+  // createForm to create ExternalRegisterPageForm when the page is initialized.
   private createForm(){
     console.log(this.email, this.provider, this.providerID, "createForm")
     this.extRegisterForm = new ExternalRegisterPageForm(this.email, this.provider, this.providerID, this.formbuilder)
   }
 
+  // Presents alert whenever a confirmation or warning has to be informed to user.
+  // h: Header of alert
+  // b: Body of alert
   async presentAlert(h, b){
     const alert = await this.alertController.create({
       header: h,

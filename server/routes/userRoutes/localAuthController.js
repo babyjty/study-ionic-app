@@ -23,7 +23,7 @@ router.use(cookieparser())
 router.use(express.json())
 //router.use(express.bodyParser())
 
-router.get('/', (req, res) => res.send('stfu bitch'))
+router.get('/', (req, res) => res.send('test'))
  
 //The following function is mounted on the /register path. It is executed for any type
 //of HTTP request on the /register path

@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express', '4.17.1')
 const app = express()
 const cors = require('cors')
@@ -48,11 +49,11 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-app.use(express.static(path.resolve(__dirname, '../dist')))
-app.get('*', (req, res) => {
-    var indexFile = path.resolve(__dirname, '../dist/index.html')
-    res.sendFile(indexFile)
-})
+// app.use(express.static(path.resolve(__dirname, '../dist')))
+// app.get('*', (req, res) => {
+//     var indexFile = path.resolve(__dirname, '../dist/index.html')
+//     res.sendFile(indexFile)
+// })
 
 app.use(json())
 

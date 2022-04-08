@@ -16,6 +16,10 @@ export class ExternalRegisterPageForm{
         this.extRegisterForm = this.createForm(this.email, this.provider, this.providerID);
     }
 
+    // create form to specify all the required fields and the conditions surrounding these fields
+    // email: user email as per obtained from angularx social login for registration
+    // provider: provider of email (GOOGLE / FACEBOOK)
+    // providerID: ID of user as per that unique to external provider (i.e. the unique user identifier for GOOGLE/FACEBOOK)
     createForm(email, provider, provID):FormGroup {
         console.log("CreateForm")
         this.extRegisterForm = this.formBuilder.group({
@@ -32,6 +36,7 @@ export class ExternalRegisterPageForm{
         return this.extRegisterForm;
     }
 
+    // Returns the form for access to form content
     getForm():FormGroup {
         return this.extRegisterForm;
     }
