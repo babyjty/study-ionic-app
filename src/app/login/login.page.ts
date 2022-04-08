@@ -29,8 +29,8 @@ export class LoginPage implements OnInit {
   ) { }
 
 
+  // Create login form as soon as page is initialized
   ngOnInit() {
-    // Create form as soon as page is initialized --> have to create inside ngOnInIt() 
     this.form = new LoginPageForm(this.formBuilder).createForm();
      this.authService.authState.subscribe((user) => {
       localStorage.setItem('profile', JSON.stringify(user));
@@ -41,11 +41,13 @@ export class LoginPage implements OnInit {
 
   }
 
+
+  // Redirects user to the register page for local register 
   register(){
     this.router.navigate(['register'])
   }
 
-
+  // To register/login via external provider Google
   async toGoogle(){
     try{
       await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((data) => {
@@ -74,6 +76,7 @@ export class LoginPage implements OnInit {
     }
   } 
 
+  // To register/login via external provider facebook 
   async toFacebook(){
     try{
       await this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then((data) => {
@@ -103,11 +106,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-  logOut() {
-    localStorage.setItem('userID', JSON.stringify(''));
-    this.authService.signOut();
-  }
-
+  // For locally registered users with StudyJio (not FACEBOOK or GOOGLE) to log in
   login(){
     console.log(this.form.value);
     if(!this.form.valid) {
@@ -131,6 +130,9 @@ export class LoginPage implements OnInit {
     }
   }}
 
+  // Presents alert whenever a confirmation or warning has to be informed to user.
+  // h: Header of alert
+  // b: Body of alert
   async presentAlert(h, b){
     const alert = await this.alertController.create({
       header: h,

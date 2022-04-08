@@ -19,23 +19,13 @@ export class JioListPage implements OnInit {
   ) { }
 
   private jios: any;
-  private length = 0;
   private isJioer: boolean;
 
-  // public myJios = [
-  //   {
-  //     title: "test title",
-  //     description: "test description",
-  //     location: "test location",
-  //     datetime: "test date time",
-  //     duration: "test duration",
-  //     status: "Pending"
-  //   }
-  // ]
-
+  // Runs when the page is initialized
+  // To load jios from the database associated to the logged in user
   ngOnInit() {
-    this.jioApiService.getMyJio().subscribe(dataMJ => {
-      try{
+    try{
+      this.jioApiService.getMyJio().subscribe(dataMJ => {
         console.log("MY JIOS");
         if (dataMJ.findSuccess === undefined){
           this.jios = dataMJ;
@@ -43,28 +33,51 @@ export class JioListPage implements OnInit {
         else{
           this.jios = [];
         }
-        // this.length = dataMJ.length();
-        // console.log(dataMJ.length());
         console.log(dataMJ)
-        console.log("x:" + this.jios)
 
         if (this.jios.length > 0){
-          this.jioApiService.isJioer(this.jios[0]).subscribe(dataIJ => {
-            try{
-              console.log("ISJior");
-              this.isJioer = dataIJ.isjioer;
-            } catch(error) {console.log(error)}
-            
-          })
-        }
-
-      } catch(error) {console.log(error)}
-    })
-
+          try{
+            this.jioApiService.isJioer(this.jios[0]).subscribe(dataIJ => {
     
+              console.log("ISJioer");
+              this.isJioer = dataIJ.isjioer;
+            })
+          }catch(error) {console.log(error)}
+    
+    
+          let today = new Date();
+          let date = new Date(this.jios[0].jio_date_time.ISO)
+          date.setHours(date.getHours() + this.jios[0].jio_duration)
+    
+          console.log(today);
+          console.log(date);
+          
+          // To delete or withdraw from Jio if the date with duration has passed
+          if(today > date){
+            if(this.isJioer){
+              try{
+                this.jioApiService.deleteJio(this.jios[0]).subscribe(dataDJ => {
+                  if(dataDJ.deleteSuccess) {this.jios = []}
+              })
+            } catch(error) {console.log(error)}
+          }
+            else {
+              try{
+                this.jioApiService.withdrawJio(this.jios[0]).subscribe(dataWJ => {
+                  if(dataWJ.withdrawSuccess) {this.jios = []}
+                })
+              } catch(error) {console.log(error)}
+            }
+        }
+      }
+
+      })
+    } catch(error) {console.log(error)}
   }
 
 
+  // withdrawJio for Jioee to remove their participation from a "Jio".
+  // jioDetails: all detailed information regarding the particular Jio including its unique identifier.
   withdrawJio(jioDetails){
     this.jioApiService.withdrawJio(jioDetails).subscribe(dataWJ =>{
       try{
@@ -81,6 +94,8 @@ export class JioListPage implements OnInit {
     })
   }
 
+  // cancelJio for Jioer to remove the whole Jio from the database
+  // jioDetails: all detailed information regarding the particular Jio including its unique identifier
   cancelJio(jioDetails){
     this.jioApiService.deleteJio(jioDetails).subscribe( dataCJ => {
       console.log(dataCJ)
@@ -100,6 +115,9 @@ export class JioListPage implements OnInit {
     
   }
 
+  // Presents alert whenever a confirmation or warning has to be informed to user.
+  // h: Header of alert
+  // b: Body of alert
   async presentAlert(h, b){
     const alert = await this.alertController.create({
       header: h,
@@ -108,70 +126,4 @@ export class JioListPage implements OnInit {
     });
     await alert.present();
   }
-
-
-
-
-
 }
-  // deleteJio(jio){
-  //   this.jioApiService.deleteJio(jio).subscribe(dataC => {
-  //     if(dataC.result){
-  //       console.log('Jio Cancelled');
-  //       this.presentAlert('Jio Cancelled', 'Sad to see you go :(')
-  //     }
-  //     else{
-  //       console.log('Jio Cancel Unsuccesful');
-  //       this.presentAlert('Jio Cancel Unsuccessful', 'Please try again')
-  //     }
-  //   })
-  // }
-
-  // async presentAlert(h, b){
-  //   const alert = await this.alertController.create({
-  //     header: h,
-  //     subHeader: b,
-  //     buttons: ['Dismiss']
-  //   });
-  //   await alert.present();
-  // }
-
-
-  // orderHeader: String = '';
-  // isDescOrder: boolean = true;
-
-  // nextpage() {
-  //   this.route.navigate(['/jio-details']);
-  // }
-
-  // nextpage2() {
-  //   this.route.navigate(['/jio-form']);
-  // }
-
-  // nextpage1() {
-  //   this.route.navigate(['/jio-details-pending']);
-  // }
-
-  // sort(headerName: String) {
-  //   this.isDescOrder = !this.isDescOrder;
-  //   this.orderHeader = headerName;
-  // }
-
-  
-  // isenabled() {
-
-  // }
-
-
-
-
-// jioList = [
-//     {
-//       picture: 'Picture 1';
-//       message: 'Message 1';
-//       location: 'Location 1';
-//       distance: 'Distance 1';
-//       cost: 'Cost 1';
-//       crowdedness: 'Crowdedness 1';
-//     }
-//   ]

@@ -12,16 +12,9 @@
 
 <ion-content>
 
-  <!-- <ion-fab vertical = "top" horizontal = "start">
-    <ion-fab-button color = "clear" routerLink = '/login'>
-      <ion-icon name = "arrow-back-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
+
   <form [formGroup]="registerForm.getForm()">
 
-    <!-- <div class = "login-logo">
-      <img src = "assets/img/StudyJioLogo.png">
-    </div> -->
 
     <div class="container">
       <div class="outer" [ngStyle]="{'background-image': 'url(' + photo + ')'}">
@@ -39,7 +32,6 @@
       <ion-card-content>
         <ion-item>
           <ion-label position = "floating" >Email</ion-label>
-          <!-- Checks the email field of the form -->
           <ion-input type = "email" formControlName="email"></ion-input>
         </ion-item>
         <app-error-message [field]= "registerForm.getForm().get('email')" error = "required" message = "Email is required"></app-error-message>

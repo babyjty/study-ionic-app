@@ -47,14 +47,15 @@ export class AuthApiService{
         return this.http.post(url, data, {withCredentials:true}).pipe(catchError(this.errorMgmt));
     }
     
-
+    // to obtain the profile of the current logged in user
+    // userID: unique identifier for the current logged in user.
     getProfile(userID): Observable<any>{
         console.log("Profile-API: Get Profile")
         let url =  `${this.baseUri}/api/localauth/get-profile`;
         return this.http.post(url, userID, {withCredentials: true}).pipe(catchError(this.errorMgmt));
       }
 
-
+    // To logout the currently logged in user
     logout():Observable<any>{
         console.log('Logout')
         let url =  `${this.baseUri}/api/localauth/local-logout`

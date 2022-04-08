@@ -1,6 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-// import { ApiService } from './../../service/api.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { RegisterPageForm } from './register.form';
 import { AuthApiService } from '../service/api.authService';
@@ -22,26 +21,16 @@ export class RegisterPage implements OnInit {
     private authApiService: AuthApiService,
     private alertController: AlertController,
     private modalController: ModalController,
-    // private ngZone: ngZone,
-    // private apiService: ApiService
   ) {}
-    // this.mainForm();
 
+  private registerForm: RegisterPageForm;
+  private isSubmitted = false;
   photo = "https://lh3.googleusercontent.com/PxYZd_6SRthIuCC1OvPnpNFTA5zGvyv7woU2o_g-5xrtwwhT5H6KFe4ZZYZMXjrOAyZ_1xLkOzILkw5T2HybxxliuF2l-cDqbckEFg=w600";
 
-  // submit = false;
-
-
-  // async openOptionSelection() {
-  //   const modal = await this.modalController.create({
-  //     component: ProfilePhotoOptionComponentComponent,
-  //     //  cssClass: ‘transparent-modal’
-  //   });
-
+  // To open modal (slide up component) when the profile image is tapped.
   async openOptionSelection() {
     const modal = await this.modalController.create({
       component: ProfilePhotoOptionComponentComponent,
-      // cssClass: ‘transparent-modal’
     })
 
     modal.onDidDismiss()
@@ -51,20 +40,21 @@ export class RegisterPage implements OnInit {
     return await modal.present();
   }
 
+  // To set user selected image as the confirmed image 
+  // url: image url to be stored in the database upon registration
   async usePicture(url: any) {
     console.log("url: " + url);
     this.photo = url;
   }
 
 
-
-
-  registerForm: RegisterPageForm;
-  isSubmitted = false;
+  // To create register form upon page initialization
   ngOnInit() {
     this.createForm();
   }
 
+  // To register for a local account with StudyJio 
+  // This function can only be run after all fields in registerForm are filled as per requirement
   async register(){
     console.log('external-register')
     this.registerForm.getForm().get('photoURL').setValue(this.photo, {onlyself: true})
@@ -101,11 +91,14 @@ export class RegisterPage implements OnInit {
     }
   }
 
-
+  // Creates form upon page initialization 
   private createForm() {
     this.registerForm = new RegisterPageForm(this.formBuilder);
   }
 
+  // Presents alert whenever a confirmation or warning has to be informed to user.
+  // h: Header of alert
+  // b: Body of alert
   async presentAlert(h, b){
     const alert = await this.alertController.create({
       header: h,
