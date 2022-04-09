@@ -80,23 +80,22 @@ export class LoginPage implements OnInit {
   async toFacebook(){
     try{
       await this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then((data) => {
-          localStorage.setItem('google_auth', JSON.stringify(data));
+          localStorage.setItem('facebook_auth', JSON.stringify(data));
           console.log("inside")
           console.log(data)
         });
         if(this.user != null){
-          try {await this.authApiService.verifyAccount(this.user.email).subscribe((dataR) => {
+          try {this.authApiService.verifyAccount(this.user).subscribe((dataR) => {
             console.log(dataR);
             if(dataR.result) {
+              this.router.navigateByUrl('/tabs', {state: {email: this.user.email, userID: dataR.userID}})
               localStorage.setItem('userID', JSON.stringify(dataR.userID));
-              this.router.navigateByUrl('/tabs', {state: {email: this.user.email, userID: dataR.userID}});
             }
             else{
               console.log(this.user);
               console.log('external')
               this.router.navigateByUrl('/external-register', {state: {email: this.user.email, provider: this.user.provider, providerID: this.user.id}})
-            }
-          });} catch(error) {console.log(error)}
+          }});} catch(error) {console.log(error)}
         }
         else {
           console.log('Invalid')
